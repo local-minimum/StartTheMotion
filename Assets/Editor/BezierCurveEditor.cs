@@ -15,7 +15,7 @@ public class BezierCurveEditor : Editor {
 
     private const int lineSteps = 15;
 
-    private void OnSceneGUI()
+    protected void OnSceneGUI()
     {
         curve = target as BezierCurve;
 
@@ -58,21 +58,21 @@ public class BezierCurveEditor : Editor {
         {
             case 4:
                 Handles.DrawLine(
-                    handleTransform.TransformPoint(curve.GetPoint(0)),
-                    handleTransform.TransformPoint(curve.GetPoint(1)));
+                    curve.GetComponentPointGlobal(0),
+                    curve.GetComponentPointGlobal(1));
 
                 Handles.DrawLine(
-                    handleTransform.TransformPoint(curve.GetPoint(2)),
-                    handleTransform.TransformPoint(curve.GetPoint(3)));
+                    curve.GetComponentPointGlobal(2),
+                    curve.GetComponentPointGlobal(3));
                 break;
             case 3:
                 Handles.DrawLine(
-                    handleTransform.TransformPoint(curve.GetPoint(0)),
-                    handleTransform.TransformPoint(curve.GetPoint(1)));
+                    curve.GetComponentPointGlobal(0),
+                    curve.GetComponentPointGlobal(1));
 
                 Handles.DrawLine(
-                    handleTransform.TransformPoint(curve.GetPoint(1)),
-                    handleTransform.TransformPoint(curve.GetPoint(2)));
+                    curve.GetComponentPointGlobal(1),
+                    curve.GetComponentPointGlobal(2));
                 break;
         }
 
@@ -83,6 +83,7 @@ public class BezierCurveEditor : Editor {
 
     protected virtual void DrawHandle(int index)
     {
+
         Vector3 pointGlobal = handleTransform.TransformPoint(curve.points[index]);
         float size = HandleUtility.GetHandleSize(pointGlobal);
         Handles.color = Color.white;
@@ -98,7 +99,7 @@ public class BezierCurveEditor : Editor {
             Undo.RecordObject(curve, "Moved Point");
             EditorUtility.SetDirty(curve);
             curve.points[index] = handleTransform.InverseTransformPoint(pointGlobal);
-
+            curve.CalculateLength();
         }
 
     }

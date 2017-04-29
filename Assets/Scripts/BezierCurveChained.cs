@@ -9,11 +9,19 @@ public class BezierCurveChained : BezierCurve {
     [Range(0, 1)]
     public float anchorTime;
 
-    public Vector3 anchorPoint
+    public Vector3 AnchorPoint
     {
         get
         {
             return transform.InverseTransformPoint(anchor.GetGlobalPoint(anchorTime));
+        }
+    }
+
+    public Vector3 GlobalAnchorPoint
+    {
+        get
+        {
+            return anchor.GetGlobalPoint(anchorTime);
         }
     }
 
@@ -29,7 +37,7 @@ public class BezierCurveChained : BezierCurve {
     {
         if (index == 0)
         {
-            return anchorPoint;
+            return AnchorPoint;
         }
         else
         {
@@ -42,11 +50,11 @@ public class BezierCurveChained : BezierCurve {
         switch (points.Length)
         {
             case 3:
-                return GetPoint(anchorPoint, points[0], points[1], points[2], t);
+                return GetPoint(AnchorPoint, points[0], points[1], points[2], t);
             case 2:
-                return GetPoint(anchorPoint, points[0], points[1], t);
+                return GetPoint(AnchorPoint, points[0], points[1], t);
             case 1:
-                return Vector3.Lerp(anchorPoint, points[0], t);
+                return Vector3.Lerp(AnchorPoint, points[0], t);
             default:
                 throw new System.ArgumentException("Must have 1-3 own points");
         }

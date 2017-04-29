@@ -6,6 +6,7 @@ using UnityEditor;
 [CustomEditor(typeof(BezierCurveChained)), CanEditMultipleObjects]
 public class BezierCurveChainedEditor : BezierCurveEditor {
 
+
     protected override void DrawHandle(int index)
     {
         if (index == 0)
@@ -14,14 +15,15 @@ public class BezierCurveChainedEditor : BezierCurveEditor {
         }
         else
         {
-            base.DrawHandle(index);
+            base.DrawHandle(index - 1);
         }
     }
 
     private const float anchorFactor = 1.5f;
     private void DrawAnchorHandle()
     {
-        Vector3 pointGlobal = handleTransform.TransformPoint((curve as BezierCurveChained).anchorPoint);
+        BezierCurveChained chainedCurve = curve as BezierCurveChained;
+        Vector3 pointGlobal = chainedCurve.GlobalAnchorPoint;
         float size = HandleUtility.GetHandleSize(pointGlobal) * anchorFactor;
         Handles.color = Color.magenta;
         if (Handles.Button(pointGlobal, handleRotation, size * handleSize, size * pickSize, Handles.CircleCap))
@@ -33,10 +35,13 @@ public class BezierCurveChainedEditor : BezierCurveEditor {
         if (selectedIndex == -2 && curve == editingCurve)
         {
             pointGlobal = Handles.DoPositionHandle(pointGlobal, handleRotation);
-            Undo.RecordObject(curve, "Moved Point");
-            EditorUtility.SetDirty(curve);
-            //curve.points[index] = handleTransform.InverseTransformPoint(pointGlobal);
 
+            Undo.RecordObject(curve, "Moved Anchor Time");
+            EditorUtility.SetDirty(chainedCurve);
+            //Debug.Log(Vector3.SqrMagnitude(pointGlobal - chainedCurve.AnchorPoint));
+            chainedCurve.anchorTime = chainedCurve.anchor.TimeClosestTo(pointGlobal);
+            
+            curve.CalculateLength();
         }
     }
 }
