@@ -108,6 +108,34 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &80318995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 80318996}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &80318996
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 80318995}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.05, y: -2.33, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &168474645
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,20 +165,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emptyScene: {fileID: 2800000, guid: 1a927757c80f36645b07caff1afd01b5, type: 3}
   sequence:
-  - {fileID: 2800000, guid: 005fd8927680118478afb7c85c0ea89a, type: 3}
-  - {fileID: 2800000, guid: 2ba8b027e47b4294a97b3b6f484ae5e1, type: 3}
-  - {fileID: 2800000, guid: ea4a2b3b4a83cb34f9121668abb39a9b, type: 3}
-  - {fileID: 2800000, guid: bfc453a7d65f6ad428e800e139ff1c1c, type: 3}
-  - {fileID: 2800000, guid: b3a9f30d6af89cc469fc0953c6de7662, type: 3}
-  - {fileID: 2800000, guid: 4f291d6e7d11e4c488ecadcd54a3deb5, type: 3}
-  - {fileID: 2800000, guid: cb31513a41daa0842a4478c7fa88f444, type: 3}
-  - {fileID: 2800000, guid: 57a7391861befbd4d8a08765a47eb2a2, type: 3}
-  - {fileID: 2800000, guid: 326382722b414514a9576129616f9459, type: 3}
-  - {fileID: 2800000, guid: d3c8b5f36408ce14384269f7324904a0, type: 3}
-  - {fileID: 2800000, guid: c393dad9d9ef856428410e8f162ed8bc, type: 3}
-  - {fileID: 2800000, guid: 3dba0eccc395af041b178d1927bfe2ad, type: 3}
-  - {fileID: 2800000, guid: eb0fda8f02e2d0a4da470a8337e08e3e, type: 3}
-  - {fileID: 2800000, guid: 69e39904b12cffd4394a4c76252cb342, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   colorDistanceThreshold: 0.05
   outputDirectory: Assets/Sprites/TestAnimation/Clean/
   cropImage: 0
@@ -204,26 +232,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 618063042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ac756f54fab97949b41ac670efa3644, type: 3}
+  m_Script: {fileID: 11500000, guid: 40553b30afbf3d64cb5125c783593f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sequence:
-  - {fileID: 21300000, guid: 23ca523e30352894a9363b58a432f77d, type: 3}
-  - {fileID: 21300000, guid: c51dbfb0a8d252f41a068fd5ec9926bc, type: 3}
-  - {fileID: 21300000, guid: 3c7fd2a63da72ee4c8910aaf032043ba, type: 3}
-  - {fileID: 21300000, guid: a54b68f7d183fd947a81791cdebafe30, type: 3}
-  - {fileID: 21300000, guid: 897fc186f7b1e694a918e0bbde4b1b5a, type: 3}
-  - {fileID: 21300000, guid: 35308ae33a0c8cf4db8843271dbc5bd7, type: 3}
-  - {fileID: 21300000, guid: 25466f966978aca4294951251ad2ab33, type: 3}
-  - {fileID: 21300000, guid: 816deb1fac6224a4d80504a4fc7c9d7b, type: 3}
-  - {fileID: 21300000, guid: c5fffe537034fe241a89eb441981c876, type: 3}
-  - {fileID: 21300000, guid: c403b11affbf2904daca8e5c9225c1fa, type: 3}
-  - {fileID: 21300000, guid: 49c6db5680f95744f8ea91b6a173f33e, type: 3}
-  - {fileID: 21300000, guid: ebf82e28295a62243b36a0d5afb126e6, type: 3}
-  - {fileID: 21300000, guid: 3bc22f2f4930e1f4ead2208be955ca9c, type: 3}
-  - {fileID: 21300000, guid: 8b15d279e901c01438436a5c6f95b52b, type: 3}
-  enabledAnimationStep: 
-  m_fps: 15
+  pt0: {x: 0, y: 0, z: 0}
+  pt1: {x: 2.47, y: 1.4, z: 0}
 --- !u!1 &1950353245
 GameObject:
   m_ObjectHideFlags: 0
