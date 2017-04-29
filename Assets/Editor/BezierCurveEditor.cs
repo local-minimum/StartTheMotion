@@ -4,18 +4,17 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(BezierCurve), true), CanEditMultipleObjects]
-public class BezierCurveEditor : Editor {
+public class BezierCurveEditor : BezierEditors {
 
     protected Transform handleTransform;
     protected Quaternion handleRotation;
     protected BezierCurve curve;
 
-    protected static BezierCurve editingCurve;
     protected int selectedIndex = -1;
 
     private const int lineSteps = 15;
 
-    protected void OnSceneGUI()
+    protected virtual void OnSceneGUI()
     {
         curve = target as BezierCurve;
 
@@ -90,13 +89,14 @@ public class BezierCurveEditor : Editor {
         if (Handles.Button(pointGlobal, handleRotation, size * handleSize, size * pickSize, Handles.DotCap))
         {
             selectedIndex = index;
-            editingCurve = curve;
+            selectedBezierItem = this;
         }
 
-        if (selectedIndex == index && curve == editingCurve)
+        if (selectedIndex == index && this == selectedBezierItem)
         {
             pointGlobal = Handles.DoPositionHandle(pointGlobal, handleRotation);       
             Undo.RecordObject(curve, "Moved Point");
+
             EditorUtility.SetDirty(curve);
             curve.points[index] = handleTransform.InverseTransformPoint(pointGlobal);
             curve.CalculateLength();

@@ -6,6 +6,16 @@ using UnityEditor;
 [CustomEditor(typeof(BezierCurveChained)), CanEditMultipleObjects]
 public class BezierCurveChainedEditor : BezierCurveEditor {
 
+    BezierCurveChained chainedCurve;
+    protected override void OnSceneGUI()
+    {
+        chainedCurve = target as BezierCurveChained;
+        if (chainedCurve.anchor == null)
+        {
+            return;
+        }
+        base.OnSceneGUI();
+    }
 
     protected override void DrawHandle(int index)
     {
@@ -19,20 +29,19 @@ public class BezierCurveChainedEditor : BezierCurveEditor {
         }
     }
 
-    private const float anchorFactor = 1.5f;
+    private const float anchorFactor = 3f;
     private void DrawAnchorHandle()
     {
-        BezierCurveChained chainedCurve = curve as BezierCurveChained;
         Vector3 pointGlobal = chainedCurve.GlobalAnchorPoint;
         float size = HandleUtility.GetHandleSize(pointGlobal) * anchorFactor;
         Handles.color = Color.magenta;
-        if (Handles.Button(pointGlobal, handleRotation, size * handleSize, size * pickSize, Handles.CircleCap))
+        if (Handles.Button(pointGlobal, handleRotation, size * handleSize, size * pickSize, Handles.SphereHandleCap))
         {
             selectedIndex = -2;
-            editingCurve = curve;
+            selectedBezierItem = this;
         }
 
-        if (selectedIndex == -2 && curve == editingCurve)
+        if (selectedIndex == -2 && this == selectedBezierItem)
         {
             pointGlobal = Handles.DoPositionHandle(pointGlobal, handleRotation);
 
