@@ -9,6 +9,7 @@ public class BezierLineEditor : Editor {
     Transform handleTransform;
     Quaternion handleRotation;
     BezierLine line;
+    private const int lineSteps = 15;
 
     private void OnSceneGUI()
     {
@@ -18,31 +19,37 @@ public class BezierLineEditor : Editor {
         handleRotation = Tools.pivotRotation == PivotRotation.Local ?
             handleTransform.rotation : Quaternion.identity;
 
-        DrawHandles(line.pt0, "pt2");
-        DrawHandles(line.pt1, "pt1");
+        Handles.color = Color.grey;
+        for (int i=0; i<line.points.Length; i++)
+        {
+            DrawHandle(i);
+            if (i > 0)
+            {
+                Handles.DrawLine(line.points[i-1], line.points[i]);
+            }
+        }
 
         Handles.color = Color.white;
-        Handles.DrawLine(line.pt0, line.pt1);
+        Vector3 lineStart = line.GetPoint(0f);
+        for (int i = 1; i <= lineSteps; i++)
+        {
+            Vector3 lineEnd = line.GetPoint(i / (float)lineSteps);
+            Handles.DrawLine(lineStart, lineEnd);
+            lineStart = lineEnd;
+        }
     }
 
-    void DrawHandles(Vector3 point, string target)
+    void DrawHandle(int index)
     {
-        Vector3 pointGlobal = handleTransform.TransformPoint(point);
+        Vector3 pointGlobal = handleTransform.TransformPoint(line.points[index]);
         EditorGUI.BeginChangeCheck();
-        Handles.DoPositionHandle(pointGlobal, handleRotation);
+        pointGlobal = Handles.DoPositionHandle(pointGlobal, handleRotation);
         if (EditorGUI.EndChangeCheck())
         {
             Undo.RecordObject(line, "Moved Point");
             EditorUtility.SetDirty(line);
-            line.pt1 = handleTransform.InverseTransformPoint(pointGlobal);
-            /*
-            typeof(BezierLine).GetProperty(target).SetValue(
-                line,
-                handleTransform.InverseTransformPoint(pointGlobal),
-                null);
-            */
-            Debug.Log("Moved Point " + line.pt1);
-            serializedObject.ApplyModifiedProperties();
+            line.points[index] = handleTransform.InverseTransformPoint(pointGlobal);
+
         }
 
 
