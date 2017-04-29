@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class BezierPoint : MonoBehaviour {
 
     [SerializeField]
@@ -69,11 +68,10 @@ public class BezierPoint : MonoBehaviour {
         }
     }
 
-    public bool snapping;
 
-    private void Update()
+    public void Snap()
     {
-        if (snapping && curve != null)
+        if (curve != null)
         {
             transform.position = curve.GetGlobalPoint(curveTime);
         }

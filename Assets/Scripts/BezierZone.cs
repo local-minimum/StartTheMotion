@@ -37,7 +37,7 @@ public class BezierZone : MonoBehaviour {
     public float left
     {
         get {
-            return times[0];
+            return Mathf.Min(times[0], times[1]);
         }
 
     }
@@ -46,7 +46,7 @@ public class BezierZone : MonoBehaviour {
     {
         get
         {
-            return times[1];
+            return Mathf.Max(times[0], times[1]);
         }
     }
 
@@ -54,6 +54,7 @@ public class BezierZone : MonoBehaviour {
 
     public bool IsInside(float t)
     {
+
         return t >= left && t <= right;
     }
 
