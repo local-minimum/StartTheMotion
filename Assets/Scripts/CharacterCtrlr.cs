@@ -15,24 +15,26 @@ public class CharacterCtrlr : MonoBehaviour {
 
     bool swappedCurveThisFrame;
 
+    private const float noMove = 0.1f;
     void Update () {
 
         swappedCurveThisFrame = false;
 
         float hor = Input.GetAxis("Horizontal");
-        if (hor > 0.001f)
+        if (hor > noMove)
         {
             Vector3 scale = transform.localScale;
             scale.x = 1;
             transform.localScale = scale;
-
-        } else if (hor < -0.001f)
+            point.Move(Time.deltaTime * speed * hor);
+        }
+        else if (hor < -noMove)
         {
             Vector3 scale = transform.localScale;
             scale.x = -1;
             transform.localScale = scale;
+            point.Move(Time.deltaTime * speed * hor);
         }
-        point.Move(Time.deltaTime * speed * hor);
 
         if (!swappedCurveThisFrame && changePaths != null && Input.GetButtonDown("Fire1"))
         {
@@ -67,7 +69,6 @@ public class CharacterCtrlr : MonoBehaviour {
 
     void OnBezierZoneEnter(BezierZone zone)
     {
-        Debug.Log(zone);
         if (zone.GetTarget<BezierCurve>() != null)
         {
             Debug.Log("Enter " + zone);
