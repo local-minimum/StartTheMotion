@@ -9,6 +9,9 @@ public class StopMotionSequencer : MonoBehaviour {
     SpriteRenderer sRend;
 
     [SerializeField]
+    string sequenceName;
+
+    [SerializeField]
     SequenceMode mode;
 
     [SerializeField]
@@ -34,38 +37,57 @@ public class StopMotionSequencer : MonoBehaviour {
 
     private void Start()
     {
-        sRend = GetComponent<SpriteRenderer>();
-        if (!sRend)
-        {
-            sRend = gameObject.AddComponent<SpriteRenderer>();
-        }
 
-        if (enabledAnimationStep.Length < sequence.Length)
-        {
-            bool[] tmpArr = new bool[sequence.Length];
-            System.Array.Copy(enabledAnimationStep, tmpArr, enabledAnimationStep.Length);
-            for (int i=enabledAnimationStep.Length; i<tmpArr.Length; i++)
-            {
-                tmpArr[i] = true;
-            }
-            enabledAnimationStep = tmpArr;
-        }
-        Play();
     }
 
     public void Play()
     {
         if (!animating)
         {
-            if (mode == SequenceMode.BackwardLoop)
-            {
-                sequenceDirection = -1;
-            } else
-            {
-                sequenceDirection = 1;
-            }
+            SetupRenderer();
+            SyncArrayLenghts();
+            SetSequenceDirection();
             StartCoroutine(Animate(m_fps));
         }
+    }
+
+    void SetSequenceDirection()
+    {
+        if (mode == SequenceMode.BackwardLoop)
+        {
+            sequenceDirection = -1;
+        }
+        else
+        {
+            sequenceDirection = 1;
+        }
+    }
+
+    void SetupRenderer()
+    {
+        if (!sRend)
+        {
+            sRend = GetComponent<SpriteRenderer>();
+        }
+        if (!sRend)
+        {
+            sRend = gameObject.AddComponent<SpriteRenderer>();
+        }
+    }
+
+    void SyncArrayLenghts()
+    {
+        if (enabledAnimationStep.Length < sequence.Length)
+        {
+            bool[] tmpArr = new bool[sequence.Length];
+            System.Array.Copy(enabledAnimationStep, tmpArr, enabledAnimationStep.Length);
+            for (int i = enabledAnimationStep.Length; i < tmpArr.Length; i++)
+            {
+                tmpArr[i] = true;
+            }
+            enabledAnimationStep = tmpArr;
+        }
+
     }
 
     public void Stop()
