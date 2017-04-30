@@ -81,6 +81,13 @@ public class BezierCurve : MonoBehaviour {
         return transform.TransformPoint(GetPoint(t));
     }
 
+    public virtual Quaternion GetRotationAt(float t)
+    {
+        Vector3 tangent = transform.TransformDirection(GetFirstDerivative(points[0], points[1], points[2], points[3], t)).normalized;
+        Vector3 forward = transform.TransformDirection(transform.forward);
+        return Quaternion.LookRotation(forward, Quaternion.AngleAxis(90, forward) * tangent);
+    }
+
     private const float minDelta = 0.002f;
 
     public float TimeClosestTo(Vector3 point)

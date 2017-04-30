@@ -33,6 +33,13 @@ public class BezierCurveChained : BezierCurve {
         }
     }
 
+    public override Quaternion GetRotationAt(float t)
+    {
+        Vector3 tangent = transform.TransformDirection(GetFirstDerivative(AnchorPoint, points[0], points[1], points[2], t)).normalized;
+        Vector3 forward = transform.TransformDirection(transform.forward);
+        return Quaternion.LookRotation(forward, Quaternion.AngleAxis(90, forward) * tangent);
+    }
+
     public override Vector3 GetComponentPoint(int index)
     {
         if (index == 0)
