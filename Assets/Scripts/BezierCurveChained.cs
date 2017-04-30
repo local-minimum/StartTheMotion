@@ -40,6 +40,31 @@ public class BezierCurveChained : BezierCurve {
         return Quaternion.LookRotation(forward, Quaternion.AngleAxis(90, forward) * tangent);
     }
 
+    public override void MakeLinear()
+    {
+        switch (N)
+        {
+            case 3:
+                points[0] = Vector3.Lerp(AnchorPoint, points[1], 0.5f);
+                break;
+            case 4:
+                points[0] = Vector3.Lerp(AnchorPoint, points[2], 0.25f);
+                points[1] = Vector3.Lerp(AnchorPoint, points[2], 0.75f);
+                break;
+        }
+    }
+
+    public override void SetDefaultShape()
+    {
+        Vector3 pt = AnchorPoint;
+        points = new Vector3[3]
+        {
+            pt + new Vector3(0.5f, 0.5f),
+            pt + new Vector3(0.5f, -0.5f),
+            pt + new Vector3(1f, 0f)
+        };
+    }
+
     public override Vector3 GetComponentPoint(int index)
     {
         if (index == 0)

@@ -14,6 +14,21 @@ public class BezierCurveEditor : BezierEditors {
 
     private const int lineSteps = 15;
 
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Make Linear"))
+        {
+            curve.MakeLinear();
+        }
+        if (GUILayout.Button("Default Shape"))
+        {
+            curve.SetDefaultShape();
+        }
+        EditorGUILayout.EndHorizontal();
+    }
+
     protected virtual void OnSceneGUI()
     {
         curve = target as BezierCurve;

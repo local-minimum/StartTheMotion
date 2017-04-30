@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BezierCurve : MonoBehaviour {
 
-    public Vector3[] points = new Vector3[3];   
+    [HideInInspector]
+    public Vector3[] points = new Vector3[3];
 
     public static Vector3 GetPoint(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
     {
@@ -46,7 +47,7 @@ public class BezierCurve : MonoBehaviour {
     {
         return points[index];
     }
-   
+
     public Vector3 GetComponentPointGlobal(int index)
     {
         return transform.TransformPoint(GetComponentPoint(index));
@@ -66,7 +67,7 @@ public class BezierCurve : MonoBehaviour {
     {
         switch (points.Length) {
             case 4:
-                return GetPoint(points[0], points[1], points[2], points[3],  t);
+                return GetPoint(points[0], points[1], points[2], points[3], t);
             case 3:
                 return GetPoint(points[0], points[1], points[2], t);
             case 2:
@@ -74,6 +75,31 @@ public class BezierCurve : MonoBehaviour {
             default:
                 throw new System.ArgumentException("Must have 2-4 points");
         }
+    }
+
+    public virtual void MakeLinear()
+    {
+        switch (N)
+        {
+            case 3:
+                points[1] = Vector3.Lerp(points[0], points[2], 0.5f);
+                break;
+            case 4:
+                points[1] = Vector3.Lerp(points[0], points[3], 0.25f);
+                points[2] = Vector3.Lerp(points[0], points[3], 0.75f);
+                break;
+        }
+    }
+
+    public virtual void SetDefaultShape()
+    {
+        points = new Vector3[4]
+        {
+            Vector3.zero,
+            new Vector3(0.5f, 0.5f),
+            new Vector3(0.5f, -0.5f),
+            new Vector3(1f, 0f)
+        };
     }
 
     public Vector3 GetGlobalPoint(float t)

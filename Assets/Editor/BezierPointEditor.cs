@@ -50,7 +50,7 @@ public class BezierPointEditor : BezierEditors {
             
             Vector3 newPtGlobal = Handles.DoPositionHandle(anchorGlobal, handleRotation);
 
-            Debug.Log("Moved " + handleTransform.InverseTransformDirection(anchorGlobal - newPtGlobal));
+
             Undo.RecordObject(point, "Moved Anchor Point");
 
             EditorUtility.SetDirty(point);
