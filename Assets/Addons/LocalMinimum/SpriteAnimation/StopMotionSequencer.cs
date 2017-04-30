@@ -45,14 +45,22 @@ public class StopMotionSequencer : MonoBehaviour {
 	public void Step()
     {
         m_isPlaying = false;
-        SetNextFrame();
-        sRend.sprite = sequence[showingIndex];
+        if (SetNextFrame())
+        {
+            SetupRenderer();
+            SyncArrayLenghts();
+            SetSequenceDirection();
+            sRend.sprite = sequence[showingIndex];
+        }
     }
 
     [SerializeField] float m_fps = 15;
 
+    StopMotionAnimator smAnimator;
+
     private void Start()
     {
+        smAnimator = GetComponent<StopMotionAnimator>();
         if (Headless && Alone)
         {
             Play();
@@ -63,7 +71,7 @@ public class StopMotionSequencer : MonoBehaviour {
     {
         get
         {
-            return GetComponent<StopMotionAnimator>() == null;
+            return smAnimator == null;
         }
     }
 
@@ -75,14 +83,36 @@ public class StopMotionSequencer : MonoBehaviour {
         }
     }
 
-    public void Play()
+    System.Func<bool> callbackOnEndPlayback;
+
+    public void Play(System.Func<bool> callbackOnEndPlayback)
     {
         if (!m_isPlaying)
         {
+            this.callbackOnEndPlayback = callbackOnEndPlayback;
             SetupRenderer();
             SyncArrayLenghts();
             SetSequenceDirection();
             StartCoroutine(Animate(m_fps));
+        }else
+        {
+            Debug.LogWarning(name + " sequencer is already running");
+        }
+    }
+
+    public void Play()
+    {
+        if (!m_isPlaying)
+        {
+            callbackOnEndPlayback = null;
+            SetupRenderer();
+            SyncArrayLenghts();
+            SetSequenceDirection();
+            StartCoroutine(Animate(m_fps));
+        }
+        else
+        {
+            Debug.LogWarning(name + " sequencer is already running");
         }
     }
 
@@ -141,19 +171,35 @@ public class StopMotionSequencer : MonoBehaviour {
         enabledAnimationStep[index] = false;
     }
 
+    float m_lastUpdate;
+
+    public float LastUpdate
+    {
+        get
+        {
+            return m_lastUpdate;
+        }
+    }
+
     IEnumerator<WaitForSeconds> Animate(float fps)
     {
         float delta = 1f / fps;
         m_isPlaying = true;
         while (m_isPlaying)
         {
-            SetNextFrame();
-            sRend.sprite = sequence[showingIndex];
-            yield return new WaitForSeconds(delta);
+            if (SetNextFrame())
+            {
+                sRend.sprite = sequence[showingIndex];
+                m_lastUpdate = Time.timeSinceLevelLoad; 
+                yield return new WaitForSeconds(delta);
+            } else
+            {
+                break;
+            }
         }
     }
 
-    void SetNextFrame()
+    bool SetNextFrame()
     {
         int start = showingIndex;
 
@@ -170,6 +216,13 @@ public class StopMotionSequencer : MonoBehaviour {
                 else
                 {
                     showingIndex = sequence.Length - 1;
+                    if (callbackOnEndPlayback != null)
+                    {
+                        if (!callbackOnEndPlayback())
+                        {
+                            return false;
+                        }
+                    }
                 }
             } else if (showingIndex >= sequence.Length)
             {
@@ -180,6 +233,13 @@ public class StopMotionSequencer : MonoBehaviour {
                 } else
                 {
                     showingIndex = 0;
+                    if (callbackOnEndPlayback != null)
+                    {
+                        if (!callbackOnEndPlayback())
+                        {
+                            return false;
+                        }
+                    }
                 }
             }
 
@@ -189,5 +249,7 @@ public class StopMotionSequencer : MonoBehaviour {
                 throw new System.ArgumentException("No frames enabled on " + name);
             }
         } while (!enabledAnimationStep[showingIndex]);
+
+        return true;
     }
 }

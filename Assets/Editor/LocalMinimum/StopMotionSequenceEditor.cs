@@ -14,9 +14,9 @@ public class StopMotionSequenceEditor : Editor {
         base.OnInspectorGUI();
 
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Play"))
+        if (GUILayout.Button("Step"))
         {
-            smSeq.Play();
+            smSeq.Step();
         }
         if (GUILayout.Button("Stop"))
         {

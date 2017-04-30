@@ -2,13 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum InstructionType { OnLoad, OnAnimationLoop};
 
+public interface IStopMotionTransition
+{
+    string transitionSource { get; }
+    string transitionTarget { get; }
+    bool CanExecute(StopMotionAnimator animator);
+    bool CanTrigger(StopMotionAnimator animator, string trigger);
+    void Execute(StopMotionAnimator animator);
+    
+}
 
 public class StopMotionAnimator : MonoBehaviour {
 
     [SerializeField]
     StopMotionSequencer[] sequences;
+
+    [SerializeField]
+    IStopMotionTransition[] transitions;
 
     private void Reset()
     {
@@ -17,10 +28,22 @@ public class StopMotionAnimator : MonoBehaviour {
 
     StopMotionSequencer active;
 
-    public void Trigger(string trigger)
+    public void PlayByName(string sequenceName)
     {
-        StopMotionSequencer next = GetSequenceByName(name);
+        StopMotionSequencer next = GetSequenceByName(sequenceName);
+        if (next)
+        {
+            Play(next);
+        }
+        else
+        {
+            active = null;
+            Debug.LogWarning("Requested sequence '" + sequenceName + "' but isn't known.");
+        }
 
+    }
+
+    public void Play(StopMotionSequencer next) { 
         if (next == active && next != null)
         {
             return;
@@ -33,22 +56,42 @@ public class StopMotionAnimator : MonoBehaviour {
 
         if (next)
         {
-            Ease(active, next);
+            next.Play(OnAnimationEnd);
             active = next;
-        } else
+        }        
+    }
+
+    public void Trigger(string trigger)
+    {
+        for (int i = 0; i < transitions.Length; i++)
         {
-            active = null;
-            Debug.LogWarning("Requested sequence '" + trigger + "' but isn't known.");
+            if (transitions[i].transitionSource == active.SequenceName && transitions[i].CanTrigger(this, trigger))
+            {
+                transitions[i].Execute(this);
+                return;
+            }
         }
-        
+
+        throw new System.ArgumentException("No valid trigger target for: " + trigger);
+    }
+
+    public void StartAnimation()
+    {
+        for (int i = 0; i < transitions.Length; i++)
+        {
+            if (transitions[i].transitionSource == active.SequenceName && transitions[i].CanExecute(this))
+            {
+                transitions[i].Execute(this);
+            }
+        }
     }
 
     void Ease(StopMotionSequencer a, StopMotionSequencer b)
     {
-        b.Play();
+        throw new System.NotImplementedException();
     }
 
-    StopMotionSequencer GetSequenceByName(string name)
+    public StopMotionSequencer GetSequenceByName(string name)
     {
         for (int i=0; i<sequences.Length; i++)
         {
@@ -60,4 +103,18 @@ public class StopMotionAnimator : MonoBehaviour {
 
         return null;
     }
+
+    private bool OnAnimationEnd()
+    {
+        for (int i=0; i<transitions.Length; i++)
+        {
+            if (transitions[i].transitionSource == active.SequenceName && transitions[i].CanExecute(this))
+            {
+                transitions[i].Execute(this);
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
