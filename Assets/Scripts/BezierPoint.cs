@@ -16,6 +16,12 @@ public class BezierPoint : MonoBehaviour {
     [SerializeField]
     bool rotateWithCurve;
 
+    public void SwapAnchor(BezierCurve curve, float time)
+    {
+        this.curve = curve;
+        CurveTime = time;
+    }
+
     public void Move(float distance)
     {
         bool hitEnd;

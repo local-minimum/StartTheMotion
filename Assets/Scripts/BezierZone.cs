@@ -40,7 +40,8 @@ public class BezierZone : MonoBehaviour {
         var t = typeof(T);
         for (int i=0; i<targets.Length; i++)
         {
-            if (t == targets[i].GetType())
+            var t2 = targets[i].GetType();
+            if (t == t2 || t2.IsSubclassOf(t))
             {
                 return targets[i] as T;
             }
@@ -54,7 +55,8 @@ public class BezierZone : MonoBehaviour {
         var t = typeof(T);
         for (int i = 0; i < targets.Length; i++)
         {
-            if (t == targets[i].GetType())
+            var t2 = targets[i].GetType();
+            if (t == t2 || t2.IsSubclassOf(t))
             {
                 ret.Add(targets[i] as T);
             }
