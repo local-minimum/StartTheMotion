@@ -13,7 +13,12 @@ public class CharacterCtrlr : MonoBehaviour {
         point = GetComponent<BezierPoint>();
     }
 
+    bool swappedCurveThisFrame;
+
     void Update () {
+
+        swappedCurveThisFrame = false;
+
         float hor = Input.GetAxis("Horizontal");
         if (hor > 0.001f)
         {
@@ -29,20 +34,33 @@ public class CharacterCtrlr : MonoBehaviour {
         }
         point.Move(Time.deltaTime * speed * hor);
 
-        if (changePaths != null && Input.GetButtonDown("Fire1"))
+        if (!swappedCurveThisFrame && changePaths != null && Input.GetButtonDown("Fire1"))
         {
             var target = changePaths.GetTarget<BezierCurve>();
             Debug.Log("Swap to: " + target);
             if (target)
             {
+                swappedCurveThisFrame = true;
                 float t = target.TimeClosestTo(transform.position);
                 point.SwapAnchor(target, t);
+                
             }
         }
 	}
 
     void OnBezierEnd(BezierPoint bPt)
     {
+        if (changePaths != null && !swappedCurveThisFrame)
+        {
+            var target = changePaths.GetTarget<BezierCurve>();
+            Debug.Log("Swap to: " + target);
+            if (target)
+            {
+                swappedCurveThisFrame = true;
+                float t = target.TimeClosestTo(transform.position);
+                point.SwapAnchor(target, t);
+            }
+        }
     }
 
     BezierZone changePaths;
