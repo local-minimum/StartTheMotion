@@ -254,6 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  related: []
   times:
   - 0.41666666
   - 0.1577381
@@ -288,10 +289,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points:
   - {x: -4.34, y: 0, z: 0}
-  - {x: -0.6892678, y: 0.40460658, z: 0}
+  - {x: 6.103676, y: 5.1752234, z: 0}
   - {x: -3.5093741, y: -2.5060396, z: 0}
   - {x: 2.17, y: -0.74, z: 0}
-  m_cachedLength: 7.0050564
+  m_cachedLength: 10.0963335
 --- !u!4 &380183395
 Transform:
   m_ObjectHideFlags: 0
@@ -579,7 +580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d16e3eb1d159924db6edd0b51d8d44d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 0.2
+  baseSpeed: 1
   speed:
     serializedVersion: 2
     m_Curve:

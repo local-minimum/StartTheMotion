@@ -33,6 +33,36 @@ public class BezierZone : MonoBehaviour {
         }
     }
 
+    public MonoBehaviour[] targets;
+
+    public T GetTarget<T>() where T : MonoBehaviour
+    {
+        var t = typeof(T);
+        for (int i=0; i<targets.Length; i++)
+        {
+            if (t == targets[i].GetType())
+            {
+                return targets[i] as T;
+            }
+        }
+        return null;
+    }
+
+    public List<T> GetAllTargets<T>() where T : MonoBehaviour
+    {
+        var ret = new List<T>();
+        var t = typeof(T);
+        for (int i = 0; i < targets.Length; i++)
+        {
+            if (t == targets[i].GetType())
+            {
+                ret.Add(targets[i] as T);
+            }
+        }
+        return ret;
+    }
+
+    [HideInInspector]
     public float[] times = new float[2] { 0, 1 };
     public float left
     {

@@ -9,7 +9,7 @@ public class Prancer : MonoBehaviour {
     [SerializeField]
     float baseSpeed = 1f;
 
-    float sign = 1;
+    float walkDirection = 1;
     [SerializeField]
     AnimationCurve speed;
 
@@ -20,11 +20,9 @@ public class Prancer : MonoBehaviour {
 
     private void Update()
     {
-        bPoint.CurveTime += speed.Evaluate(bPoint.CurveTime) * Time.deltaTime * sign * baseSpeed;
-        if (bPoint.CurveTime == 1  || bPoint.CurveTime == 0)
-        {
-            sign *= -1;
-        }
+               
+        bPoint.Move(speed.Evaluate(bPoint.CurveTime) * Time.deltaTime * walkDirection * baseSpeed);
+        
     }
 
     [SerializeField]
@@ -39,6 +37,8 @@ public class Prancer : MonoBehaviour {
             scale.x = scaleX;
             transform.localScale = scale;
         }
+
+        walkDirection *= -1;
     }
 
     void OnBezierZoneEnter(BezierZone zone)

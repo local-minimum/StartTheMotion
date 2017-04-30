@@ -102,6 +102,73 @@ public class BezierCurve : MonoBehaviour {
         };
     }
 
+    private const float maxLengthStep = 0.01f;
+    private const float tStartStep = 0.01f;
+    private const float lengthAcceptance = 0.001f;
+
+    public float GetTimeAfter(float startTime, float distance, out bool hitEnd)
+    {
+        if (distance == 0)
+        {
+            hitEnd = false;
+            return startTime;
+        }
+
+        int iterations = 0;
+        Vector3 prev = GetGlobalPoint(startTime);        
+        Vector3 cur = prev;
+        float tPrev = startTime;
+        float tCur = startTime;
+        float direction = distance > 0 ? 1f : -1f;
+        distance = Mathf.Abs(distance);
+        float l = 0;
+        float maxLSq = Mathf.Pow(Vector3.Distance(GetGlobalPoint(0), GetGlobalPoint(1)) * maxLengthStep, 2);
+        while (true)
+        {
+            tCur = Mathf.Clamp01(tPrev + tStartStep * direction);            
+
+            do
+            {
+                cur = GetGlobalPoint(tCur);
+                if (Vector3.SqrMagnitude(prev - cur) > maxLSq)
+                {
+                    tCur = Mathf.Lerp(tPrev, tCur, 0.5f);
+                }
+                else
+                {
+                    float deltaL = Vector3.Distance(prev, cur);
+                    if (l + deltaL > distance + lengthAcceptance && tCur != 0 && tCur != 1)
+                    {
+                        tCur = Mathf.Lerp(tPrev, tCur, 0.5f);
+                    }
+                    else
+                    {
+                        l += deltaL;
+                        break;
+                    }
+                }
+
+                iterations++;
+                if (iterations > 1000)
+                {
+                    throw new System.ArgumentException(string.Format("Too many iterations finding {0}, now at {1} with l {2}", distance, tCur, l));
+                }
+            } while (true);
+
+            prev = cur;
+            tPrev = tCur;
+            if (l > distance - lengthAcceptance || tCur == 0 || tCur == 1)
+            {
+                hitEnd = tCur == 0 || tCur == 1;
+                break;
+            }
+
+
+        }
+
+        return tCur;
+    }
+
     public Vector3 GetGlobalPoint(float t)
     {
         return transform.TransformPoint(GetPoint(t));
@@ -185,9 +252,6 @@ public class BezierCurve : MonoBehaviour {
             return m_cachedLength;
         }
     }
-
-    private const float maxLengthStep = 0.01f;
-    private const float tStartStep = 0.01f;
 
     public void CalculateLength()
     {

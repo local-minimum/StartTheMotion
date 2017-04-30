@@ -16,6 +16,12 @@ public class BezierPoint : MonoBehaviour {
     [SerializeField]
     bool rotateWithCurve;
 
+    public void Move(float distance)
+    {
+        bool hitEnd;
+        CurveTime = curve.GetTimeAfter(curveTime, distance, out hitEnd);
+    }
+
     private void OnEnable()
     {
         CurveTime = curveTime;
