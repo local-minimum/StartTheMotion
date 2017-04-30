@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SequenceMode {ForwardLoop, BackwardLoop, PingPong};
+
 public class StopMotionSequencer : MonoBehaviour {
 
     SpriteRenderer sRend;
+
+    [SerializeField]
+    SequenceMode mode;
 
     [SerializeField]
     Sprite[] sequence;
@@ -13,6 +18,8 @@ public class StopMotionSequencer : MonoBehaviour {
     bool[] enabledAnimationStep;
 
     int showingIndex;
+
+    int sequenceDirection = 1;
 
     bool animating;
 
@@ -50,6 +57,13 @@ public class StopMotionSequencer : MonoBehaviour {
     {
         if (!animating)
         {
+            if (mode == SequenceMode.BackwardLoop)
+            {
+                sequenceDirection = -1;
+            } else
+            {
+                sequenceDirection = 1;
+            }
             StartCoroutine(Animate(m_fps));
         }
     }
@@ -88,8 +102,30 @@ public class StopMotionSequencer : MonoBehaviour {
 
         do
         {
-            showingIndex++;
-            showingIndex %= sequence.Length;
+            showingIndex+=sequenceDirection;
+            if (showingIndex < 0)
+            {
+                if (mode == SequenceMode.PingPong)
+                {
+                    showingIndex = 1;
+                    sequenceDirection = 1;
+                }
+                else
+                {
+                    showingIndex = sequence.Length - 1;
+                }
+            } else if (showingIndex >= sequence.Length)
+            {
+                if (mode == SequenceMode.PingPong)
+                {
+                    showingIndex = sequence.Length - 2;
+                    sequenceDirection = -1;
+                } else
+                {
+                    showingIndex = 0;
+                }
+            }
+
             if (showingIndex == start)
             {
                 throw new System.ArgumentException("No frames enabled on " + name);
