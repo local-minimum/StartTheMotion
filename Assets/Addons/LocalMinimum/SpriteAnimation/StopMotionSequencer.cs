@@ -11,6 +11,14 @@ public class StopMotionSequencer : MonoBehaviour {
     [SerializeField]
     string sequenceName;
 
+    public string SequenceName
+    {
+        get
+        {
+            return sequenceName;
+        }
+    }
+
     [SerializeField]
     SequenceMode mode;
 
@@ -24,11 +32,19 @@ public class StopMotionSequencer : MonoBehaviour {
 
     int sequenceDirection = 1;
 
-    bool animating;
+    bool m_isPlaying;
+
+    public bool IsPlaying
+    {
+        get
+        {
+            return m_isPlaying;
+        }
+    }
 
 	public void Step()
     {
-        animating = false;
+        m_isPlaying = false;
         SetNextFrame();
         sRend.sprite = sequence[showingIndex];
     }
@@ -37,12 +53,31 @@ public class StopMotionSequencer : MonoBehaviour {
 
     private void Start()
     {
+        if (Headless && Alone)
+        {
+            Play();
+        }
+    }
 
+    public bool Headless
+    {
+        get
+        {
+            return GetComponent<StopMotionAnimator>() == null;
+        }
+    }
+
+    public bool Alone
+    {
+        get
+        {
+            return GetComponents<StopMotionSequencer>().Length == 1;
+        }
     }
 
     public void Play()
     {
-        if (!animating)
+        if (!m_isPlaying)
         {
             SetupRenderer();
             SyncArrayLenghts();
@@ -92,7 +127,7 @@ public class StopMotionSequencer : MonoBehaviour {
 
     public void Stop()
     {
-        animating = false;  
+        m_isPlaying = false;  
 
     }
 
@@ -109,8 +144,8 @@ public class StopMotionSequencer : MonoBehaviour {
     IEnumerator<WaitForSeconds> Animate(float fps)
     {
         float delta = 1f / fps;
-        animating = true;
-        while (animating)
+        m_isPlaying = true;
+        while (m_isPlaying)
         {
             SetNextFrame();
             sRend.sprite = sequence[showingIndex];
@@ -150,6 +185,7 @@ public class StopMotionSequencer : MonoBehaviour {
 
             if (showingIndex == start)
             {
+                m_isPlaying = false;
                 throw new System.ArgumentException("No frames enabled on " + name);
             }
         } while (!enabledAnimationStep[showingIndex]);
