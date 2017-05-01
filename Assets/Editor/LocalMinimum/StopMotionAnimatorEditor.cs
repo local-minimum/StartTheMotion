@@ -13,15 +13,20 @@ public class StopMotionAnimatorEditor : Editor {
     public override void OnInspectorGUI()
     {
         stAnim = target as StopMotionAnimator;
+        base.OnInspectorGUI();
+        
+        //ListTransitions();
 
-        ListTransitions();
-        AddNewTransitions();
     }
 
     void ListTransitions()
     {
         EditorGUI.BeginChangeCheck();
         var transListProp = serializedObject.FindProperty("transitions");
+        if (transListProp == null)
+        {
+            return;
+        }
         transListProp.isExpanded = EditorGUILayout.Foldout(transListProp.isExpanded, "Transitions");
         if (transListProp.isExpanded)
         {
@@ -34,7 +39,7 @@ public class StopMotionAnimatorEditor : Editor {
                     if (EditorGUILayout.PropertyField(item))
                     {
                     }
-                    if (GUILayout.Button("- Remove"))
+                    if (GUILayout.Button("-", GUILayout.Width(26)))
                     {
                         transListProp.DeleteArrayElementAtIndex(i);
                     }
@@ -48,7 +53,7 @@ public class StopMotionAnimatorEditor : Editor {
                 var item = transListProp.GetArrayElementAtIndex(i);
                 if (item.objectReferenceValue != null)
                 {
-                    Debug.Log(item.objectReferenceValue);
+                   
                     if (i != movedIndex)
                     {
                         transListProp.GetArrayElementAtIndex(movedIndex).objectReferenceValue = item.objectReferenceValue;
@@ -79,27 +84,5 @@ public class StopMotionAnimatorEditor : Editor {
             }
         }
     }
-
-
-    void AddNewTransitions()
-    {
-        var transitionInterface = typeof(AbstractStopMotionTransition);
-        var types = AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(s => s.GetTypes())
-            .Where(p => transitionInterface.IsAssignableFrom(p) && p != transitionInterface)
-            .ToArray();
-
-        EditorGUILayout.BeginHorizontal();
-        typeIndex = EditorGUILayout.Popup(new GUIContent("New transition"), typeIndex, types.Select(e => new GUIContent(e.Name)).ToArray());
-        if (GUILayout.Button("+ Add"))
-        {
-            var inst = Activator.CreateInstance(types[typeIndex]);
-            Debug.Log(inst);
-            //stAnim.AddTransition(inst as AbstractStopMotionTransition);
-            //serializedObject.ApplyModifiedProperties();
-        }
-
-        EditorGUILayout.EndHorizontal();
-
-    }
+    
 }

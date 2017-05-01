@@ -42,7 +42,7 @@ public class StopMotionSequencer : MonoBehaviour {
         }
     }
 
-	public void Step()
+    public void Step()
     {
         m_isPlaying = false;
         SetupRenderer();
@@ -63,7 +63,7 @@ public class StopMotionSequencer : MonoBehaviour {
         smAnimator = GetComponent<StopMotionAnimator>();
         if (Headless && Alone)
         {
-            Play();
+            Play(true);
         }
     }
 
@@ -85,7 +85,7 @@ public class StopMotionSequencer : MonoBehaviour {
 
     System.Func<bool> callbackOnEndPlayback;
 
-    public void Play(System.Func<bool> callbackOnEndPlayback)
+    public void Play(bool resetSequence, System.Func<bool> callbackOnEndPlayback)
     {
         if (!m_isPlaying)
         {
@@ -93,19 +93,27 @@ public class StopMotionSequencer : MonoBehaviour {
             SetupRenderer();
             SyncArrayLenghts();
             SetSequenceDirection();
+            if (resetSequence)
+            {
+                SetSequenceStart();
+            }
             StartCoroutine(Animate(m_fps));
-        }else
+        } else
         {
-            Debug.LogWarning(name + " sequencer is already running");
+            Debug.LogWarning(name + " sequencer " + sequenceName + " is already running");
         }
     }
 
-    public void Play()
+    public void Play(bool resetSequence)
     {
         if (!m_isPlaying)
         {
             callbackOnEndPlayback = null;
             SetupRenderer();
+            if (resetSequence)
+            {
+                SetSequenceStart();
+            }
             SyncArrayLenghts();
             SetSequenceDirection();
             StartCoroutine(Animate(m_fps));
@@ -113,6 +121,17 @@ public class StopMotionSequencer : MonoBehaviour {
         else
         {
             Debug.LogWarning(name + " sequencer is already running");
+        }
+    }
+
+    void SetSequenceStart()
+    {
+        if (mode == SequenceMode.BackwardLoop)
+        {
+            showingIndex = sequence.Length;
+        } else if (mode == SequenceMode.ForwardLoop)
+        {
+            showingIndex = -1;
         }
     }
 

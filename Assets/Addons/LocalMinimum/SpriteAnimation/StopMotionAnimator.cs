@@ -2,30 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public abstract class AbstractStopMotionTransition : Object
-{
-    public abstract string transitionSource { get; }
-    public abstract string transitionTarget { get; }
-    public abstract bool AutoFires { get; }
-    public abstract bool CanExecute(StopMotionAnimator animator);
-    public abstract bool CanTrigger(StopMotionAnimator animator, string trigger);
-    public abstract void Execute(StopMotionAnimator animator);
-    
-}
-
 public class StopMotionAnimator : MonoBehaviour {
 
     [SerializeField, HideInInspector]
     StopMotionSequencer[] sequences;
+   
+    [SerializeField]
+    List<StopMotionTransition> transitions = new List<StopMotionTransition>();
 
-    [SerializeField, HideInInspector]
-    List<AbstractStopMotionTransition> transitions = new List<AbstractStopMotionTransition>();
-
-    public void AddTransition(AbstractStopMotionTransition transition)
+    public void AddTransition(StopMotionTransition transition)
     {
         transitions.Add(transition);
-        Debug.Log(transition);
     }
 
     private void Reset()
@@ -46,6 +33,14 @@ public class StopMotionAnimator : MonoBehaviour {
             {
                 return null;
             }
+        }
+    }
+
+   public bool HasActiveAnimtion
+   {
+        get
+        {
+            return active != null;
         }
     }
 
@@ -77,7 +72,7 @@ public class StopMotionAnimator : MonoBehaviour {
 
         if (next)
         {
-            next.Play(OnAnimationEnd);
+            next.Play(true, OnAnimationEnd);
             active = next;
         }        
     }
@@ -96,13 +91,20 @@ public class StopMotionAnimator : MonoBehaviour {
         throw new System.ArgumentException("No valid trigger target for: " + trigger);
     }
 
+    private void Start()
+    {
+        active = null;
+        StartAnimation();
+    }
+
     public void StartAnimation()
     {
         for (int i = 0, l = transitions.Count; i < l; i++)
         {
-            if (transitions[i].transitionSource == active.SequenceName && transitions[i].CanExecute(this))
+            if (transitions[i].CanExecute(this))
             {
                 transitions[i].Execute(this);
+                break;
             }
         }
     }
@@ -131,8 +133,12 @@ public class StopMotionAnimator : MonoBehaviour {
         {
             if (transitions[i].AutoFires && transitions[i].CanExecute(this))
             {
+                Debug.Log("Transition to " + transitions[i].transitionTarget + " with transition " + i);
                 transitions[i].Execute(this);
                 return false;
+            } else
+            {
+                //Debug.Log("Transition Refused: " + i);
             }
         }
         return true;

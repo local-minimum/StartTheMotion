@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class StopMotionTransition : AbstractStopMotionTransition
+public class StopMotionTransition
 {
     [SerializeField]
     string m_Source;
 
-    public override string transitionSource
+    public string transitionSource
     {
         get
         {
@@ -27,7 +27,7 @@ public class StopMotionTransition : AbstractStopMotionTransition
     [SerializeField]
     string m_Target;
 
-    public override string transitionTarget
+    public string transitionTarget
     {
         get
         {
@@ -37,11 +37,11 @@ public class StopMotionTransition : AbstractStopMotionTransition
 
     StopMotionSequencer m_targetSequencer;
 
-    public override bool CanExecute(StopMotionAnimator animator)
+    public bool CanExecute(StopMotionAnimator animator)
     {
         m_targetSequencer = animator.GetSequenceByName(m_Target);
 
-        return m_targetSequencer != null && (FromAnyState || m_Source == animator.ActiveName);
+        return m_targetSequencer != null && (FromAnyState && !animator.HasActiveAnimtion || m_Source == animator.ActiveName);
         
     }
 
@@ -64,7 +64,7 @@ public class StopMotionTransition : AbstractStopMotionTransition
         }
     }
 
-    public override bool AutoFires
+    public bool AutoFires
     {
         get
         {
@@ -72,13 +72,13 @@ public class StopMotionTransition : AbstractStopMotionTransition
         }
     }
 
-    public override bool CanTrigger(StopMotionAnimator animator, string trigger)
+    public virtual bool CanTrigger(StopMotionAnimator animator, string trigger)
     {
         return IsTriggerDriven && trigger == m_Trigger && CanExecute(animator); 
     }
 
 
-    public override void Execute(StopMotionAnimator animator)
+    public virtual void Execute(StopMotionAnimator animator)
     {
         animator.Play(m_targetSequencer);
     }
