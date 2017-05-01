@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,6 +24,14 @@ public class StopMotionStart : IStopMotionTransition
         }
     }
 
+    public bool AutoFires
+    {
+        get
+        {
+            return true;
+        }
+    }
+
     StopMotionSequencer targetSequence; 
     public bool CanExecute(StopMotionAnimator animator)
     {
@@ -41,4 +48,5 @@ public class StopMotionStart : IStopMotionTransition
     {
         animator.Play(targetSequence);
     }
+    
 }

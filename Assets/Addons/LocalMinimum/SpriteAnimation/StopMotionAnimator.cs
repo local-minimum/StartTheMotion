@@ -7,6 +7,7 @@ public interface IStopMotionTransition
 {
     string transitionSource { get; }
     string transitionTarget { get; }
+    bool AutoFires { get; }
     bool CanExecute(StopMotionAnimator animator);
     bool CanTrigger(StopMotionAnimator animator, string trigger);
     void Execute(StopMotionAnimator animator);
@@ -15,10 +16,10 @@ public interface IStopMotionTransition
 
 public class StopMotionAnimator : MonoBehaviour {
 
-    [SerializeField]
+    [SerializeField, HideInInspector]
     StopMotionSequencer[] sequences;
 
-    [SerializeField]
+    [SerializeField, HideInInspector]
     IStopMotionTransition[] transitions;
 
     private void Reset()
@@ -27,6 +28,20 @@ public class StopMotionAnimator : MonoBehaviour {
     }
 
     StopMotionSequencer active;
+
+    public string ActiveName
+    {
+        get
+        {
+            if (active)
+            {
+                return active.SequenceName;
+            } else
+            {
+                return null;
+            }
+        }
+    }
 
     public void PlayByName(string sequenceName)
     {
@@ -108,7 +123,7 @@ public class StopMotionAnimator : MonoBehaviour {
     {
         for (int i=0; i<transitions.Length; i++)
         {
-            if (transitions[i].transitionSource == active.SequenceName && transitions[i].CanExecute(this))
+            if (transitions[i].AutoFires && transitions[i].CanExecute(this))
             {
                 transitions[i].Execute(this);
                 return false;
