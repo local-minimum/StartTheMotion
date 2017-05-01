@@ -45,6 +45,7 @@ public class StopMotionTransition : IStopMotionTransition
         
     }
 
+    [SerializeField]
     string m_Trigger;
 
     public string Trigger
