@@ -25,6 +25,7 @@ public class StopMotionAnimator : MonoBehaviour {
     public void AddTransition(AbstractStopMotionTransition transition)
     {
         transitions.Add(transition);
+        Debug.Log(transition);
     }
 
     private void Reset()

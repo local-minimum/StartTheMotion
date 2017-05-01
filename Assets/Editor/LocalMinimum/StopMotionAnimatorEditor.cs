@@ -20,11 +20,48 @@ public class StopMotionAnimatorEditor : Editor {
 
     void ListTransitions()
     {
+        EditorGUI.BeginChangeCheck();
         var transListProp = serializedObject.FindProperty("transitions");
         transListProp.isExpanded = EditorGUILayout.Foldout(transListProp.isExpanded, "Transitions");
         if (transListProp.isExpanded)
         {
-
+            int nFilled = 0;
+            for (int i = 0, l = transListProp.arraySize; i < l; i++)
+            {
+                var item = transListProp.GetArrayElementAtIndex(i);
+                if (item.objectReferenceValue != null) {
+                    EditorGUILayout.BeginHorizontal();
+                    if (EditorGUILayout.PropertyField(item))
+                    {
+                    }
+                    if (GUILayout.Button("- Remove"))
+                    {
+                        transListProp.DeleteArrayElementAtIndex(i);
+                    }
+                    EditorGUILayout.EndHorizontal();
+                    nFilled++;
+                }
+            }
+            int movedIndex = 0;
+            for (int i=0, l=transListProp.arraySize; i<l; i++)
+            {
+                var item = transListProp.GetArrayElementAtIndex(i);
+                if (item.objectReferenceValue != null)
+                {
+                    Debug.Log(item.objectReferenceValue);
+                    if (i != movedIndex)
+                    {
+                        transListProp.GetArrayElementAtIndex(movedIndex).objectReferenceValue = item.objectReferenceValue;
+                    }
+                    movedIndex++;
+                }
+               
+            }
+            transListProp.arraySize = movedIndex;
+            if (EditorGUI.EndChangeCheck())
+            {
+                serializedObject.ApplyModifiedProperties();
+            }
         } else
         {
             if (transListProp.arraySize == 0)
@@ -43,6 +80,7 @@ public class StopMotionAnimatorEditor : Editor {
         }
     }
 
+
     void AddNewTransitions()
     {
         var transitionInterface = typeof(AbstractStopMotionTransition);
@@ -55,8 +93,10 @@ public class StopMotionAnimatorEditor : Editor {
         typeIndex = EditorGUILayout.Popup(new GUIContent("New transition"), typeIndex, types.Select(e => new GUIContent(e.Name)).ToArray());
         if (GUILayout.Button("+ Add"))
         {
-            stAnim.AddTransition(Activator.CreateInstance(types[typeIndex]) as AbstractStopMotionTransition);
-            serializedObject.ApplyModifiedProperties();
+            var inst = Activator.CreateInstance(types[typeIndex]);
+            Debug.Log(inst);
+            //stAnim.AddTransition(inst as AbstractStopMotionTransition);
+            //serializedObject.ApplyModifiedProperties();
         }
 
         EditorGUILayout.EndHorizontal();
