@@ -45,11 +45,11 @@ public class StopMotionSequencer : MonoBehaviour {
 	public void Step()
     {
         m_isPlaying = false;
+        SetupRenderer();
+        SyncArrayLenghts();
+        SetSequenceDirection();
         if (SetNextFrame())
         {
-            SetupRenderer();
-            SyncArrayLenghts();
-            SetSequenceDirection();
             sRend.sprite = sequence[showingIndex];
         }
     }
