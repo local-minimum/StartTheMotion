@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public interface IStopMotionTransition
+public abstract class AbstractStopMotionTransition : Object
 {
-    string transitionSource { get; }
-    string transitionTarget { get; }
-    bool AutoFires { get; }
-    bool CanExecute(StopMotionAnimator animator);
-    bool CanTrigger(StopMotionAnimator animator, string trigger);
-    void Execute(StopMotionAnimator animator);
+    public abstract string transitionSource { get; }
+    public abstract string transitionTarget { get; }
+    public abstract bool AutoFires { get; }
+    public abstract bool CanExecute(StopMotionAnimator animator);
+    public abstract bool CanTrigger(StopMotionAnimator animator, string trigger);
+    public abstract void Execute(StopMotionAnimator animator);
     
 }
 
@@ -20,7 +20,12 @@ public class StopMotionAnimator : MonoBehaviour {
     StopMotionSequencer[] sequences;
 
     [SerializeField, HideInInspector]
-    IStopMotionTransition[] transitions;
+    List<AbstractStopMotionTransition> transitions = new List<AbstractStopMotionTransition>();
+
+    public void AddTransition(AbstractStopMotionTransition transition)
+    {
+        transitions.Add(transition);
+    }
 
     private void Reset()
     {
@@ -78,7 +83,7 @@ public class StopMotionAnimator : MonoBehaviour {
 
     public void Trigger(string trigger)
     {
-        for (int i = 0; i < transitions.Length; i++)
+        for (int i = 0, l = transitions.Count; i < l; i++)
         {
             if (transitions[i].transitionSource == active.SequenceName && transitions[i].CanTrigger(this, trigger))
             {
@@ -92,7 +97,7 @@ public class StopMotionAnimator : MonoBehaviour {
 
     public void StartAnimation()
     {
-        for (int i = 0; i < transitions.Length; i++)
+        for (int i = 0, l = transitions.Count; i < l; i++)
         {
             if (transitions[i].transitionSource == active.SequenceName && transitions[i].CanExecute(this))
             {
@@ -121,7 +126,7 @@ public class StopMotionAnimator : MonoBehaviour {
 
     private bool OnAnimationEnd()
     {
-        for (int i=0; i<transitions.Length; i++)
+        for (int i=0, l=transitions.Count; i<l; i++)
         {
             if (transitions[i].AutoFires && transitions[i].CanExecute(this))
             {

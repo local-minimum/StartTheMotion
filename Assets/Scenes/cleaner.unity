@@ -266,7 +266,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -5
-  m_Sprite: {fileID: 21300000, guid: 82cee3d9c7181054e8829463f0e5d58f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 13da720f79b1e284bb27abb6bab4e052, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -310,7 +310,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 49589e923b8a1bc4c99f8aebf08a9571, type: 3}
   - {fileID: 21300000, guid: 846f101bf023e5c489ccca0ddfb3b257, type: 3}
   - {fileID: 21300000, guid: 09686faf0c0877942830dc2524561fb0, type: 3}
-  enabledAnimationStep: 
+  enabledAnimationStep: 01010101010101010101010101010101010101010101
   m_fps: 15
 --- !u!4 &364410575
 Transform:
@@ -361,6 +361,8 @@ MonoBehaviour:
   sequences:
   - {fileID: 364410574}
   - {fileID: 364410576}
+  transitions:
+  - {fileID: 0}
 --- !u!1 &370828659
 GameObject:
   m_ObjectHideFlags: 0

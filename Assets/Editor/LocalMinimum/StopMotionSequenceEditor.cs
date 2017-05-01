@@ -18,10 +18,12 @@ public class StopMotionSequenceEditor : Editor {
         {
             smSeq.Step();
         }
+
         if (GUILayout.Button("Stop"))
         {
             smSeq.Stop();
         }
+
         EditorGUILayout.EndHorizontal();
     }
 }

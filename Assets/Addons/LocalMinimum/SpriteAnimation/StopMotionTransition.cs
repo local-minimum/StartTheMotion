@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class StopMotionTransition : IStopMotionTransition
+public class StopMotionTransition : AbstractStopMotionTransition
 {
     [SerializeField]
     string m_Source;
 
-    public string transitionSource
+    public override string transitionSource
     {
         get
         {
@@ -27,7 +27,7 @@ public class StopMotionTransition : IStopMotionTransition
     [SerializeField]
     string m_Target;
 
-    public string transitionTarget
+    public override string transitionTarget
     {
         get
         {
@@ -37,7 +37,7 @@ public class StopMotionTransition : IStopMotionTransition
 
     StopMotionSequencer m_targetSequencer;
 
-    public bool CanExecute(StopMotionAnimator animator)
+    public override bool CanExecute(StopMotionAnimator animator)
     {
         m_targetSequencer = animator.GetSequenceByName(m_Target);
 
@@ -64,7 +64,7 @@ public class StopMotionTransition : IStopMotionTransition
         }
     }
 
-    public bool AutoFires
+    public override bool AutoFires
     {
         get
         {
@@ -72,13 +72,13 @@ public class StopMotionTransition : IStopMotionTransition
         }
     }
 
-    public bool CanTrigger(StopMotionAnimator animator, string trigger)
+    public override bool CanTrigger(StopMotionAnimator animator, string trigger)
     {
         return IsTriggerDriven && trigger == m_Trigger && CanExecute(animator); 
     }
 
 
-    public void Execute(StopMotionAnimator animator)
+    public override void Execute(StopMotionAnimator animator)
     {
         animator.Play(m_targetSequencer);
     }
