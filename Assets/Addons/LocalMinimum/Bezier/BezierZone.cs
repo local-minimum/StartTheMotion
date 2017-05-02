@@ -26,7 +26,7 @@ public class BezierZone : MonoBehaviour {
         myZones.Clear();   
         for (int i=0, l=zones.Count; i<l; i++)
         {
-            if (pt.IsOnCurve(zones[i].curve) && zones[i].IsInside(pt.CurveTime))
+            if (zones[i].IsInside(pt.Curve, pt.CurveTime))
             {
                 myZones.Add(zones[i]);
             }
@@ -84,10 +84,10 @@ public class BezierZone : MonoBehaviour {
 
     public BezierCurve curve;
 
-    public bool IsInside(float t)
+    public virtual bool IsInside(BezierCurve curve, float t)
     {
 
-        return t >= left && t <= right;
+        return curve == this.curve && t >= left && t <= right;
     }
 
 #if UNITY_EDITOR

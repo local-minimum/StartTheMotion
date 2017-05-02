@@ -21,6 +21,20 @@ public class BezierPoint : MonoBehaviour {
         this.curve = curve;
         CurveTime = time;
     }
+    
+    public BezierCurve Curve
+    {
+        get
+        {
+            return curve;
+        }        
+    }
+
+    public void ReAttach(BezierCurve curve, float time)
+    {
+        this.curve = curve;
+        CurveTime = time;
+    }
 
     public void Move(float distance)
     {
@@ -38,10 +52,7 @@ public class BezierPoint : MonoBehaviour {
         inZones.Clear();
     }
 
-    public bool IsOnCurve(BezierCurve curve)
-    {
-        return curve == this.curve;
-    }
+    
 
     public Vector3 CurvePoint
     {
@@ -85,7 +96,7 @@ public class BezierPoint : MonoBehaviour {
 
         if (curveTime == 0 || curveTime == 1)
         {
-            BroadcastMessage("OnBezierEnd", this, SendMessageOptions.DontRequireReceiver);
+            curve.BroadcastMessage("OnBezierEnd", this, SendMessageOptions.DontRequireReceiver);
         }
 
         BezierZone.PointIsInZones(this, tmpZones);

@@ -44,27 +44,19 @@ public class CharacterCtrlr : MonoBehaviour {
             {
                 swappedCurveThisFrame = true;
                 float t = target.TimeClosestTo(transform.position);
+                if (t == 0)
+                {
+                    t = Mathf.Epsilon;
+                } else if (t == 1)
+                {
+                    t = 1 - Mathf.Epsilon;
+                }
                 point.SwapAnchor(target, t);
                 
             }
         }
 	}
-
-    void OnBezierEnd(BezierPoint bPt)
-    {
-        if (changePaths != null && !swappedCurveThisFrame)
-        {
-            var target = changePaths.GetTarget<BezierCurve>();
-            Debug.Log("Swap to: " + target);
-            if (target)
-            {
-                swappedCurveThisFrame = true;
-                float t = target.TimeClosestTo(transform.position);
-                point.SwapAnchor(target, t);
-            }
-        }
-    }
-
+    
     BezierZone changePaths;
 
     void OnBezierZoneEnter(BezierZone zone)

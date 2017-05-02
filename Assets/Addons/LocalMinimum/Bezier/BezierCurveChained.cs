@@ -9,6 +9,19 @@ public class BezierCurveChained : BezierCurve {
     [Range(0, 1)]
     public float anchorTime;
 
+    private void Reset()
+    {
+        anchorTime = 1;
+
+        if (transform.parent)
+        {
+            anchor = transform.parent.GetComponentInParent<BezierCurve>();            
+        } else
+        {
+            SetDefaultShape();
+        }
+    }
+
     public Vector3 AnchorPoint
     {
         get
@@ -51,6 +64,28 @@ public class BezierCurveChained : BezierCurve {
                 points[0] = Vector3.Lerp(AnchorPoint, points[2], 0.25f);
                 points[1] = Vector3.Lerp(AnchorPoint, points[2], 0.75f);
                 break;
+        }
+    }
+
+    public void CloneToChild()
+    {
+        var GO = new GameObject(name + "-child");
+        GO.transform.SetParent(transform);
+        GO.transform.localPosition = Vector3.zero;
+        var childCurve = GO.AddComponent<BezierCurveChained>();
+        RelativeCloneToChild(this, childCurve);
+    }
+
+    static void RelativeCloneToChild(BezierCurveChained from, BezierCurveChained to)
+    {
+        to.anchorTime = 1;
+        to.anchor = from as BezierCurve;
+        to.points = new Vector3[from.points.Length];
+        Vector3 toAnchor = to.AnchorPoint;
+        Vector3 fromAnchor = from.AnchorPoint;
+        for (int i=0; i<from.points.Length; i++)
+        {
+            to.points[i] = from.points[i] - fromAnchor + toAnchor;
         }
     }
 

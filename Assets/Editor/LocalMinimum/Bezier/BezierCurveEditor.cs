@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(BezierCurve), true), CanEditMultipleObjects]
+[CustomEditor(typeof(BezierCurve)), CanEditMultipleObjects]
 public class BezierCurveEditor : BezierEditors {
 
     protected Transform handleTransform;
@@ -16,7 +16,9 @@ public class BezierCurveEditor : BezierEditors {
 
     public override void OnInspectorGUI()
     {
+        curve = target as BezierCurve;
         base.OnInspectorGUI();
+        
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Make Linear"))
         {

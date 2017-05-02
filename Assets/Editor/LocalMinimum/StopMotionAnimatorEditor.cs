@@ -8,11 +8,10 @@ using System.Linq;
 [CustomEditor(typeof(StopMotionAnimator))]
 public class StopMotionAnimatorEditor : Editor {
 
-    StopMotionAnimator stAnim;
-    int typeIndex = 0;
+    //int typeIndex = 0;
     public override void OnInspectorGUI()
     {
-        stAnim = target as StopMotionAnimator;
+        
         base.OnInspectorGUI();
         
         //ListTransitions();

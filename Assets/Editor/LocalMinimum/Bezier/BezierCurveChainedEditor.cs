@@ -7,11 +7,30 @@ using UnityEditor;
 public class BezierCurveChainedEditor : BezierCurveEditor {
 
     BezierCurveChained chainedCurve;
+
+    public override void OnInspectorGUI()
+    {
+        chainedCurve = target as BezierCurveChained;
+
+        if (chainedCurve.anchor == null)
+        {
+            EditorGUILayout.HelpBox("Chained curve will malfunction without an anchor", MessageType.Error);
+        }
+        base.OnInspectorGUI();
+        
+
+        if (GUILayout.Button("Make relative child"))
+        {
+            chainedCurve.CloneToChild();
+        }
+
+    }
+
     protected override void OnSceneGUI()
     {
         chainedCurve = target as BezierCurveChained;
         if (chainedCurve.anchor == null)
-        {
+        {            
             return;
         }
         base.OnSceneGUI();
