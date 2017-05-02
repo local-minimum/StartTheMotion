@@ -96,7 +96,7 @@ public class BezierPoint : MonoBehaviour {
 
         if (curveTime == 0 || curveTime == 1)
         {
-            curve.BroadcastMessage("OnBezierEnd", this, SendMessageOptions.DontRequireReceiver);
+            curve.SendMessage("OnBezierEnd", this, SendMessageOptions.DontRequireReceiver);
         }
 
         BezierZone.PointIsInZones(this, tmpZones);
