@@ -326,6 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1519953102}
   - component: {fileID: 1519953103}
+  - component: {fileID: 1519953104}
   m_Layer: 0
   m_Name: IntoWater
   m_TagString: Untagged
@@ -369,6 +370,24 @@ MonoBehaviour:
   anchorRight: {fileID: 0}
   anchoredTimeRight: 0
   m_cachedLength: 9.774393
+--- !u!114 &1519953104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1519953101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets:
+  - {fileID: 0}
+  times:
+  - 0.45833334
+  - 0.5744048
+  curve: {fileID: 1519953103}
+  lineColor: {r: 1, g: 0.09558821, b: 0.09558821, a: 0.853}
 --- !u!1 &1644153369
 GameObject:
   m_ObjectHideFlags: 0

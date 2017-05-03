@@ -6,7 +6,19 @@ public class BezierZone : MonoBehaviour {
 
     static List<BezierZone> zones = new List<BezierZone>();
 
-    private void OnEnable()
+    private void Reset()
+    {
+        curve = GetComponent<BezierCurve>();
+        times = new float[] { 0.25f, 0.75f };
+#if UNITY_EDITOR
+
+        lineColor = Color.red;
+
+#endif
+
+}
+
+private void OnEnable()
     {
         zones.Add(this);
     }
@@ -64,8 +76,9 @@ public class BezierZone : MonoBehaviour {
         return ret;
     }
 
-    [HideInInspector]
-    public float[] times = new float[2] { 0, 1 };
+    //[HideInInspector]
+    public float[] times = new float[2] { 0.25f, .75f };
+
     public float left
     {
         get {
