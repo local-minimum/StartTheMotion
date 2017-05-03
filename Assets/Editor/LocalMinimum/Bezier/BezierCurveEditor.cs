@@ -40,7 +40,7 @@ public class BezierCurveEditor : BezierEditors {
             handleTransform.rotation : Quaternion.identity;
 
         Handles.color = Color.grey;
-        int l = curve.N;
+        int l = curve.NumberOfPoints;
 
         DrawComponentLines(l);
         DrawCapButtons(l);

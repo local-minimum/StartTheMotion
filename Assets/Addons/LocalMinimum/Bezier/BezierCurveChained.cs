@@ -38,11 +38,11 @@ public class BezierCurveChained : BezierCurve {
         }
     }
 
-    public override int N
+    public override int NumberOfPoints
     {
         get
         {
-            return base.N + 1;
+            return base.NumberOfPoints + 1;
         }
     }
 
@@ -55,7 +55,7 @@ public class BezierCurveChained : BezierCurve {
 
     public override void MakeLinear()
     {
-        switch (N)
+        switch (NumberOfPoints)
         {
             case 3:
                 points[0] = Vector3.Lerp(AnchorPoint, points[1], 0.5f);

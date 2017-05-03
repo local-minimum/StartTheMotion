@@ -2,10 +2,66 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BezierType {Quadratic, Cubic};
+
 public class BezierCurve : MonoBehaviour {
 
+    [SerializeField]
+    BezierType bezierType = BezierType.Cubic;
+
     [HideInInspector]
-    public Vector3[] points = new Vector3[3];
+    public Vector3[] points = new Vector3[4];
+
+
+    #region LeftAnchor
+    public BezierCurve anchorLeft;
+
+    [Range(0, 1)]
+    public float anchoredTimeLeft;
+
+    Vector3 AnchorPointLeft
+    {
+        get
+        {
+            return transform.InverseTransformPoint(anchorLeft.GetGlobalPoint(anchoredTimeLeft));
+        }
+    }
+
+    public Vector3 GlobalAnchorPointLeft
+    {
+        get
+        {
+            return anchorLeft.GetGlobalPoint(anchoredTimeLeft);
+        }
+    }
+
+    #endregion
+
+    #region RightAnchor
+    public BezierCurve anchorRight;
+
+    [Range(0, 1)]
+    public float anchoredTimeRight;
+
+    Vector3 AnchorPointRight
+    {
+        get
+        {
+            return transform.InverseTransformPoint(anchorRight.GetGlobalPoint(anchoredTimeRight));
+        }
+    }
+
+    public Vector3 GlobalAnchorPointRight
+    {
+        get
+        {
+            return anchorRight.GetGlobalPoint(anchoredTimeRight);
+        }
+    }
+
+    #endregion
+
+    #region StaticBezierCalculations
 
     public static Vector3 GetPoint(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
     {
@@ -35,17 +91,41 @@ public class BezierCurve : MonoBehaviour {
             t * t * p2;
     }
 
-    public virtual int N
+    #endregion
+
+    #region Points
+    public virtual Vector3 GetPoint(float t)
     {
-        get
+        switch (bezierType)
         {
-            return points.Length;
+            case BezierType.Cubic:
+                return GetPoint(GetComponentPoint(0), points[1], points[2], GetComponentPoint(3), t);
+            case BezierType.Quadratic:
+                return GetPoint(GetComponentPoint(0), points[1], GetComponentPoint(3), t);
+            default:
+                throw new System.ArgumentException("Wacky bezier");
         }
+    }
+
+    public Vector3 GetGlobalPoint(float t)
+    {
+        return transform.TransformPoint(GetPoint(t));
     }
 
     public virtual Vector3 GetComponentPoint(int index)
     {
-        return points[index];
+        switch (index)
+        {
+            case 0:
+                return anchorLeft == null ? points[0] : AnchorPointLeft;
+            case 1:
+                return points[1];
+            case 2:
+                return points[2];
+            case 3:
+                return anchorRight == null ? points[3] : AnchorPointRight;
+        }
+        throw new System.ArgumentException(index + " not in range 0-3");
     }
 
     public Vector3 GetComponentPointGlobal(int index)
@@ -63,45 +143,68 @@ public class BezierCurve : MonoBehaviour {
             3f * t * t * (p3 - p2);
     }
 
-    public virtual Vector3 GetPoint(float t)
+    public Vector3 GetClosestPointOnBezier(Vector3 worldPos)
     {
-        switch (points.Length) {
-            case 4:
-                return GetPoint(points[0], points[1], points[2], points[3], t);
-            case 3:
-                return GetPoint(points[0], points[1], points[2], t);
-            case 2:
-                return Vector3.Lerp(points[0], points[1], t);
-            default:
-                throw new System.ArgumentException("Must have 2-4 points");
-        }
+        return GetGlobalPoint(TimeClosestTo(worldPos));
     }
 
+    #endregion
+
+    #region HelpFunctions
     public virtual void MakeLinear()
     {
-        switch (N)
+        switch (bezierType)
         {
-            case 3:
-                points[1] = Vector3.Lerp(points[0], points[2], 0.5f);
+            case BezierType.Quadratic:
+                points[1] = Vector3.Lerp(GetComponentPoint(0), GetComponentPoint(3), 0.5f);
                 break;
-            case 4:
-                points[1] = Vector3.Lerp(points[0], points[3], 0.25f);
-                points[2] = Vector3.Lerp(points[0], points[3], 0.75f);
+            case BezierType.Cubic:
+                points[1] = Vector3.Lerp(GetComponentPoint(0), GetComponentPoint(3), 0.25f);
+                points[2] = Vector3.Lerp(GetComponentPoint(0), GetComponentPoint(3), 0.75f);
                 break;
         }
     }
 
-    public virtual void SetDefaultShape()
+    public void SetDefaultShape()
     {
+        Vector3 left = anchorLeft == null ? Vector3.zero : transform.InverseTransformPoint(AnchorPointLeft);
+        Vector3 right = anchorRight == null ? left + Vector3.right : transform.InverseTransformPoint(AnchorPointRight);
+        Vector3 midPoint = Vector3.Lerp(left, right, 0.5f);
+
         points = new Vector3[4]
         {
-            Vector3.zero,
-            new Vector3(0.5f, 0.5f),
-            new Vector3(0.5f, -0.5f),
-            new Vector3(1f, 0f)
+            left,
+            midPoint + Vector3.up,
+            midPoint + Vector3.down,
+            right
         };
     }
 
+    public void CloneMakeChild()
+    {
+        var GO = new GameObject(name + "-child");
+        GO.transform.SetParent(transform);
+        GO.transform.localPosition = Vector3.zero;
+        var childCurve = GO.AddComponent<BezierCurve>();
+        RelativeCloneToChild(this, childCurve);
+    }
+
+    static void RelativeCloneToChild(BezierCurve from, BezierCurve to)
+    {
+        to.anchoredTimeLeft = 1;
+        to.anchorLeft = from;
+        to.points = new Vector3[4];
+        Vector3 toAnchor = to.AnchorPointLeft;
+        Vector3 fromAnchor = from.GetGlobalPoint(0);
+        for (int i = 0; i < from.points.Length; i++)
+        {
+            to.points[i] = to.transform.InverseTransformDirection( 
+                from.transform.TransformDirection(from.points[i] - fromAnchor)) + toAnchor;
+        }
+    }
+    #endregion
+
+    #region Times
     private const float maxLengthStep = 0.01f;
     private const float tStartStep = 0.01f;
     private const float lengthAcceptance = 0.001f;
@@ -169,24 +272,12 @@ public class BezierCurve : MonoBehaviour {
         return tCur;
     }
 
-    public Vector3 GetGlobalPoint(float t)
-    {
-        return transform.TransformPoint(GetPoint(t));
-    }
-
-    public virtual Quaternion GetRotationAt(float t)
-    {
-        Vector3 tangent = transform.TransformDirection(GetFirstDerivative(points[0], points[1], points[2], points[3], t)).normalized;
-        Vector3 forward = transform.TransformDirection(transform.forward);
-        return Quaternion.LookRotation(forward, Quaternion.AngleAxis(90, forward) * tangent);
-    }
-
     private const float minDelta = 0.002f;
 
     public float TimeClosestTo(Vector3 point)
     {
         Vector3 local = transform.InverseTransformPoint(point);
-        float seed = GetSeedTime(local);
+        float seed = GetRoughClosestTime(local);
 
         Vector3 clostestPt = GetPoint(seed);
         float closestSq = Vector3.SqrMagnitude(local - clostestPt);
@@ -202,7 +293,8 @@ public class BezierCurve : MonoBehaviour {
             {
                 closestSq = sqDestLeft;
                 seed = lTime;
-            } else if (sqDistRight < closestSq)
+            }
+            else if (sqDistRight < closestSq)
             {
                 closestSq = sqDistRight;
                 seed = rTime;
@@ -211,25 +303,20 @@ public class BezierCurve : MonoBehaviour {
             if (delta < minDelta)
             {
                 break;
-            }            
+            }
         }
         return seed;
     }
 
-    public Vector3 GetClosestPointOnBezier(Vector3 worldPos)
-    {
-        return GetGlobalPoint(TimeClosestTo(worldPos));
-    }
-
     private const int seedSteps = 42;
 
-    float GetSeedTime(Vector3 localPt)
+    float GetRoughClosestTime(Vector3 localPt)
     {
         float seed = 0;
         float minSqDist = -1;
-        for (int i =0; i<=seedSteps; i++)
+        for (int i = 0; i <= seedSteps; i++)
         {
-            float t = i / (float) seedSteps;
+            float t = i / (float)seedSteps;
             //Debug.Log(t);
             float sqDist = Vector3.SqrMagnitude(localPt - GetPoint(t));
             if (minSqDist < 0 || sqDist < minSqDist)
@@ -241,7 +328,28 @@ public class BezierCurve : MonoBehaviour {
         return seed;
     }
 
+    #endregion
 
+    #region Rotation
+    public virtual Quaternion GetRotationAt(float t)
+    {
+        Vector3 tangent;
+        switch (bezierType) {
+            case BezierType.Cubic:
+                tangent = transform.TransformDirection(
+            GetFirstDerivative(GetComponentPoint(0), GetComponentPoint(1),
+            GetComponentPoint(2), GetComponentPoint(3), t)).normalized;
+                break;
+            default:
+                throw new System.NotImplementedException("No support for rotation of " + bezierType);
+        }
+
+        Vector3 forward = transform.TransformDirection(transform.forward);
+        return Quaternion.LookRotation(forward, Quaternion.AngleAxis(90, forward) * tangent);
+    }
+    #endregion
+
+    #region CurveLength
     [SerializeField]
     float m_cachedLength;
 
@@ -289,4 +397,5 @@ public class BezierCurve : MonoBehaviour {
         }
         m_cachedLength = l;
     }
+    #endregion
 }
