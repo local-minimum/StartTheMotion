@@ -327,6 +327,7 @@ GameObject:
   - component: {fileID: 1519953102}
   - component: {fileID: 1519953103}
   - component: {fileID: 1519953104}
+  - component: {fileID: 1519953105}
   m_Layer: 0
   m_Name: IntoWater
   m_TagString: Untagged
@@ -382,12 +383,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targets:
-  - {fileID: 0}
+  - {fileID: 1519953105}
   times:
-  - 0.45833334
+  - 0
   - 0.5744048
   curve: {fileID: 1519953103}
   lineColor: {r: 1, g: 0.09558821, b: 0.09558821, a: 0.853}
+--- !u!114 &1519953105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1519953101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa468bf6ec8d56f4ebf8b2b7a35cebd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedByPostion:
+    active: 1
+    velocity:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 5
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.45929265
+        value: 2.788529
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 8
+        inSlope: 14.14228
+        outSlope: 14.14228
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    duration: 0
+  speedByDuration:
+    active: 0
+    velocity:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    duration: 0
 --- !u!1 &1644153369
 GameObject:
   m_ObjectHideFlags: 0
