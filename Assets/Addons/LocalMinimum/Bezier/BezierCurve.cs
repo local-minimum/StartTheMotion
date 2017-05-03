@@ -5,9 +5,8 @@ using UnityEngine;
 public enum BezierType {Quadratic, Cubic};
 
 public class BezierCurve : MonoBehaviour {
-
-    [SerializeField]
-    BezierType bezierType = BezierType.Cubic;
+    
+    public BezierType bezierType = BezierType.Cubic;
 
     [HideInInspector]
     public Vector3[] points = new Vector3[4];
