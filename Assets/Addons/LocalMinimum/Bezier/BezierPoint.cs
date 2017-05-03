@@ -34,6 +34,7 @@ public class BezierPoint : MonoBehaviour {
     {
         this.curve = curve;
         CurveTime = time;
+        curve.SendMessage("OnAttachToCurve", this, SendMessageOptions.DontRequireReceiver);
     }
 
     public void Move(float distance)

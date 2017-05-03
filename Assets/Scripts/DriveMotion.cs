@@ -8,13 +8,22 @@ public struct MotionParameters
     public bool active;    
     public AnimationCurve velocity;
     public float duration;
+
+    public MotionParameters Clone()
+    {
+        var clone = new MotionParameters();
+        clone.active = active;
+        clone.duration = duration;
+        clone.velocity = velocity;
+        return clone;
+    }
 }
 
 public class Driver
 {
     public BezierPoint point;
-    MotionParameters speedByPosition;
-    MotionParameters speedByDuration;
+    public MotionParameters speedByPosition;
+    public MotionParameters speedByDuration;
 
     public void Update()
     {
@@ -27,10 +36,14 @@ public class Driver
 
         if (speedByPosition.active)
         {
+            //Debug.Log(point.CurveTime);
+            //Debug.Log(speedByPosition.velocity.Evaluate(point.CurveTime));
+
             distance += speedByPosition.velocity.Evaluate(point.CurveTime) * Time.deltaTime;
             speedByPosition.duration += Time.deltaTime;
         }
 
+        //Debug.Log(distance);
         point.Move(distance);
     }
 }
@@ -38,15 +51,24 @@ public class Driver
 public class DriveMotion : MonoBehaviour {
 
 
-    void OnBezierEnter()
+    void OnAttachToCurve(BezierPoint point)
     {
-
+        if (!IsDrivingPoint(point))
+        {
+            AddDriver(point);
+            point.SendMessage("OnPointDriven", this, SendMessageOptions.DontRequireReceiver);
+        }
     }
 
-    void OnBezierExit()
+    void AddDriver(BezierPoint point)
     {
-
+        var driver = new Driver();
+        driver.point = point;
+        driver.speedByDuration = speedByDuration.Clone();
+        driver.speedByPosition = speedByPostion.Clone();
+        automatons.Add(driver);
     }
+
 
     bool IsDrivingPoint(BezierPoint point)
     {
@@ -60,6 +82,8 @@ public class DriveMotion : MonoBehaviour {
 
         return false;
     }
+
+    public string[] canBeDriven;
 
     List<Driver> automatons = new List<Driver>();
 

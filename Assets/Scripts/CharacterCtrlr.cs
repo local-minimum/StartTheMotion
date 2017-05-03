@@ -20,7 +20,7 @@ public class CharacterCtrlr : MonoBehaviour {
 
         swappedCurveThisFrame = false;
 
-        float hor = Input.GetAxis("Horizontal");
+        float hor = playerControlled ? Input.GetAxis("Horizontal") : 0f;
         if (hor > noMove)
         {
             Vector3 scale = transform.localScale;
@@ -75,5 +75,17 @@ public class CharacterCtrlr : MonoBehaviour {
             Debug.Log("Exit " + zone);
             changePaths = null;
         }
+    }
+
+    bool playerControlled = true;
+
+    void OnPointDriven(DriveMotion driveMotion)
+    {
+        playerControlled = false;
+    }
+
+    void KillPlayer(PointInvoker invoker)
+    {
+        Debug.Log("Respawn");
     }
 }
