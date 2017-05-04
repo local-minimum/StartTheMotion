@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum BezierZoneEventType {EnterZone, StayZone, ExitZone};
 
+[System.Serializable]
 public struct BezierZoneEvent
 {
     public BezierZone zone;

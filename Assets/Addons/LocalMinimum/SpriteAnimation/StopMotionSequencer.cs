@@ -32,19 +32,33 @@ public class StopMotionSequencer : MonoBehaviour {
 
     int sequenceDirection = 1;
 
-    bool m_isPlaying;
-
     public bool IsPlaying
     {
         get
         {
-            return m_isPlaying;
+            return _activeAnimation != null;
+        }
+
+        private set
+        {
+            if (value || _activeAnimation == null)
+            {
+                Debug.LogError(name + ", " + sequenceName + " has unexpected missing animation" + 
+                    string.Format("Request {0} while animation {1}", value, _activeAnimation));
+            } else
+            {
+                StopCoroutine(_activeAnimation);
+                _activeAnimation = null;
+            }
         }
     }
 
     public void Step()
     {
-        m_isPlaying = false;
+        if (IsPlaying)
+        {
+            IsPlaying = false;
+        }
         SetupRenderer();
         SyncArrayLenghts();
         SetSequenceDirection();
@@ -87,7 +101,7 @@ public class StopMotionSequencer : MonoBehaviour {
 
     public void Play(bool resetSequence, System.Func<bool> callbackOnEndPlayback)
     {
-        if (!m_isPlaying)
+        if (!IsPlaying)
         {
             this.callbackOnEndPlayback = callbackOnEndPlayback;
             SetupRenderer();
@@ -97,7 +111,8 @@ public class StopMotionSequencer : MonoBehaviour {
             {
                 SetSequenceStart();
             }
-            StartCoroutine(Animate(m_fps));
+            _activeAnimation = Animate(m_fps);
+            StartCoroutine(_activeAnimation);
         } else
         {
             Debug.LogWarning(name + " sequencer " + sequenceName + " is already running");
@@ -106,7 +121,7 @@ public class StopMotionSequencer : MonoBehaviour {
 
     public void Play(bool resetSequence)
     {
-        if (!m_isPlaying)
+        if (!IsPlaying)
         {
             callbackOnEndPlayback = null;
             SetupRenderer();
@@ -116,13 +131,16 @@ public class StopMotionSequencer : MonoBehaviour {
             }
             SyncArrayLenghts();
             SetSequenceDirection();
-            StartCoroutine(Animate(m_fps));
+            _activeAnimation = Animate(m_fps);
+            StartCoroutine(_activeAnimation);
         }
         else
         {
             Debug.LogWarning(name + " sequencer is already running");
         }
     }
+
+    IEnumerator<WaitForSeconds> _activeAnimation = null;
 
     void SetSequenceStart()
     {
@@ -176,8 +194,8 @@ public class StopMotionSequencer : MonoBehaviour {
 
     public void Stop()
     {
-        m_isPlaying = false;  
-
+        IsPlaying = false;
+        Debug.Log(name + ": Stopped playing " + sequenceName);
     }
 
     public void SetAnimationStepEnabled(int index)
@@ -203,8 +221,8 @@ public class StopMotionSequencer : MonoBehaviour {
     IEnumerator<WaitForSeconds> Animate(float fps)
     {
         float delta = 1f / fps;
-        m_isPlaying = true;
-        while (m_isPlaying)
+        
+        while (true)
         {
             if (SetNextFrame())
             {
@@ -221,6 +239,11 @@ public class StopMotionSequencer : MonoBehaviour {
     bool SetNextFrame()
     {
         int start = showingIndex;
+        if (sequence.Length == 1)
+        {
+            showingIndex = 0;
+            return true;
+        }
 
         do
         {
@@ -264,7 +287,7 @@ public class StopMotionSequencer : MonoBehaviour {
 
             if (showingIndex == start)
             {
-                m_isPlaying = false;
+                IsPlaying = false;
                 throw new System.ArgumentException("No frames enabled on " + name);
             }
         } while (!enabledAnimationStep[showingIndex]);

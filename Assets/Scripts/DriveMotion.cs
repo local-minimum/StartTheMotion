@@ -60,6 +60,15 @@ public class DriveMotion : MonoBehaviour {
         }
     }
 
+    void OnDetachFromCurve(BezierPoint point)
+    {
+        if (IsDrivingPoint(point))
+        {
+            RemoveDriver(point);
+            point.SendMessage("OnPointNotDriven", this, SendMessageOptions.DontRequireReceiver);
+        }
+    }
+
     void AddDriver(BezierPoint point)
     {
         var driver = new Driver();
@@ -69,6 +78,16 @@ public class DriveMotion : MonoBehaviour {
         automatons.Add(driver);
     }
 
+    void RemoveDriver(BezierPoint point)
+    {
+        for (int i=0, l=automatons.Count; i<l; i++)
+        {
+            if (automatons[i].point == point)
+            {
+                automatons.RemoveAt(i);
+            }
+        }
+    }
 
     bool IsDrivingPoint(BezierPoint point)
     {

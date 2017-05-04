@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StopMotionAnimator : MonoBehaviour {
 
-    [SerializeField, HideInInspector]
+    [SerializeField]
     StopMotionSequencer[] sequences;
    
     [SerializeField]
@@ -60,8 +60,9 @@ public class StopMotionAnimator : MonoBehaviour {
     }
 
     public void Play(StopMotionSequencer next) { 
-        if (next == active && next != null)
+        if (next == active || next == null)
         {
+            Debug.LogWarning(next == null ? "Can't play null sequence" : "Next and current animations are the same '" + next.SequenceName + "'");
             return;
         }
 
@@ -74,6 +75,7 @@ public class StopMotionAnimator : MonoBehaviour {
         {
             next.Play(true, OnAnimationEnd);
             active = next;
+            Debug.Log(name + ": Changed active sequence to " + active.SequenceName);
         }        
     }
 
@@ -81,9 +83,10 @@ public class StopMotionAnimator : MonoBehaviour {
     {
         for (int i = 0, l = transitions.Count; i < l; i++)
         {
-            if (transitions[i].transitionSource == active.SequenceName && transitions[i].CanTrigger(this, trigger))
+            if (transitions[i].CanTrigger(this, trigger))
             {
                 transitions[i].Execute(this);
+                Debug.Log(name + " is triggering with " + trigger + " to play " + transitions[i].transitionTarget);
                 return;
             }
         }
@@ -93,7 +96,6 @@ public class StopMotionAnimator : MonoBehaviour {
 
     private void Start()
     {
-        active = null;
         StartAnimation();
     }
 
@@ -104,9 +106,11 @@ public class StopMotionAnimator : MonoBehaviour {
             if (transitions[i].CanExecute(this))
             {
                 transitions[i].Execute(this);
-                break;
+                Debug.Log(name + ": Start animation " + transitions[i].transitionTarget);
+                return;
             }
         }
+        Debug.Log(name + ": No start animation for ");
     }
 
     void Ease(StopMotionSequencer a, StopMotionSequencer b)

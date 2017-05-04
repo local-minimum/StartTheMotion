@@ -36,6 +36,14 @@ public class CharacterCtrlr : MonoBehaviour {
             point.Move(Time.deltaTime * speed * hor);
         }
 
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if (interactableDeathLife)
+            {
+                interactableDeathLife.alive = !interactableDeathLife.alive;
+            }
+        }
+        /* Temp code for action swapping curves 
         if (!swappedCurveThisFrame && changePaths != null && Input.GetButtonDown("Fire1"))
         {
             var target = changePaths.GetTarget<BezierCurve>();
@@ -53,21 +61,53 @@ public class CharacterCtrlr : MonoBehaviour {
                 }
                 point.SwapAnchor(target, t);
                 
-            }
-        }
+            } 
+        } */
 	}
     
     BezierZone changePaths;
 
-    bool playerControlled = true;
+    bool playerControlled
+    {
+        get
+        {
+            return _driver == null;
+        }
+    }
+
+    DriveMotion _driver;
 
     void OnPointDriven(DriveMotion driveMotion)
     {
-        playerControlled = false;
+        _driver = driveMotion;
+    }
+
+    void OnPointNotDriven(DriveMotion driveMotion)
+    {
+        if (_driver == driveMotion)
+        {
+            _driver = null;
+        }
     }
 
     void KillPlayer(PointInvoker invoker)
     {
         Debug.Log("Respawn");
+    }
+
+    DeathLife interactableDeathLife;
+
+    void ShowDeathLife(DeathLife deathLife)
+    {
+        Debug.Log(name + " can manipulate " + deathLife);
+        interactableDeathLife = deathLife;
+    }
+
+    void HideDeathLife(DeathLife deathLife)
+    {
+        if (interactableDeathLife == deathLife)
+        {
+            interactableDeathLife = null;
+        } 
     }
 }

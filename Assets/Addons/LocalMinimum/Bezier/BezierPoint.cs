@@ -32,6 +32,10 @@ public class BezierPoint : MonoBehaviour {
 
     public void ReAttach(BezierCurve curve, float time)
     {
+        if (this.curve)
+        {
+            this.curve.SendMessage("OnDetachFromCurve", this, SendMessageOptions.DontRequireReceiver);
+        }
         this.curve = curve;
         CurveTime = time;
         curve.SendMessage("OnAttachToCurve", this, SendMessageOptions.DontRequireReceiver);

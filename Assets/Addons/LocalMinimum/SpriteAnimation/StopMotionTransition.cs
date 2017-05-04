@@ -41,7 +41,7 @@ public class StopMotionTransition
     {
         m_targetSequencer = animator.GetSequenceByName(m_Target);
 
-        return m_targetSequencer != null && (FromAnyState && !animator.HasActiveAnimtion || m_Source == animator.ActiveName);
+        return m_targetSequencer != null && (FromAnyState && !animator.HasActiveAnimtion || m_Source == animator.ActiveName) && !IsTriggerDriven;
         
     }
 
@@ -74,7 +74,8 @@ public class StopMotionTransition
 
     public virtual bool CanTrigger(StopMotionAnimator animator, string trigger)
     {
-        return IsTriggerDriven && trigger == m_Trigger && CanExecute(animator); 
+        m_targetSequencer = animator.GetSequenceByName(m_Target);
+        return IsTriggerDriven && trigger == m_Trigger && (FromAnyState || animator.ActiveName == transitionSource) && m_targetSequencer != null; 
     }
 
 
