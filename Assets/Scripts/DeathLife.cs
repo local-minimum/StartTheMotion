@@ -47,4 +47,12 @@ public class DeathLife : MonoBehaviour {
     {
         return alive == affectedBifAliveReq;
     }
+
+    [SerializeField]
+    bool carryWhenAlive;
+
+    public bool CanCarry()
+    {
+        return alive == carryWhenAlive;
+    }
 }

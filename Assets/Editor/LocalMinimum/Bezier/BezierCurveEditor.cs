@@ -24,9 +24,14 @@ public class BezierCurveEditor : BezierEditors {
         {
             curve.MakeLinear();
         }
-        if (GUILayout.Button("Default Shape"))
+        if (GUILayout.Button("Reset Shape"))
         {
             curve.SetDefaultShape();
+        }
+
+        if (GUILayout.Button("Inv Direction"))
+        {
+            curve.InvertDirection();
         }
 
         if (GUILayout.Button("Create child"))

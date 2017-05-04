@@ -13,12 +13,16 @@ public class CharacterCtrlr : MonoBehaviour {
         point = GetComponent<BezierPoint>();
     }
 
-    bool swappedCurveThisFrame;
+    //bool swappedCurveThisFrame;
 
     private const float noMove = 0.1f;
     void Update () {
 
-        swappedCurveThisFrame = false;
+        if (outroAnim != null)
+        {
+            return;
+        }
+        //swappedCurveThisFrame = false;
 
         float hor = playerControlled ? Input.GetAxis("Horizontal") : 0f;
         if (hor > noMove)
@@ -109,5 +113,28 @@ public class CharacterCtrlr : MonoBehaviour {
         {
             interactableDeathLife = null;
         } 
+    }
+
+    void PointDrop(DeathLife lifeDeath)
+    {
+        point.Detatch();
+        outroAnim = FallKill();
+        StartCoroutine(outroAnim);
+
+    }
+
+    IEnumerator<WaitForSeconds> outroAnim;
+
+    IEnumerator<WaitForSeconds> FallKill()
+    {
+        Vector3 speed = Vector3.down * .01f;
+        for (int i=0; i<30f; i++)
+        {
+            speed *= 1.5f;
+            transform.position += speed;
+            yield return new WaitForSeconds(0.016f);
+        }
+        Debug.Log("Death fall");
+        outroAnim = null;
     }
 }

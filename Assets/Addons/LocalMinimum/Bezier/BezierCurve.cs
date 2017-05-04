@@ -201,6 +201,25 @@ public class BezierCurve : MonoBehaviour {
                 from.transform.TransformDirection(from.points[i] - fromAnchor)) + toAnchor;
         }
     }
+
+    public void InvertDirection()
+    {
+        Vector3 tmp = points[0];
+        points[0] = points[3];
+        points[3] = tmp;
+        tmp = points[1];
+        points[1] = points[2];
+        points[2] = tmp;
+
+        BezierCurve tmpA = anchorLeft;
+        anchorLeft = anchorRight;
+        anchorRight = tmpA;
+
+        float tmpT = anchoredTimeLeft;
+        anchoredTimeLeft = anchoredTimeRight;
+        anchoredTimeRight = tmpT;
+    }
+
     #endregion
 
     #region Times

@@ -30,15 +30,26 @@ public class BezierPoint : MonoBehaviour {
         }        
     }
 
+    public void Detatch()
+    {
+        if (curve)
+        {
+            curve.SendMessage("OnDetachFromCurve", this, SendMessageOptions.DontRequireReceiver);
+        }
+        inZones.Clear();
+        curve = null;
+    }
+
     public void ReAttach(BezierCurve curve, float time)
     {
         if (this.curve)
         {
             this.curve.SendMessage("OnDetachFromCurve", this, SendMessageOptions.DontRequireReceiver);
         }
+        inZones.Clear();
         this.curve = curve;
-        CurveTime = time;
         curve.SendMessage("OnAttachToCurve", this, SendMessageOptions.DontRequireReceiver);
+        CurveTime = time;
     }
 
     public void Move(float distance)
@@ -98,11 +109,6 @@ public class BezierPoint : MonoBehaviour {
     void CheckEvents()
     {
 
-        if (curveTime == 0 || curveTime == 1)
-        {
-            curve.SendMessage("OnBezierEnd", this, SendMessageOptions.DontRequireReceiver);
-        }
-
         BezierZone.PointIsInZones(this, tmpZones);
         for(int i=0, l=inZones.Count; i<l;i++)
         {
@@ -134,6 +140,13 @@ public class BezierPoint : MonoBehaviour {
         }
         inZones.Clear();
         inZones.AddRange(tmpZones);
+
+        if (curveTime == 0 || curveTime == 1)
+        {
+            curve.SendMessage("OnBezierEnd", this, SendMessageOptions.DontRequireReceiver);
+        }
+
+
     }
 
     public void Snap()
