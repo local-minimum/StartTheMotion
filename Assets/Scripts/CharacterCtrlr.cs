@@ -59,24 +59,6 @@ public class CharacterCtrlr : MonoBehaviour {
     
     BezierZone changePaths;
 
-    void OnBezierZoneEnter(BezierZone zone)
-    {
-        if (zone.GetTarget<BezierCurve>() != null)
-        {
-            Debug.Log("Enter " + zone);
-            changePaths = zone;
-        }
-    }
-
-    void OnBezierZoneExit(BezierZone zone)
-    {
-        if (changePaths == zone)
-        {
-            Debug.Log("Exit " + zone);
-            changePaths = null;
-        }
-    }
-
     bool playerControlled = true;
 
     void OnPointDriven(DriveMotion driveMotion)

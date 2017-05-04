@@ -94,7 +94,6 @@ public class BezierPoint : MonoBehaviour {
     void CheckEvents()
     {
 
-
         if (curveTime == 0 || curveTime == 1)
         {
             curve.SendMessage("OnBezierEnd", this, SendMessageOptions.DontRequireReceiver);
@@ -105,7 +104,10 @@ public class BezierPoint : MonoBehaviour {
         {
             if (!tmpZones.Contains(inZones[i]))
             {
-                BroadcastMessage("OnBezierZoneExit", inZones[i], SendMessageOptions.DontRequireReceiver);
+                inZones[i].SendMessage(
+                    "OnBezierZoneEvent", 
+                    new BezierZoneEvent(inZones[i], this, BezierZoneEventType.ExitZone),
+                    SendMessageOptions.DontRequireReceiver);
             }
         }
 
@@ -113,10 +115,17 @@ public class BezierPoint : MonoBehaviour {
         {
             if (inZones.Contains(tmpZones[i]))
             {
-                BroadcastMessage("OnBezierZoneStay", tmpZones[i], SendMessageOptions.DontRequireReceiver);
-            } else
+                tmpZones[i].SendMessage(
+                    "OnBezierZoneEvent",
+                    new BezierZoneEvent(tmpZones[i], this, BezierZoneEventType.StayZone),
+                    SendMessageOptions.DontRequireReceiver);
+            }
+            else
             {
-                BroadcastMessage("OnBezierZoneEnter", tmpZones[i], SendMessageOptions.DontRequireReceiver);
+                tmpZones[i].SendMessage(
+                    "OnBezierZoneEvent",
+                    new BezierZoneEvent(tmpZones[i], this, BezierZoneEventType.EnterZone),
+                    SendMessageOptions.DontRequireReceiver);
             }
         }
         inZones.Clear();

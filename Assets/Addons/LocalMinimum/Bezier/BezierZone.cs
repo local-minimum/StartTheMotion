@@ -2,6 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BezierZoneEventType {EnterZone, StayZone, ExitZone};
+
+public struct BezierZoneEvent
+{
+    public BezierZone zone;
+    public BezierPoint point;
+    public BezierZoneEventType type;
+
+    public BezierZoneEvent(BezierZone zone, BezierPoint point, BezierZoneEventType type)
+    {
+        this.zone = zone;
+        this.point = point;
+        this.type = type;
+    }
+}
+
 public class BezierZone : MonoBehaviour {
 
     static List<BezierZone> zones = new List<BezierZone>();
@@ -16,9 +32,9 @@ public class BezierZone : MonoBehaviour {
 
 #endif
 
-}
+    }
 
-private void OnEnable()
+    private void OnEnable()
     {
         zones.Add(this);
     }
@@ -45,17 +61,17 @@ private void OnEnable()
         }
     }
 
-    public MonoBehaviour[] targets;
+    public MonoBehaviour[] forwardEventsTo;
 
     public T GetTarget<T>() where T : MonoBehaviour
     {
         var t = typeof(T);
-        for (int i=0; i<targets.Length; i++)
+        for (int i=0; i<forwardEventsTo.Length; i++)
         {
-            var t2 = targets[i].GetType();
+            var t2 = forwardEventsTo[i].GetType();
             if (t == t2 || t2.IsSubclassOf(t))
             {
-                return targets[i] as T;
+                return forwardEventsTo[i] as T;
             }
         }
         return null;
@@ -65,18 +81,39 @@ private void OnEnable()
     {
         var ret = new List<T>();
         var t = typeof(T);
-        for (int i = 0; i < targets.Length; i++)
+        for (int i = 0; i < forwardEventsTo.Length; i++)
         {
-            var t2 = targets[i].GetType();
+            var t2 = forwardEventsTo[i].GetType();
             if (t == t2 || t2.IsSubclassOf(t))
             {
-                ret.Add(targets[i] as T);
+                ret.Add(forwardEventsTo[i] as T);
             }
         }
         return ret;
     }
 
-    //[HideInInspector]
+    void OnBezierZoneEvent(BezierZoneEvent bEvent)
+    {
+        if (bEvent.zone == this)
+        {
+            
+            for (int i = 0, l = forwardEventsTo.Length; i < l; i++)
+            {
+                if (forwardEventsTo[i].gameObject == gameObject)
+                {
+                    Debug.LogWarning(
+                        string.Format(
+                            "Zone {0} and behaviour {1} is on same game object, no need to forward",
+                            this, forwardEventsTo[i]));
+                } else
+                {
+                    forwardEventsTo[i].SendMessage("OnBezierZoneEvent", bEvent);
+                }
+            }
+        }
+    }
+
+    [HideInInspector]
     public float[] times = new float[2] { 0.25f, .75f };
 
     public float left

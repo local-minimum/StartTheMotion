@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets: []
+  forwardEventsTo: []
   times:
   - 0
   - 0.52678573
@@ -450,8 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 1519953107}
+  forwardEventsTo: []
   times:
   - 0.95238096
   - 1
@@ -468,6 +467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd1d95f51b06d4848bb9481ba3cfe7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respondsToZone: {fileID: 1519953106}
+  respondsToEvent: 0
   Actions:
   - KillPlayer
   abortActionChain: 0

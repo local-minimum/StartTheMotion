@@ -5,6 +5,12 @@ using UnityEngine;
 public class PointInvoker : MonoBehaviour {
 
     [SerializeField]
+    BezierZone respondsToZone;
+
+    [SerializeField]
+    BezierZoneEventType respondsToEvent;
+
+    [SerializeField]
     string[] Actions;
     
     [HideInInspector]
@@ -19,6 +25,14 @@ public class PointInvoker : MonoBehaviour {
             {
                 break;
             }
+        }
+    }
+
+    void OnBezierZoneEvent(BezierZoneEvent bEvent)
+    {
+        if (bEvent.zone == respondsToZone && bEvent.type == respondsToEvent)
+        {
+            SendActions(bEvent.point);
         }
     }
 }
