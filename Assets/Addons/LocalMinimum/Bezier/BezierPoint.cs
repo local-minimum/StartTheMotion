@@ -77,7 +77,13 @@ public class BezierPoint : MonoBehaviour {
     {
         get
         {
-            return curve.GetGlobalPoint(curveTime);
+            if (curve)
+            {
+                return curve.GetGlobalPoint(curveTime);
+            } else
+            {
+                return Vector3.zero;
+            }
         }
     }
 
