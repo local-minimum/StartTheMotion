@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum SequenceMode {ForwardLoop, BackwardLoop, PingPong};
+public delegate void SequenceFrame(StopMotionSequencer sequencer);
 
 public class StopMotionSequencer : MonoBehaviour {
+
+    public event SequenceFrame OnSequenceFrame;
 
     SpriteRenderer sRend;
 
@@ -29,6 +32,22 @@ public class StopMotionSequencer : MonoBehaviour {
     bool[] enabledAnimationStep;
 
     int showingIndex;
+
+    public int ShowingIndex
+    {
+        get
+        {
+            return showingIndex;
+        }
+    }
+
+    public string ShowingImageName
+    {
+        get
+        {
+            return sequence[showingIndex].name;
+        }
+    }
 
     int sequenceDirection = 1;
 
@@ -65,6 +84,11 @@ public class StopMotionSequencer : MonoBehaviour {
         if (SetNextFrame())
         {
             sRend.sprite = sequence[showingIndex];
+            if (OnSequenceFrame != null)
+            {
+                OnSequenceFrame(this);
+            }
+            Debug.Log(string.Format("{0}, {1}: Stepping to '{2}'", name, sequenceName, ShowingImageName));
         }
     }
 
@@ -227,7 +251,11 @@ public class StopMotionSequencer : MonoBehaviour {
             if (SetNextFrame())
             {
                 sRend.sprite = sequence[showingIndex];
-                m_lastUpdate = Time.timeSinceLevelLoad; 
+                m_lastUpdate = Time.timeSinceLevelLoad;
+                if (OnSequenceFrame != null)
+                {
+                    OnSequenceFrame(this);
+                } 
                 yield return new WaitForSeconds(delta);
             } else
             {
