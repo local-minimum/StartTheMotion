@@ -96,7 +96,7 @@ public class CharacterCtrlr : MonoBehaviour {
 
     void KillPlayer(PointInvoker invoker)
     {
-        Debug.Log("Respawn");
+        Kill();
     }
 
     DeathLife interactableDeathLife;
@@ -136,5 +136,18 @@ public class CharacterCtrlr : MonoBehaviour {
         }
         Debug.Log("Death fall");
         outroAnim = null;
+        Kill();
+    }
+
+    [SerializeField]
+    bool canDie = true;
+
+    void Kill()
+    {
+        if (canDie && SpawnPoint.spawnPoint)
+        {
+            Debug.Log(name + ": Respawns at " + SpawnPoint.zoneEvent.zone.curve.name);
+            point.ReAttach(SpawnPoint.zoneEvent.zone.curve, SpawnPoint.zoneEvent.zone.center);
+        }
     }
 }

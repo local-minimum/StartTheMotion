@@ -5,9 +5,17 @@ using UnityEngine;
 [System.Serializable]
 public struct PositionInstruction
 {
+    public string name
+    {
+        get
+        {
+            return string.Format("{0},{1}:{2}", sequencerGameObject, sequencerName, sequenceImageName);
+        }
+    }
+
+    public string sequenceImageName;
     public string sequencerName;
     public string sequencerGameObject;
-    public string sequenceImageName;
     public Vector3 position;
     
     public PositionInstruction(StopMotionSequencer sequencer, PositionWithAnimation posWithAnim)
@@ -28,6 +36,16 @@ public struct PositionInstruction
     public bool HasSameNames(StopMotionSequencer other)
     {
         return sequenceImageName == other.ShowingImageName && sequencerName == other.SequenceName && sequencerGameObject == other.name;
+    }
+
+    public PositionInstruction Clone()
+    {
+        var positionInstruction = new PositionInstruction();
+        positionInstruction.sequenceImageName = sequenceImageName;
+        positionInstruction.position = position;
+        positionInstruction.sequencerGameObject = sequencerGameObject;
+        positionInstruction.sequencerName = sequencerName;
+        return positionInstruction;
     }
 }
 
@@ -83,6 +101,8 @@ public class PositionWithAnimation : MonoBehaviour {
     [SerializeField]
     PositionInstruction editingPosition;
 
+    int insertIndex;
+
     private void PositionWithAnimation_OnSequenceFrame(StopMotionSequencer sequencer)
     {
         currentSequencer = sequencer;
@@ -90,27 +110,51 @@ public class PositionWithAnimation : MonoBehaviour {
         {
             if (positions[i].HasSameNames(sequencer))
             {
-                LoadPosition(i);
-                editingPosition = positions[i];
+                editingPosition = positions[i].Clone();
+                LoadPosition();
+                insertIndex = i;
+                break;
             }
-            break;
         }
-        editingPosition = nullPosition;
+        editingPosition = new PositionInstruction(sequencer, this);
+        insertIndex = -1;
     }
 
-    public void LoadPosition(int index)
+    public void RecordPosition()
+    {
+        if (simulationSpace == Space.Self)
+        {
+            editingPosition.position = transform.localPosition;
+        }
+        else
+        {
+            editingPosition.position = transform.position - currentSequencer.transform.position;
+        }
+
+        if (insertIndex < 0)
+        {
+            insertIndex = positions.Count;
+            positions.Add(editingPosition.Clone());
+        } else
+        {
+            positions[insertIndex] = editingPosition.Clone();
+        }
+    }
+
+    public void LoadPosition()
     {
         if (simulationSpace == Space.Self)
         {
             transform.localPosition = editingPosition.position;
         } else
         {
-            transform.position = editingPosition.position;
+            transform.position = currentSequencer.transform.TransformVector(editingPosition.position) + currentSequencer.transform.position;
+
         }
     }
 
     public void StepCurrentAnimation()
     {
-
+        currentSequencer.Step();
     }
 }

@@ -15,7 +15,7 @@ public class Bifurcation : MonoBehaviour {
 
     public System.Func<bool> externalCondtion;
 
-    void OnBezierZoneEvent(BezierZoneEvent bEvent)
+    public void OnBezierZoneEvent(BezierZoneEvent bEvent)
     {
         if (externalCondtion == null || externalCondtion())
         {

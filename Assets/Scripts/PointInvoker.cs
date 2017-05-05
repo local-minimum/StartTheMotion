@@ -17,6 +17,7 @@ public class PointInvoker : MonoBehaviour {
     public bool abortActionChain;
 
     public void SendActions(BezierPoint point) {
+        Debug.Log("invoking");
         abortActionChain = false;
         for (int i=0; i<Actions.Length;i++)
         {
@@ -28,7 +29,7 @@ public class PointInvoker : MonoBehaviour {
         }
     }
 
-    void OnBezierZoneEvent(BezierZoneEvent bEvent)
+    public void OnBezierZoneEvent(BezierZoneEvent bEvent)
     {
         if (bEvent.zone == respondsToZone && bEvent.type == respondsToEvent)
         {

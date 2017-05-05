@@ -55,7 +55,10 @@ public class BezierPoint : MonoBehaviour {
     public void Move(float distance)
     {
         bool hitEnd;
-        CurveTime = curve.GetTimeAfter(curveTime, distance, out hitEnd);
+        if (curve)
+        {
+            CurveTime = curve.GetTimeAfter(curveTime, distance, out hitEnd);
+        }
     }
 
     private void OnEnable()
@@ -114,10 +117,25 @@ public class BezierPoint : MonoBehaviour {
         {
             if (!tmpZones.Contains(inZones[i]))
             {
+                MonoBehaviour component = inZones[i];
+                var type = component.GetType();
+                var methodInfo = type.GetMethod("OnBezierZoneEvent");
+                if (methodInfo == null)
+                {
+                    Debug.LogWarning(inZones[i] + " is missing OnBezierZoneEvent");
+                }
+                else
+                {
+                    methodInfo.Invoke(component, new object[] {
+                    new BezierZoneEvent(inZones[i], this, BezierZoneEventType.ExitZone)
+                });
+                }
+                /*
                 inZones[i].SendMessage(
                     "OnBezierZoneEvent", 
                     new BezierZoneEvent(inZones[i], this, BezierZoneEventType.ExitZone),
                     SendMessageOptions.DontRequireReceiver);
+                    */
             }
         }
 

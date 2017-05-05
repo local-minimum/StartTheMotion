@@ -93,13 +93,25 @@ public class BezierZone : MonoBehaviour {
         return ret;
     }
 
-    void OnBezierZoneEvent(BezierZoneEvent bEvent)
+    public void OnBezierZoneEvent(BezierZoneEvent bEvent)
     {
         if (bEvent.zone == this)
         {
             
             for (int i = 0, l = forwardEventsTo.Length; i < l; i++)
             {
+                MonoBehaviour component = forwardEventsTo[i];
+
+                var type = component.GetType();
+                var methodInfo = type.GetMethod("OnBezierZoneEvent");
+                if (methodInfo == null)
+                {
+                    Debug.LogWarning(component + " is missing OnBezierZoneEvent");
+                }
+                else { 
+                    methodInfo.Invoke(component, new object[] { bEvent });
+                }
+                /*
                 if (forwardEventsTo[i].gameObject == gameObject)
                 {
                     Debug.LogWarning(
@@ -110,6 +122,7 @@ public class BezierZone : MonoBehaviour {
                 {
                     forwardEventsTo[i].SendMessage("OnBezierZoneEvent", bEvent);
                 }
+                */
             }
         }
     }
@@ -133,6 +146,13 @@ public class BezierZone : MonoBehaviour {
         }
     }
 
+    public float center
+    {
+        get
+        {
+            return (times[0] + times[1]) / 2f;
+        }
+    }
     public BezierCurve curve;
 
     public virtual bool IsInside(BezierCurve curve, float t)
