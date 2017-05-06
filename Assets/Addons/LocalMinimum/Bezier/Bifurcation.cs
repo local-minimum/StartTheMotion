@@ -17,9 +17,9 @@ public class Bifurcation : MonoBehaviour {
 
     public void OnBezierZoneEvent(BezierZoneEvent bEvent)
     {
-        if (externalCondtion == null || externalCondtion())
+        if (bEvent.type == forkCondition.type && bEvent.zone == forkCondition.zone)
         {
-            if (bEvent.type == forkCondition.type && bEvent.zone == forkCondition.zone)
+            if (externalCondtion == null || externalCondtion())
             {
                 if (forkCondition.point == null || forkCondition.point == bEvent.point)
                 {

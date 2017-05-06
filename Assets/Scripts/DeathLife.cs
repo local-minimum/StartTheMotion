@@ -34,9 +34,19 @@ public class DeathLife : MonoBehaviour {
     [SerializeField]
     StopMotionAnimator[] animations;
 
+    [SerializeField]
+    bool affectAnimationsAtStart;
     private void Start()
     {
-        alive = _aliveOnAwake;
+        if (affectAnimationsAtStart)
+        {
+            alive = _aliveOnAwake;
+        } else
+        {
+            _alive = _aliveOnAwake;
+
+        }
+
         for (int i=0; i<affectedBifurcations.Length; i++)
         {
             affectedBifurcations[i].externalCondtion = IsAlive;

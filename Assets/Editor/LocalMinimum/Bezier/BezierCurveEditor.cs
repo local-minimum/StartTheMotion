@@ -14,6 +14,8 @@ public class BezierCurveEditor : BezierEditors {
 
     private const int lineSteps = 15;
 
+    private float zValue;
+
     public override void OnInspectorGUI()
     {
         curve = target as BezierCurve;
@@ -38,6 +40,16 @@ public class BezierCurveEditor : BezierEditors {
         {
             curve.CloneMakeChild();
         }
+        
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        zValue = EditorGUILayout.FloatField(zValue);
+        if (GUILayout.Button("Set All Z-values"))
+        {
+            curve.SetAllZTo(zValue);
+        }
+
         EditorGUILayout.EndHorizontal();
     }
 

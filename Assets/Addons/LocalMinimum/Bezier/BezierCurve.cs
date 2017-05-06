@@ -147,6 +147,13 @@ public class BezierCurve : MonoBehaviour {
         return GetGlobalPoint(TimeClosestTo(worldPos));
     }
 
+    public void SetAllZTo(float value)
+    {
+        for (int i=0; i<4; i++)
+        {
+            points[i].z = value;
+        }
+    }
     #endregion
 
     #region HelpFunctions

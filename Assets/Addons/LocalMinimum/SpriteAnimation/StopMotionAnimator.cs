@@ -91,7 +91,8 @@ public class StopMotionAnimator : MonoBehaviour {
             }
         }
 
-        throw new System.ArgumentException("No valid trigger target for: " + trigger);
+        throw new System.ArgumentException(string.Format(
+            "{0}, {1}: No valid trigger target for: {2}", name, ActiveName, trigger));
     }
 
     private void Start()

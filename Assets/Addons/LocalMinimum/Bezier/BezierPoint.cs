@@ -103,7 +103,13 @@ public class BezierPoint : MonoBehaviour {
 
             if (rotateWithCurve)
             {
-                transform.rotation = curve.GetRotationAt(curveTime);
+                Vector3 euler = curve.GetRotationAt(curveTime).eulerAngles;
+                if (euler.z < 0)
+                {
+                    euler.z += 360f;
+                }
+                //transform.rotation = curve.GetRotationAt(curveTime);
+                transform.rotation = Quaternion.Euler(euler);
             }
 
             if (Application.isPlaying)

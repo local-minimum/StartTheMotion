@@ -42,8 +42,9 @@ public class CharacterCtrlr : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire1"))
         {
-            if (interactableDeathLife)
+            if (interactableDeathLifes.Count > 0)
             {
+                DeathLife interactableDeathLife = interactableDeathLifes[interactableDeathLifes.Count - 1];
                 interactableDeathLife.alive = !interactableDeathLife.alive;
             }
         }
@@ -99,20 +100,23 @@ public class CharacterCtrlr : MonoBehaviour {
         Kill();
     }
 
-    DeathLife interactableDeathLife;
+    List<DeathLife> interactableDeathLifes = new List<DeathLife>();
 
     void ShowDeathLife(DeathLife deathLife)
     {
         Debug.Log(name + " can manipulate " + deathLife);
-        interactableDeathLife = deathLife;
+        if (!interactableDeathLifes.Contains(deathLife))
+        {
+            interactableDeathLifes.Add(deathLife);
+        }
     }
 
     void HideDeathLife(DeathLife deathLife)
     {
-        if (interactableDeathLife == deathLife)
+        if (interactableDeathLifes.Contains(deathLife))
         {
-            interactableDeathLife = null;
-        } 
+            interactableDeathLifes.Remove(deathLife);
+        }
     }
 
     void PointDrop(DeathLife lifeDeath)
