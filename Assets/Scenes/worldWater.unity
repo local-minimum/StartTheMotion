@@ -393,13 +393,13 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
+        value: 0.2
         inSlope: 0
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
         time: 1
-        value: 1
+        value: 0.03
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1981,7 +1981,7 @@ MonoBehaviour:
   transitions:
   - m_Source: 
     m_Target: Swimming
-    m_Trigger: 
+    m_Trigger: Life
   - m_Source: 
     m_Target: Swimming
     m_Trigger: Swim
@@ -1989,7 +1989,7 @@ MonoBehaviour:
     m_Target: Death
     m_Trigger: Death
   - m_Source: 
-    m_Target: Flapping
+    m_Target: Swimming
     m_Trigger: Life
   - m_Source: 
     m_Target: Flapping
@@ -2473,6 +2473,7 @@ MonoBehaviour:
   - {fileID: 1113577746}
   - {fileID: 396205477}
   - {fileID: 1785765192}
+  flappingZone: {fileID: 236236307}
   fallSpeed: 8
   swimFallSpeed: 12
 --- !u!1 &1761054417
