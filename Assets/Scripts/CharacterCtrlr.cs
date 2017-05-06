@@ -45,7 +45,7 @@ public class CharacterCtrlr : MonoBehaviour {
             if (interactableDeathLifes.Count > 0)
             {
                 DeathLife interactableDeathLife = interactableDeathLifes[interactableDeathLifes.Count - 1];
-                interactableDeathLife.alive = !interactableDeathLife.alive;
+                interactableDeathLife.SetAlive(!interactableDeathLife.alive, true);
             }
         }
         /* Temp code for action swapping curves 

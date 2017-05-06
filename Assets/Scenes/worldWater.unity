@@ -366,7 +366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardEventsTo: []
+  forwardEventsTo:
+  - {fileID: 1721233221}
   times:
   - 0
   - 1
@@ -622,7 +623,6 @@ GameObject:
   - component: {fileID: 396205476}
   - component: {fileID: 396205475}
   - component: {fileID: 396205478}
-  - component: {fileID: 396205479}
   m_Layer: 0
   m_Name: FishDown
   m_TagString: Untagged
@@ -677,13 +677,14 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 396205471}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.4, y: -0.18, z: 0}
+  m_LocalPosition: {x: 16.8, y: -0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1113577742}
   - {fileID: 1785765190}
   - {fileID: 236236305}
   - {fileID: 840714394}
+  - {fileID: 1721233220}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -763,7 +764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardEventsTo:
-  - {fileID: 396205479}
+  - {fileID: 1721233221}
   times:
   - 0.68452376
   - 1
@@ -786,21 +787,6 @@ MonoBehaviour:
     type: 2
   fork: {fileID: 236236306}
   forkAttachTime: 0.00001
---- !u!114 &396205479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 396205471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e84779ca8657f394c8d8926c616708be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fish: {fileID: 1380105458}
-  bifucation: {fileID: 396205478}
-  forkReason: {fileID: 831275760}
-  forkCondition: 0
 --- !u!1001 &455097025
 Prefab:
   m_ObjectHideFlags: 0
@@ -1124,7 +1110,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 7.27, y: -2.74}
+  m_Offset: {x: 11.3, y: -2.74}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1135,7 +1121,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 17.59, y: 5.22}
+  m_Size: {x: 25.75, y: 5.22}
   m_EdgeRadius: 0
 --- !u!4 &831275758
 Transform:
@@ -1183,7 +1169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe3d387b6b948547b821a50dbc830ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aliveOnAwake: 1
+  _aliveOnAwake: 0
   affectedBifurcations:
   - {fileID: 1519953108}
   affectedBifAliveReq: 0
@@ -1241,7 +1227,7 @@ MonoBehaviour:
   anchorOffset: {x: 0, y: 0, z: 0}
   rotateWithCurve: 0
   forceAttachment: 1
-  curveTime: 1
+  curveTime: 0.001
 --- !u!1 &958751371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,7 +1289,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.32
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1483,10 +1469,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardEventsTo: []
+  forwardEventsTo:
+  - {fileID: 1721233221}
   times:
   - 0
-  - 0.47619048
+  - 0.52380955
   curve: {fileID: 1113577743}
   lineColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &1175586967
@@ -1859,11 +1846,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99b49f7fd68af745b8dd62caf8c51fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curve: {fileID: 1113577743}
+  curve: {fileID: 1785765191}
   anchorOffset: {x: 0, y: 0, z: 0}
   rotateWithCurve: 1
   forceAttachment: 0
-  curveTime: 0.05
+  curveTime: 0.001
 --- !u!61 &1380105456
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1913,12 +1900,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe3d387b6b948547b821a50dbc830ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aliveOnAwake: 1
+  _aliveOnAwake: 0
   affectedBifurcations: []
   affectedBifAliveReq: 0
   animations:
   - {fileID: 1380105461}
-  affectAnimationsAtStart: 0
+  affectAnimationsAtStart: 1
   carryWhenAlive: 0
 --- !u!212 &1380105459
 SpriteRenderer:
@@ -1969,7 +1956,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1380105454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.75, y: 4, z: 0}
+  m_LocalPosition: {x: 19.7, y: -16.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2437,6 +2424,57 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     duration: 0
+--- !u!1 &1721233219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1721233220}
+  - component: {fileID: 1721233221}
+  m_Layer: 0
+  m_Name: ctrl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1721233220
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1721233219}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 396205474}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1721233221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1721233219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84779ca8657f394c8d8926c616708be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fish: {fileID: 1380105458}
+  spawnPoint: {fileID: 840714395}
+  bifucation: {fileID: 396205478}
+  forkReason: {fileID: 831275760}
+  forkCondition: 0
+  killers:
+  - {fileID: 1113577746}
+  - {fileID: 396205477}
+  - {fileID: 1785765192}
+  fallSpeed: 8
+  swimFallSpeed: 12
 --- !u!1 &1761054417
 GameObject:
   m_ObjectHideFlags: 0
@@ -2517,6 +2555,7 @@ GameObject:
   - component: {fileID: 1785765191}
   - component: {fileID: 1785765192}
   - component: {fileID: 1785765193}
+  - component: {fileID: 1785765194}
   m_Layer: 0
   m_Name: FishRestingPath
   m_TagString: Untagged
@@ -2550,14 +2589,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bezierType: 1
   points:
-  - {x: -17.589157, y: -7.5186815, z: 0}
-  - {x: 0.11671162, y: -10.252492, z: 0}
-  - {x: -1.0484676, y: -13.095206, z: 0}
   - {x: -0.63011646, y: -16.393501, z: 0}
-  anchorLeft: {fileID: 396205473}
-  anchoredTimeLeft: 1
-  anchorRight: {fileID: 0}
-  anchoredTimeRight: 0
+  - {x: -1.0484676, y: -13.095206, z: 0}
+  - {x: 0.11671162, y: -10.252492, z: 0}
+  - {x: -17.589157, y: -7.5186815, z: 0}
+  anchorLeft: {fileID: 0}
+  anchoredTimeLeft: 0
+  anchorRight: {fileID: 396205473}
+  anchoredTimeRight: 1
   m_cachedLength: 14.941262
 --- !u!114 &1785765192
 MonoBehaviour:
@@ -2570,9 +2609,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardEventsTo: []
+  forwardEventsTo:
+  - {fileID: 1721233221}
   times:
-  - 0
+  - 0.122023806
   - 1
   curve: {fileID: 1785765191}
   lineColor: {r: 1, g: 0, b: 0, a: 1}
@@ -2596,13 +2636,13 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -10
+        value: 5
         inSlope: 0
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
         time: 1
-        value: -5
+        value: 10
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -2619,6 +2659,21 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     duration: 0
+--- !u!114 &1785765194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1785765189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab521e7d981499e4fa580201dda8d8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftTransitionTo: {fileID: 0}
+  leftTransitionToTime: 0.00001
+  rightTransitionTo: {fileID: 1113577743}
+  rightTransitionToTime: 0.00001
 --- !u!1 &1881967116
 GameObject:
   m_ObjectHideFlags: 0

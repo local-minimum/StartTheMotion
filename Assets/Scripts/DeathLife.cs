@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public delegate void LifeOrDeath(DeathLife dl, bool byPlayer);
+
 public class DeathLife : MonoBehaviour {
+
+    public event LifeOrDeath OnLifeOrDeath;
 
     [SerializeField]
     bool _aliveOnAwake = true;
@@ -20,14 +25,19 @@ public class DeathLife : MonoBehaviour {
         get
         {
             return _alive;
-        }
-        set
+        }   
+    }
+
+    public void SetAlive(bool isAlive, bool isPlayer)
+    {
+        for (int i = 0; i < animations.Length; i++)
         {
-            for (int i = 0; i < animations.Length; i++)
-            {
-                animations[i].Trigger(value ? "Life" : "Death");
-            }
-            _alive = value;
+            animations[i].Trigger(isAlive ? "Life" : "Death");
+        }
+        _alive = isAlive;
+        if (OnLifeOrDeath != null)
+        {
+            OnLifeOrDeath(this, isPlayer);
         }
     }
 
@@ -40,7 +50,7 @@ public class DeathLife : MonoBehaviour {
     {
         if (affectAnimationsAtStart)
         {
-            alive = _aliveOnAwake;
+            SetAlive(_aliveOnAwake, false);
         } else
         {
             _alive = _aliveOnAwake;
