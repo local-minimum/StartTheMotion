@@ -35,10 +35,10 @@ public class EndToEndTrigger : MonoBehaviour
     {
         if (point.CurveTime == 0 && leftTransitionTo)
         {
-            point.ReAttach(leftTransitionTo, leftTransitionToTime);
+            point.Attach(leftTransitionTo, leftTransitionToTime);
         } else if (point.CurveTime == 1 && rightTransitionTo)
         {
-            point.ReAttach(rightTransitionTo, rightTransitionToTime);
+            point.Attach(rightTransitionTo, rightTransitionToTime);
         }
 
         

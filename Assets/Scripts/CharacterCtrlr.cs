@@ -147,7 +147,7 @@ public class CharacterCtrlr : MonoBehaviour {
         if (canDie && SpawnPoint.spawnPoint)
         {
             Debug.Log(name + ": Respawns at " + SpawnPoint.zoneEvent.zone.curve.name);
-            point.ReAttach(SpawnPoint.zoneEvent.zone.curve, SpawnPoint.zoneEvent.zone.center);
+            point.Attach(SpawnPoint.zoneEvent.zone.curve, SpawnPoint.zoneEvent.zone.center);
         }
     }
 }

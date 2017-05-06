@@ -27,7 +27,7 @@ public class Bifurcation : MonoBehaviour {
                         "Attatch {0} from {1} to {2} at {3} time",
                         bEvent.point, bEvent.point.Curve, fork, forkAttachTime
                         ));
-                    bEvent.point.ReAttach(fork, forkAttachTime);
+                    bEvent.point.Attach(fork, forkAttachTime);
                 }
             }
 

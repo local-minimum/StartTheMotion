@@ -15,12 +15,6 @@ public class BezierPoint : MonoBehaviour {
 
     [SerializeField]
     bool rotateWithCurve;
-
-    public void SwapAnchor(BezierCurve curve, float time)
-    {
-        this.curve = curve;
-        CurveTime = time;
-    }
     
     public BezierCurve Curve
     {
@@ -40,7 +34,7 @@ public class BezierPoint : MonoBehaviour {
         curve = null;
     }
 
-    public void ReAttach(BezierCurve curve, float time)
+    public void Attach(BezierCurve curve, float time)
     {
         if (this.curve)
         {
@@ -61,9 +55,13 @@ public class BezierPoint : MonoBehaviour {
         }
     }
 
+    [HideInInspector]
+    public bool forceAttachment = true;
+
+    
     private void OnEnable()
     {
-        CurveTime = curveTime;
+        forceAttachment = true;
     }
 
     private void OnDisable()
@@ -87,7 +85,7 @@ public class BezierPoint : MonoBehaviour {
         }
     }
 
-    [SerializeField]
+    [SerializeField, Range(0, 1)]
     float curveTime;
 
     public float CurveTime
@@ -178,6 +176,15 @@ public class BezierPoint : MonoBehaviour {
         if (curve != null)
         {
             CurveTime = curveTime;
+        }
+    }
+
+    private void Update()
+    {
+        if (forceAttachment)
+        {
+            CurveTime = curveTime;
+            forceAttachment = false;
         }
     }
 }

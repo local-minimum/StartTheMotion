@@ -50,11 +50,24 @@ public class Driver
 
 public class DriveMotion : MonoBehaviour {
 
+    public void OnBezierZoneEvent(BezierZoneEvent bEvent)
+    {
+        if (bEvent.type == BezierZoneEventType.ExitZone)
+        {
+            if (IsDrivingPoint(bEvent.point))
+            {                
+                RemoveDriver(bEvent.point);
+            }
+        } else if (!IsDrivingPoint(bEvent.point) && CanDrivePoint(bEvent.point)) 
+        {
+            AddDriver(bEvent.point);
+        }
+    }
 
     void OnAttachToCurve(BezierPoint point)
     {
-        if (!IsDrivingPoint(point))
-        {
+        if (!IsDrivingPoint(point) && CanDrivePoint(point))
+        {           
             AddDriver(point);
             point.SendMessage("OnPointDriven", this, SendMessageOptions.DontRequireReceiver);
         }
@@ -102,7 +115,20 @@ public class DriveMotion : MonoBehaviour {
         return false;
     }
 
-    public string[] canBeDriven;
+    bool CanDrivePoint(BezierPoint point)
+    {
+        for (int i=0;i<canBeDriven.Length; i++)
+        {
+            if (canBeDriven[i] == point.name)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    [SerializeField]
+    string[] canBeDriven;
 
     List<Driver> automatons = new List<Driver>();
 
