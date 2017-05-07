@@ -7,10 +7,8 @@ Shader "Sprites/HSVtuning"
 	Properties
 	{
 		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
-		_Color("Tint", Color) = (1,1,1,1)
 		_SaturationMixing("Saturation Mixing", Range(0, 1)) = 0.1
 		_SaturationTarget("Saturation Target", Int) = 0
-		[MaterialToggle] PixelSnap("Pixel snap", Float) = 0
 		[HideInInspector] _RendererColor("RendererColor", Color) = (1,1,1,1)
 		[HideInInspector] _Flip("Flip", Vector) = (1,1,1,1)
 		[PerRendererData] _AlphaTex("External Alpha", 2D) = "white" {}
@@ -69,10 +67,11 @@ Shader "Sprites/HSVtuning"
 			{
 				fixed4 c = tex2D(_MainTex, i.texcoord);
 				fixed3 hsv = rgb2hsv(c.rgb);
-				hsv.y *= lerp(hsv.y, _SaturationTarget, _SaturationMixing);
+				hsv.y = lerp(hsv.y, _SaturationTarget, _SaturationMixing);
 				c.rgb = hsv2rgb(hsv);
-				
-				return c;
+				clip(c.a - 1.0 / 255.0);
+				c.rgb *= c.a;
+				return saturate(c);
 			}
 
 

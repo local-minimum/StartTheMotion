@@ -8,14 +8,25 @@ public class CharacterCtrlr : MonoBehaviour {
 
     public float speed = 2;
 
+    Vector3 originalScale;
+
     private void Start()
     {
+        originalScale = transform.localScale;
         point = GetComponent<BezierPoint>();
     }
 
     //bool swappedCurveThisFrame;
 
     private const float noMove = 0.1f;
+
+    void Orient(MoveDirection direction)
+    {
+        Vector3 scale = originalScale;
+        scale.x *= (direction == MoveDirection.Left ? -1 : 1);
+        transform.localScale = scale;
+    }
+    
     void Update () {
 
         if (outroAnim != null)
@@ -25,19 +36,22 @@ public class CharacterCtrlr : MonoBehaviour {
         //swappedCurveThisFrame = false;
 
         float hor = IsInControl ? Input.GetAxis("Horizontal") : 0f;
-        if (hor > noMove)
+        float dir = 1;
+        if (Mathf.Abs(hor) > noMove)
         {
-            Vector3 scale = transform.localScale;
-            scale.x = 1;
-            transform.localScale = scale;
-            point.Move(Time.deltaTime * speed * hor);
-        }
-        else if (hor < -noMove)
-        {
-            Vector3 scale = transform.localScale;
-            scale.x = -1;
-            transform.localScale = scale;
-            point.Move(Time.deltaTime * speed * hor);
+            
+            if (hor > noMove)
+            {
+                Orient(MoveDirection.Right);
+                dir = (currentDirection != MoveDirection.Right) ? -1 : 1;
+                point.Move(Time.deltaTime * dir * speed * hor);
+            }
+            else
+            {
+                Orient(MoveDirection.Left);
+                dir = (currentDirection != MoveDirection.Right) ? -1 : 1;
+                point.Move(Time.deltaTime * dir * speed * hor);
+            }
         }
 
         if (Input.GetButtonDown("Fire1"))
@@ -71,10 +85,17 @@ public class CharacterCtrlr : MonoBehaviour {
 	}
     
     BezierZone changePaths;
+    MoveDirection currentDirection = MoveDirection.Right;
 
     public void SetMovementConfig(MoveDirection coordinatingDirection)
     {
-
+        if (coordinatingDirection == MoveDirection.None || coordinatingDirection == currentDirection)
+        {
+            return;
+        }
+        Debug.Log(currentDirection);
+        currentDirection = coordinatingDirection;
+        Orient(currentDirection);
     }
 
     public bool IsInControl
