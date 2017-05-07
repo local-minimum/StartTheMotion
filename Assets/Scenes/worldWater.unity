@@ -288,6 +288,11 @@ Prefab:
       propertyPath: m_Name
       value: Water-type1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 212547067523110252, guid: dd9aef85a4422aa47b0145fd96e38313,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 05e45eb6795919841822491a03395459, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd9aef85a4422aa47b0145fd96e38313, type: 2}
   m_IsPrefabParent: 0
@@ -835,6 +840,11 @@ Prefab:
       propertyPath: m_Name
       value: Water-type2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 212821717603730316, guid: 008a4b699a2f04e49ba80add1895a747,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 05e45eb6795919841822491a03395459, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 008a4b699a2f04e49ba80add1895a747, type: 2}
   m_IsPrefabParent: 0
@@ -897,6 +907,11 @@ Prefab:
       propertyPath: m_Name
       value: Water-type1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 212547067523110252, guid: dd9aef85a4422aa47b0145fd96e38313,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 05e45eb6795919841822491a03395459, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd9aef85a4422aa47b0145fd96e38313, type: 2}
   m_IsPrefabParent: 0
@@ -997,6 +1012,11 @@ Prefab:
       propertyPath: m_SortingOrder
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 212821717603730316, guid: 008a4b699a2f04e49ba80add1895a747,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 05e45eb6795919841822491a03395459, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 008a4b699a2f04e49ba80add1895a747, type: 2}
   m_IsPrefabParent: 0
@@ -1921,7 +1941,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 05e45eb6795919841822491a03395459, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2293,6 +2313,11 @@ Prefab:
       propertyPath: m_Name
       value: Water-type2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 212821717603730316, guid: 008a4b699a2f04e49ba80add1895a747,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 05e45eb6795919841822491a03395459, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 008a4b699a2f04e49ba80add1895a747, type: 2}
   m_IsPrefabParent: 0
@@ -2818,6 +2843,11 @@ Prefab:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 212547067523110252, guid: dd9aef85a4422aa47b0145fd96e38313,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 05e45eb6795919841822491a03395459, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd9aef85a4422aa47b0145fd96e38313, type: 2}
   m_IsPrefabParent: 0
@@ -2880,6 +2910,11 @@ Prefab:
       propertyPath: m_Name
       value: Water-type2 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 212821717603730316, guid: 008a4b699a2f04e49ba80add1895a747,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 05e45eb6795919841822491a03395459, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 008a4b699a2f04e49ba80add1895a747, type: 2}
   m_IsPrefabParent: 0

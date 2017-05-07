@@ -33,6 +33,7 @@ public class DeathLife : MonoBehaviour {
         for (int i = 0; i < animations.Length; i++)
         {
             animations[i].Trigger(isAlive ? "Life" : "Death");
+            animations[i].GetComponent<SpriteRenderer>().material.SetFloat("_SaturationMixing", isAlive ? 0 : 0.95f);
         }
         _alive = isAlive;
         if (OnLifeOrDeath != null)
