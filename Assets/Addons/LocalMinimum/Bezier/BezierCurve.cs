@@ -11,6 +11,8 @@ public class BezierCurve : MonoBehaviour {
     [HideInInspector]
     public Vector3[] points = new Vector3[4];
 
+    [SerializeField]
+    bool attractorsAreOffsets;
 
     #region LeftAnchor
     public BezierCurve anchorLeft;
@@ -98,9 +100,9 @@ public class BezierCurve : MonoBehaviour {
         switch (bezierType)
         {
             case BezierType.Cubic:
-                return GetPoint(GetComponentPoint(0), points[1], points[2], GetComponentPoint(3), t);
+                return GetPoint(GetComponentPoint(0), GetComponentPoint(1), GetComponentPoint(2), GetComponentPoint(3), t);
             case BezierType.Quadratic:
-                return GetPoint(GetComponentPoint(0), points[1], GetComponentPoint(3), t);
+                return GetPoint(GetComponentPoint(0), GetComponentPoint(1), GetComponentPoint(3), t);
             default:
                 throw new System.ArgumentException("Wacky bezier");
         }
@@ -111,6 +113,26 @@ public class BezierCurve : MonoBehaviour {
         return transform.TransformPoint(GetPoint(t));
     }
 
+    public void SetComponentPoint(int index, Vector3 globalPoint)
+    {
+        if (attractorsAreOffsets && (index == 1 || index == 2))
+        {
+            if (index == 1) {
+                if (bezierType == BezierType.Quadratic) {
+                    Debug.LogWarning("This isn'treally supported, just using offset on left side for now");
+                }
+                points[1] = transform.InverseTransformPoint(globalPoint) - GetComponentPoint(0);
+
+            } else
+            {
+                points[2] = transform.InverseTransformPoint(globalPoint) - GetComponentPoint(3);
+            }
+        } else
+        {
+            points[index] = transform.InverseTransformPoint(globalPoint);
+        }
+    }
+
     public virtual Vector3 GetComponentPoint(int index)
     {
         switch (index)
@@ -118,9 +140,28 @@ public class BezierCurve : MonoBehaviour {
             case 0:
                 return anchorLeft == null ? points[0] : AnchorPointLeft;
             case 1:
-                return points[1];
+                if (attractorsAreOffsets)
+                {
+                    if (bezierType == BezierType.Cubic)
+                    {
+                        return GetComponentPoint(0) + points[1];
+                    } else
+                    {
+                        Debug.LogWarning("Not really implemented, using left side offset for now");
+                        return GetComponentPoint(0) + points[1];
+                    }
+                }
+                else {
+                    return points[1];
+                }
             case 2:
-                return points[2];
+                if (attractorsAreOffsets)
+                {
+                    return GetComponentPoint(3) + points[2];
+                }
+                else {
+                    return points[2];
+                }
             case 3:
                 return anchorRight == null ? points[3] : AnchorPointRight;
         }
@@ -152,6 +193,21 @@ public class BezierCurve : MonoBehaviour {
         for (int i=0; i<4; i++)
         {
             points[i].z = value;
+        }
+    }
+
+    public bool AllZIsZero
+    {
+        get
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (points[i].z != 0)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
     #endregion
@@ -204,8 +260,8 @@ public class BezierCurve : MonoBehaviour {
         Vector3 fromAnchor = from.GetGlobalPoint(0);
         for (int i = 0; i < from.points.Length; i++)
         {
-            to.points[i] = to.transform.InverseTransformDirection( 
-                from.transform.TransformDirection(from.points[i] - fromAnchor)) + toAnchor;
+            to.points[i] = to.transform.InverseTransformVector( 
+                from.transform.TransformVector(from.points[i] - fromAnchor)) + toAnchor;
         }
     }
 

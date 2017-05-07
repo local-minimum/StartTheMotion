@@ -19,6 +19,12 @@ public class BezierCurveEditor : BezierEditors {
     public override void OnInspectorGUI()
     {
         curve = target as BezierCurve;
+
+        if (!curve.AllZIsZero)
+        {
+            EditorGUILayout.HelpBox("THE CURVE IS NOT FLAT IN Z-DIMENSION", MessageType.Warning);
+        }
+
         base.OnInspectorGUI();
         
         EditorGUILayout.BeginHorizontal();
@@ -146,7 +152,7 @@ public class BezierCurveEditor : BezierEditors {
     protected virtual void DrawHandle(int index)
     {
 
-        Vector3 pointGlobal = handleTransform.TransformPoint(curve.points[index]);
+        Vector3 pointGlobal = curve.GetComponentPointGlobal(index);
         float size = HandleUtility.GetHandleSize(pointGlobal);
         Handles.color = capColors[index];
         if (Handles.Button(pointGlobal, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap))
@@ -161,7 +167,7 @@ public class BezierCurveEditor : BezierEditors {
             Undo.RecordObject(curve, "Moved Point");
 
             EditorUtility.SetDirty(curve);
-            curve.points[index] = handleTransform.InverseTransformPoint(pointGlobal);
+            curve.SetComponentPoint(index, pointGlobal);            
             curve.CalculateLength();
         }
     }
