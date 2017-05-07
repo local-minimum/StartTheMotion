@@ -93,6 +93,11 @@ public class BezierZone : MonoBehaviour {
         return ret;
     }
 
+    public override string ToString()
+    {
+        return string.Format("Bezier Zone {0}-{1} on {2}", left, right, curve);
+    }
+
     public void OnBezierZoneEvent(BezierZoneEvent bEvent)
     {
         if (bEvent.zone == this)
@@ -101,7 +106,11 @@ public class BezierZone : MonoBehaviour {
             for (int i = 0, l = forwardEventsTo.Length; i < l; i++)
             {
                 MonoBehaviour component = forwardEventsTo[i];
-
+                if (component == null)
+                {
+                    Debug.LogWarning(this + ": Missing target for zone/null");
+                    continue;
+                }
                 var type = component.GetType();
                 var methodInfo = type.GetMethod("OnBezierZoneEvent");
                 if (methodInfo == null)

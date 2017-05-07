@@ -10,9 +10,12 @@ public class TriggerDrivenDeathLife : MonoBehaviour {
     [SerializeField]
     BezierCurve[] dropPlayerOnCurves;
 
+    [SerializeField]
+    public bool allowKilling = true;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (IsValidCollider(collision))
+        if (allowKilling && IsValidCollider(collision))
         {
             collision.SendMessage("ShowDeathLife", deathLife, SendMessageOptions.DontRequireReceiver);            
         }
@@ -44,7 +47,7 @@ public class TriggerDrivenDeathLife : MonoBehaviour {
         }
     }
 
-    bool IsValidCollider(Collider2D collision)
+    public bool IsValidCollider(Collider2D collision)
     {
         return deathLife && collision.GetComponent<CharacterCtrlr>() != null;
     }

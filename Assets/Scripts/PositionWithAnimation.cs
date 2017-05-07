@@ -52,8 +52,6 @@ public struct PositionInstruction
 [ExecuteInEditMode]
 public class PositionWithAnimation : MonoBehaviour {
 
-    PositionInstruction nullPosition = new PositionInstruction();
-
     [SerializeField]
     Space simulationSpace = Space.Self;
 

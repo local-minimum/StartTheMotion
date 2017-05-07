@@ -8,14 +8,18 @@ public class Prancer : MonoBehaviour {
 
     [SerializeField]
     float baseSpeed = 1f;
+    
+    public float walkDirection = 1;
 
-    float walkDirection = 1;
     [SerializeField]
     AnimationCurve speed;
+
+    Vector3 localScale;
 
     private void Start()
     {
         bPoint = GetComponent<BezierPoint>();
+        localScale = transform.localScale;
     }
 
     private void Update()
@@ -32,10 +36,8 @@ public class Prancer : MonoBehaviour {
     {
         if (turnOnCurveEnd)
         {
-            float scaleX = 1 - bPt.CurveTime * 2f;
-            Vector3 scale = transform.localScale;
-            scale.x = scaleX;
-            transform.localScale = scale;
+            localScale.x *= -1;
+            transform.localScale = localScale;
         }
 
         walkDirection *= -1;

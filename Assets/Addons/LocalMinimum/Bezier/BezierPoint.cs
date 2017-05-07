@@ -2,7 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MoveDirection {None, Left, Right};
+
 public class BezierPoint : MonoBehaviour {
+
+    MoveDirection moveDirection = MoveDirection.None;
+
+    public MoveDirection GetDirection()
+    {
+        return moveDirection;
+    }
 
     [SerializeField]
     BezierCurve curve;
@@ -11,7 +20,7 @@ public class BezierPoint : MonoBehaviour {
     public Vector3 anchorOffset;
 
     List<BezierZone> inZones = new List<BezierZone>();
-    List<BezierZone> tmpZones = new List<BezierZone>();
+    List<BezierZone> currentInZones = new List<BezierZone>();
 
     [SerializeField]
     bool rotateWithCurve;
@@ -26,22 +35,26 @@ public class BezierPoint : MonoBehaviour {
 
     public void Detatch()
     {
-        Debug.Log("Detaching from" + curve);
         if (curve)
         {
+            Debug.Log("Detaching from" + curve);
             curve.SendMessage("OnDetachFromCurve", this, SendMessageOptions.DontRequireReceiver);
+
+            curve = null;
+            List<BezierZone> tmpZones = new List<BezierZone>();
+            tmpZones.AddRange(inZones);
+            inZones.Clear();
+            for (int i=0, l=tmpZones.Count; i< l; i++)
+            {
+                SendEvent(tmpZones[i], BezierZoneEventType.ExitZone);
+            }            
         }
-        inZones.Clear();
-        curve = null;
+
     }
 
     public void Attach(BezierCurve curve, float time)
     {
-        if (this.curve)
-        {
-            this.curve.SendMessage("OnDetachFromCurve", this, SendMessageOptions.DontRequireReceiver);
-        }
-        inZones.Clear();
+        Detatch();
         this.curve = curve;
         curve.SendMessage("OnAttachToCurve", this, SendMessageOptions.DontRequireReceiver);
         CurveTime = time;
@@ -98,8 +111,19 @@ public class BezierPoint : MonoBehaviour {
 
         set
         {
+            float prev = curveTime;
             curveTime = Mathf.Clamp01(value);
 
+            if (prev < curveTime)
+            {
+                moveDirection = MoveDirection.Right;
+            } else if (prev > curveTime)
+            {
+                moveDirection = MoveDirection.Left;
+            } else
+            {
+                moveDirection = MoveDirection.None;
+            }
             transform.position = curve.GetGlobalPoint(curveTime) + transform.TransformDirection(anchorOffset);
 
             if (rotateWithCurve)
@@ -120,62 +144,63 @@ public class BezierPoint : MonoBehaviour {
         }
     }
 
+    void SendEvent(BezierZone zone, BezierZoneEventType eventType)
+    {
+        MonoBehaviour component = zone;
+        var type = component.GetType();
+        var methodInfo = type.GetMethod("OnBezierZoneEvent");
+        if (methodInfo == null)
+        {
+            Debug.LogWarning(zone + " is missing OnBezierZoneEvent");
+        }
+        else
+        {
+            //Debug.Log(eventType + ": " + this + " -> " + zone);
+            methodInfo.Invoke(component, new object[] {
+                    new BezierZoneEvent(zone, this, eventType)
+                });
+        }
+
+    }
+
     void CheckEvents()
     {
 
-        BezierZone.PointIsInZones(this, tmpZones);
-        for(int i=0, l=inZones.Count; i<l;i++)
+        BezierZone.PointIsInZones(this, currentInZones);
+        List<BezierZone> previousInZones = new List<BezierZone>();
+        previousInZones.AddRange(inZones);
+        inZones.Clear();
+
+        for(int i=0, l=previousInZones.Count; i<l;i++)
         {
-            if (!tmpZones.Contains(inZones[i]))
+            if (!currentInZones.Contains(previousInZones[i]))
             {
-                MonoBehaviour component = inZones[i];
-                var type = component.GetType();
-                var methodInfo = type.GetMethod("OnBezierZoneEvent");
-                if (methodInfo == null)
-                {
-                    Debug.LogWarning(inZones[i] + " is missing OnBezierZoneEvent");
-                }
-                else
-                {
-                    methodInfo.Invoke(component, new object[] {
-                    new BezierZoneEvent(inZones[i], this, BezierZoneEventType.ExitZone)
-                });
-                }
-                /*
-                inZones[i].SendMessage(
-                    "OnBezierZoneEvent", 
-                    new BezierZoneEvent(inZones[i], this, BezierZoneEventType.ExitZone),
-                    SendMessageOptions.DontRequireReceiver);
-                    */
+                SendEvent(previousInZones[i], BezierZoneEventType.ExitZone);
             }
         }
 
-        for (int i=0, l=tmpZones.Count; i<l; i++)
+        for (int i=0, l=currentInZones.Count; i<l; i++)
         {
-            if (inZones.Contains(tmpZones[i]))
+            if (previousInZones.Contains(currentInZones[i]))
             {
-                tmpZones[i].SendMessage(
-                    "OnBezierZoneEvent",
-                    new BezierZoneEvent(tmpZones[i], this, BezierZoneEventType.StayZone),
-                    SendMessageOptions.DontRequireReceiver);
+                SendEvent(currentInZones[i], BezierZoneEventType.StayZone);
             }
             else
             {
-                tmpZones[i].SendMessage(
-                    "OnBezierZoneEvent",
-                    new BezierZoneEvent(tmpZones[i], this, BezierZoneEventType.EnterZone),
-                    SendMessageOptions.DontRequireReceiver);
+                SendEvent(currentInZones[i], BezierZoneEventType.EnterZone);
             }
         }
-        inZones.Clear();
-        inZones.AddRange(tmpZones);
 
         if (curveTime == 0 || curveTime == 1)
         {
-            curve.SendMessage("OnBezierEnd", this, SendMessageOptions.DontRequireReceiver);
+            if (curve)
+            {
+                curve.SendMessage("OnBezierEnd", this, SendMessageOptions.DontRequireReceiver);
+            }
+            SendMessage("OnBezierEnd", this, SendMessageOptions.DontRequireReceiver);
         }
 
-
+        inZones.AddRange(currentInZones);
     }
 
     public void Snap()

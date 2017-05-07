@@ -24,7 +24,7 @@ public class CharacterCtrlr : MonoBehaviour {
         }
         //swappedCurveThisFrame = false;
 
-        float hor = playerControlled ? Input.GetAxis("Horizontal") : 0f;
+        float hor = IsInControl ? Input.GetAxis("Horizontal") : 0f;
         if (hor > noMove)
         {
             Vector3 scale = transform.localScale;
@@ -72,7 +72,12 @@ public class CharacterCtrlr : MonoBehaviour {
     
     BezierZone changePaths;
 
-    bool playerControlled
+    public void SetMovementConfig(MoveDirection coordinatingDirection)
+    {
+
+    }
+
+    public bool IsInControl
     {
         get
         {
@@ -93,6 +98,11 @@ public class CharacterCtrlr : MonoBehaviour {
         {
             _driver = null;
         }
+    }
+
+    void KillPlayer()
+    {
+        Kill();
     }
 
     void KillPlayer(PointInvoker invoker)
@@ -149,11 +159,7 @@ public class CharacterCtrlr : MonoBehaviour {
     void Kill()
     {
         if (canDie && SpawnPoint.spawnPoint)
-        {
-            if (point.Curve)
-            {
-                point.Detatch();
-            }
+        {            
             Debug.Log(name + ": Respawns at " + SpawnPoint.zoneEvent.zone.curve.name);
             point.Attach(SpawnPoint.zoneEvent.zone.curve, SpawnPoint.zoneEvent.zone.center);
         }

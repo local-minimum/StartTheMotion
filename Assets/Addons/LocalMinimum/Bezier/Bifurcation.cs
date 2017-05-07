@@ -17,6 +17,7 @@ public class Bifurcation : MonoBehaviour {
 
     public void OnBezierZoneEvent(BezierZoneEvent bEvent)
     {
+        Debug.Log(string.Format("{0}, {1}, {2}", bEvent.point.CurveTime, bEvent.type, bEvent.zone));
         if (bEvent.type == forkCondition.type && bEvent.zone == forkCondition.zone)
         {
             if (externalCondtion == null || externalCondtion())
