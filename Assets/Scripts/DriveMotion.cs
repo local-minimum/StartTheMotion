@@ -50,24 +50,30 @@ public class Driver
 
 public class DriveMotion : MonoBehaviour {
 
+    BezierCurve curve;
+
     public void OnBezierZoneEvent(BezierZoneEvent bEvent)
     {
-        if (bEvent.type == BezierZoneEventType.ExitZone)
+        if (driveForZoneOnly)
         {
-            if (IsDrivingPoint(bEvent.point))
-            {                
-                RemoveDriver(bEvent.point);
+            if (bEvent.type == BezierZoneEventType.ExitZone)
+            {
+                if (IsDrivingPoint(bEvent.point))
+                {
+                    RemoveDriver(bEvent.point);
+                }
             }
-        } else if (!IsDrivingPoint(bEvent.point) && CanDrivePoint(bEvent.point)) 
-        {
-            AddDriver(bEvent.point);
+            else if (!IsDrivingPoint(bEvent.point) && CanDrivePoint(bEvent.point))
+            {
+                AddDriver(bEvent.point);
+            }
         }
     }
 
     void OnAttachToCurve(BezierPoint point)
     {
-        if (!IsDrivingPoint(point) && CanDrivePoint(point))
-        {           
+        if (!IsDrivingPoint(point) && CanDrivePoint(point) && !driveForZoneOnly)
+        {
             AddDriver(point);
             point.SendMessage("OnPointDriven", this, SendMessageOptions.DontRequireReceiver);
         }
@@ -75,6 +81,7 @@ public class DriveMotion : MonoBehaviour {
 
     void OnDetachFromCurve(BezierPoint point)
     {
+        Debug.Log(name + ": Remove driver " + point + "? " + IsDrivingPoint(point));
         if (IsDrivingPoint(point))
         {
             RemoveDriver(point);
@@ -84,6 +91,7 @@ public class DriveMotion : MonoBehaviour {
 
     void AddDriver(BezierPoint point)
     {
+        Debug.Log(name + ": Driving " + point);
         var driver = new Driver();
         driver.point = point;
         driver.speedByDuration = speedByDuration.Clone();
@@ -97,9 +105,12 @@ public class DriveMotion : MonoBehaviour {
         {
             if (automatons[i].point == point)
             {
+                Debug.Log(name + ": Not Driving " + automatons[i].point);
                 automatons.RemoveAt(i);
             }
         }
+
+        Debug.Log(name + ": Drivers remaining " + automatons.Count);
     }
 
     bool IsDrivingPoint(BezierPoint point)
@@ -130,6 +141,9 @@ public class DriveMotion : MonoBehaviour {
     [SerializeField]
     string[] canBeDriven;
 
+    [SerializeField]
+    bool driveForZoneOnly = false;
+
     List<Driver> automatons = new List<Driver>();
 
 
@@ -139,12 +153,22 @@ public class DriveMotion : MonoBehaviour {
     [SerializeField]
     MotionParameters speedByDuration;
 
+    void Start()
+    {
+        curve = GetComponent<BezierCurve>();
+    }
 
     private void Update()
     {
         for (int i=0, l=automatons.Count; i<l; i++)
         {
-            automatons[i].Update();
+            if (automatons[i].point.Curve == curve)
+            {
+                automatons[i].Update();
+            } else
+            {
+                Debug.LogWarning(string.Format("{0}: Driver #{1}, {2} should have been removed because on other curve", name, i, automatons[i]));
+            }
         }
     }
 }

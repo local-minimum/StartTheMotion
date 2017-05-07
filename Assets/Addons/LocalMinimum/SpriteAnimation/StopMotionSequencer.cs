@@ -219,7 +219,7 @@ public class StopMotionSequencer : MonoBehaviour {
     public void Stop()
     {
         IsPlaying = false;
-        Debug.Log(name + ": Stopped playing " + sequenceName);
+        //Debug.Log(name + ": Stopped playing " + sequenceName);
     }
 
     public void SetAnimationStepEnabled(int index)

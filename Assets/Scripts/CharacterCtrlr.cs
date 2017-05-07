@@ -150,6 +150,10 @@ public class CharacterCtrlr : MonoBehaviour {
     {
         if (canDie && SpawnPoint.spawnPoint)
         {
+            if (point.Curve)
+            {
+                point.Detatch();
+            }
             Debug.Log(name + ": Respawns at " + SpawnPoint.zoneEvent.zone.curve.name);
             point.Attach(SpawnPoint.zoneEvent.zone.curve, SpawnPoint.zoneEvent.zone.center);
         }

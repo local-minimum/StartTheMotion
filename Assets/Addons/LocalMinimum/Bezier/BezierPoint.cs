@@ -26,6 +26,7 @@ public class BezierPoint : MonoBehaviour {
 
     public void Detatch()
     {
+        Debug.Log("Detaching from" + curve);
         if (curve)
         {
             curve.SendMessage("OnDetachFromCurve", this, SendMessageOptions.DontRequireReceiver);

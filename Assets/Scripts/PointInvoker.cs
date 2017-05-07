@@ -17,10 +17,10 @@ public class PointInvoker : MonoBehaviour {
     public bool abortActionChain;
 
     public void SendActions(BezierPoint point) {
-        Debug.Log("invoking");
         abortActionChain = false;
         for (int i=0; i<Actions.Length;i++)
         {
+            Debug.Log(string.Format("Invoking {0} on {1}", Actions[i], point));
             point.SendMessage(Actions[i], this, SendMessageOptions.DontRequireReceiver);
             if (abortActionChain)
             {

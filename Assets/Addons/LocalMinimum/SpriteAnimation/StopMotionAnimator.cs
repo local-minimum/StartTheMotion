@@ -75,7 +75,7 @@ public class StopMotionAnimator : MonoBehaviour {
         {
             next.Play(true, OnAnimationEnd);
             active = next;
-            Debug.Log(name + ": Changed active sequence to " + active.SequenceName);
+            //Debug.Log(name + ": Changed active sequence to " + active.SequenceName);
         }        
     }
 
@@ -86,7 +86,7 @@ public class StopMotionAnimator : MonoBehaviour {
             if (transitions[i].CanTrigger(this, trigger))
             {
                 transitions[i].Execute(this);
-                Debug.Log(name + " is triggering with " + trigger + " to play " + transitions[i].transitionTarget);
+                //Debug.Log(name + " is triggering with " + trigger + " to play " + transitions[i].transitionTarget);
                 return;
             }
         }
