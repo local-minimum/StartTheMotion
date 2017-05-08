@@ -34,12 +34,13 @@ public class JumpSelection : MonoBehaviour {
 
     void Update()
     {
-        if (inZone && player.IsInControl && Input.GetButtonDown("Jump"))
+        if (inZone && player.IsInControl && Input.GetButtonDown("Jump") && player.CanJump)
         {
             var jump = GetJump();
             if (jump != null)
             {
-                jump.Grab(pt);   
+                jump.Grab(pt);
+                player.GetComponent<StopMotionAnimator>().Trigger("Jump");
             }
         } 
     }
