@@ -48,13 +48,13 @@ public class Hearts : MonoBehaviour {
     void KillHeart(int i)
     {
         hearts[i].sequencer.Stop();
-        hearts[i].mat.SetFloat("SaturationMixing", deadSaturationMixing);
+        hearts[i].mat.SetFloat("_SaturationMixing", deadSaturationMixing);
     }
 
     void RessurectHeart(int i)
     {
         hearts[i].sequencer.Play(false);
-        hearts[i].mat.SetFloat("SaturationMixing", aliveSaturationMixing);
+        hearts[i].mat.SetFloat("_SaturationMixing", aliveSaturationMixing);
     }
 
     public bool CanGiveLife
@@ -95,7 +95,10 @@ public class Hearts : MonoBehaviour {
         return false;
     }
 
+    [SerializeField]
+    Vector3 offset;
+
     void Update () {
-		
-	}
+        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)) + offset;
+    }
 }
