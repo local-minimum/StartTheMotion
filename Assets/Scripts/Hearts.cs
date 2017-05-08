@@ -11,11 +11,12 @@ struct HeartAndMaterial{
     public HeartAndMaterial(StopMotionSequencer sequencer)
     {
         this.sequencer = sequencer;
-        mat = sequencer.GetComponent<SpriteRenderer>().material;
+        mat = sequencer.GetComponent<SpriteRenderer>().sharedMaterial;
     }
     
 }
 
+[ExecuteInEditMode]
 public class Hearts : MonoBehaviour {
 
     [SerializeField, Range(0,1)]
@@ -98,7 +99,9 @@ public class Hearts : MonoBehaviour {
     [SerializeField]
     Vector3 offset;
 
+    Vector3 placement = new Vector3(0, 1, 0);
+
     void Update () {
-        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)) + offset;
+        transform.position = Camera.main.ViewportToWorldPoint(placement) + offset;
     }
 }

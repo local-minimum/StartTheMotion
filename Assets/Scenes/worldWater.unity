@@ -337,6 +337,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 176121584}
+  - component: {fileID: 176121588}
   - component: {fileID: 176121586}
   - component: {fileID: 176121585}
   - component: {fileID: 176121587}
@@ -389,7 +390,7 @@ MonoBehaviour:
   bezierType: 1
   points:
   - {x: 115.64224, y: -1.4559488, z: 0}
-  - {x: -7.603714, y: 11.326229, z: 0}
+  - {x: -6.168503, y: 19.495861, z: 0}
   - {x: 0.6702461, y: 11.782669, z: 0}
   - {x: 147.14774, y: -4.63115, z: 0}
   attractorsAreOffsets: 1
@@ -397,7 +398,7 @@ MonoBehaviour:
   anchoredTimeLeft: 0
   anchorRight: {fileID: 1346758282}
   anchoredTimeRight: 0.5
-  m_cachedLength: 34.36183
+  m_cachedLength: 38.452267
 --- !u!114 &176121587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,6 +449,104 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     duration: 0
+--- !u!114 &176121588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 176121583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf5d4ab9bfebed48a7f64e85530e80e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpCurve: {fileID: 176121586}
+  jumpTime: 0.00001
+  requireInZone: 1
+--- !u!21 &191130142
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Hearts (Instance)
+  m_Shader: {fileID: 4800000, guid: 5fd7b1fde6c9dab4ca2ae8c9f342ca9c, type: 3}
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA PIXELSNAP_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 1
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EnableExternalAlpha: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Saturation: 0.1
+    - _SaturationMixing: 0.9
+    - _SaturationTarget: 0.1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &228810826
 Prefab:
   m_ObjectHideFlags: 0
@@ -1029,7 +1128,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c04d2e700ccedf64ab9a94d9ea7f65d1, type: 2}
+  - {fileID: 191130142}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1300,7 +1399,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c04d2e700ccedf64ab9a94d9ea7f65d1, type: 2}
+  - {fileID: 1478304804}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1319,7 +1418,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5e5a503345ff6b341b2c48eb916f9019, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 340469a7ba6258d48a1cc7ff706c57a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1460,7 +1559,7 @@ MonoBehaviour:
   bezierType: 1
   points:
   - {x: -103.36322, y: -20.846485, z: 0}
-  - {x: 6.8835297, y: 21.756794, z: 0}
+  - {x: 11.052856, y: 38.290363, z: 0}
   - {x: -3.1059113, y: 7.4307346, z: 0}
   - {x: -76.876755, y: -18.128593, z: 0}
   attractorsAreOffsets: 1
@@ -1468,7 +1567,7 @@ MonoBehaviour:
   anchoredTimeLeft: 0.9880952
   anchorRight: {fileID: 1898681020}
   anchoredTimeRight: 0
-  m_cachedLength: 36.37089
+  m_cachedLength: 46.608597
 --- !u!114 &468078153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1571,7 +1670,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c04d2e700ccedf64ab9a94d9ea7f65d1, type: 2}
+  - {fileID: 1400958480}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1883,7 +1982,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 771785405}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -26.325558, y: 16.98984, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 404451866}
@@ -2158,6 +2257,191 @@ MonoBehaviour:
   rotateWithCurve: 0
   forceAttachment: 1
   curveTime: 0.001
+--- !u!1 &857710039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 857710040}
+  - component: {fileID: 857710046}
+  - component: {fileID: 857710045}
+  - component: {fileID: 857710044}
+  - component: {fileID: 857710043}
+  - component: {fileID: 857710042}
+  - component: {fileID: 857710041}
+  - component: {fileID: 857710047}
+  m_Layer: 0
+  m_Name: JumpLand2Water
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &857710040
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 857710039}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1040646235}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &857710041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 857710039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd1d95f51b06d4848bb9481ba3cfe7c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respondsToZone: {fileID: 857710042}
+  respondsToEvent: 0
+  Actions:
+  - KillPlayer
+  abortActionChain: 0
+--- !u!114 &857710042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 857710039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardEventsTo:
+  - {fileID: 857710041}
+  times:
+  - 0.86011904
+  - 1
+  curve: {fileID: 857710046}
+  lineColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &857710043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 857710039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf5d4ab9bfebed48a7f64e85530e80e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpCurve: {fileID: 0}
+  jumpTime: 0.00001
+  requireInZone: 0
+--- !u!114 &857710044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 857710039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa468bf6ec8d56f4ebf8b2b7a35cebd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canBeDriven:
+  - Rabbit
+  driveForZoneOnly: 0
+  speedByPostion:
+    active: 1
+    velocity:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 15
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.28242728
+        value: 10
+        inSlope: 6.0749054
+        outSlope: 6.0749054
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 20
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    duration: 0
+  speedByDuration:
+    active: 0
+    velocity:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    duration: 0
+--- !u!114 &857710045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 857710039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab521e7d981499e4fa580201dda8d8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftTransitionTo: {fileID: 0}
+  leftTransitionToTime: 0.99999
+  rightTransitionTo: {fileID: 0}
+  rightTransitionToTime: 0.5
+--- !u!114 &857710046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 857710039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40553b30afbf3d64cb5125c783593f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bezierType: 1
+  points:
+  - {x: 115.64224, y: -1.4559488, z: 0}
+  - {x: -10.673157, y: 29.198215, z: 0}
+  - {x: 0.6702461, y: 11.782669, z: 0}
+  - {x: 70.9149, y: -26.80798, z: 0}
+  attractorsAreOffsets: 1
+  anchorLeft: {fileID: 1898681020}
+  anchoredTimeLeft: 0
+  anchorRight: {fileID: 0}
+  anchoredTimeRight: 0.5
+  m_cachedLength: 52.400364
+--- !u!114 &857710047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 857710039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf5d4ab9bfebed48a7f64e85530e80e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpCurve: {fileID: 0}
+  jumpTime: 0.00001
+  requireInZone: 0
 --- !u!1 &958751371
 GameObject:
   m_ObjectHideFlags: 0
@@ -2305,9 +2589,94 @@ Transform:
   m_Children:
   - {fileID: 1898681022}
   - {fileID: 176121584}
+  - {fileID: 857710040}
   m_Father: {fileID: 1954811211}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &1067725446
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Hearts (Instance)
+  m_Shader: {fileID: 4800000, guid: 5fd7b1fde6c9dab4ca2ae8c9f342ca9c, type: 3}
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA PIXELSNAP_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 1
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EnableExternalAlpha: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Saturation: 0.1
+    - _SaturationMixing: 0.9
+    - _SaturationTarget: 0.1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1094359999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2861,6 +3230,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1175586967}
   m_Script: {fileID: 11500000, guid: 71d98282e9ecde74a91ff2b7c0e0272b, type: 3}
+--- !u!114 &1222024436 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114637842126000544, guid: 205c4d25ca6eaeb4e85e133c1ec3ac92,
+    type: 2}
+  m_PrefabInternal: {fileID: 1175586967}
+  m_Script: {fileID: 11500000, guid: e99b49f7fd68af745b8dd62caf8c51fa, type: 3}
 --- !u!50 &1222024439
 Rigidbody2D:
   serializedVersion: 4
@@ -3140,6 +3515,11 @@ GameObject:
   - component: {fileID: 1303167006}
   - component: {fileID: 1303167008}
   - component: {fileID: 1303167007}
+  - component: {fileID: 1303167009}
+  - component: {fileID: 1303167013}
+  - component: {fileID: 1303167012}
+  - component: {fileID: 1303167011}
+  - component: {fileID: 1303167010}
   m_Layer: 0
   m_Name: JumpTurtle2Water
   m_TagString: Untagged
@@ -3153,12 +3533,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1303167005}
-  m_LocalRotation: {x: -0, y: -0, z: 0.5, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 57.506405, y: -4.789399, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1346758281}
-  m_RootOrder: 0
+  m_Father: {fileID: 1954811211}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1303167007
 MonoBehaviour:
@@ -3224,15 +3604,97 @@ MonoBehaviour:
   bezierType: 1
   points:
   - {x: -23.526676, y: 52.767933, z: 0}
-  - {x: 0.32321548, y: 9.371006, z: 0}
+  - {x: 4.837429, y: 14.607488, z: 0}
   - {x: 0.6162143, y: 7.971687, z: 0}
-  - {x: -15.7011595, y: 0.73478794, z: 0}
+  - {x: 2.3556743, y: -13.620394, z: 0}
   attractorsAreOffsets: 1
   anchorLeft: {fileID: 1346758282}
-  anchoredTimeLeft: 1
-  anchorRight: {fileID: 147396586}
-  anchoredTimeRight: 0.5
-  m_cachedLength: 15.937997
+  anchoredTimeLeft: 0
+  anchorRight: {fileID: 0}
+  anchoredTimeRight: 0.61011904
+  m_cachedLength: 22.923862
+--- !u!114 &1303167009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1303167005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf5d4ab9bfebed48a7f64e85530e80e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpCurve: {fileID: 1303167008}
+  jumpTime: 0.00001
+  requireInZone: 0
+--- !u!114 &1303167010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1303167005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9c6dba0333ac1498dfbc241a255114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forkCondition:
+    zone: {fileID: 1303167011}
+    point: {fileID: 1222024436}
+    type: 2
+  fork: {fileID: 1954811212}
+  forkAttachTime: 0.496
+--- !u!114 &1303167011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1303167005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardEventsTo: []
+  times:
+  - 0.25
+  - 0.5357143
+  curve: {fileID: 1303167008}
+  lineColor: {r: 0.10399985, g: 1, b: 0, a: 1}
+--- !u!114 &1303167012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1303167005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd1d95f51b06d4848bb9481ba3cfe7c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respondsToZone: {fileID: 1303167013}
+  respondsToEvent: 0
+  Actions:
+  - KillPlayer
+  abortActionChain: 0
+--- !u!114 &1303167013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1303167005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardEventsTo:
+  - {fileID: 1303167012}
+  times:
+  - 0.9047619
+  - 1
+  curve: {fileID: 1303167008}
+  lineColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1346758280
 GameObject:
   m_ObjectHideFlags: 0
@@ -3246,6 +3708,7 @@ GameObject:
   - component: {fileID: 1346758285}
   - component: {fileID: 1346758283}
   - component: {fileID: 1346758286}
+  - component: {fileID: 1346758287}
   m_Layer: 0
   m_Name: TurtleBack
   m_TagString: Untagged
@@ -3262,8 +3725,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.02, y: 3.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1303167006}
+  m_Children: []
   m_Father: {fileID: 304463701}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3315,7 +3777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardEventsTo: []
   times:
-  - 0.5863095
+  - 0.33035713
   - 1
   curve: {fileID: 1346758282}
   lineColor: {r: 1, g: 0, b: 0, a: 1}
@@ -3343,12 +3805,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardEventsTo: []
+  forwardEventsTo:
+  - {fileID: 1346758287}
   times:
   - 0
-  - 0.44345236
+  - 0.2202381
   curve: {fileID: 1346758282}
   lineColor: {r: 0, g: 1, b: 0.15400004, a: 1}
+--- !u!114 &1346758287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1346758280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe648c544c9d51648b969dbca18d411b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternativePriority:
+  - {fileID: 1303167009}
+  player: {fileID: 1222024435}
 --- !u!1 &1350310861
 GameObject:
   m_ObjectHideFlags: 0
@@ -3392,7 +3869,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c04d2e700ccedf64ab9a94d9ea7f65d1, type: 2}
+  - {fileID: 1067725446}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3801,6 +4278,90 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &1400958480
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Hearts (Instance)
+  m_Shader: {fileID: 4800000, guid: 5fd7b1fde6c9dab4ca2ae8c9f342ca9c, type: 3}
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA PIXELSNAP_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 1
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EnableExternalAlpha: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Saturation: 0.1
+    - _SaturationMixing: 0.9
+    - _SaturationTarget: 0.1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1414158823
 GameObject:
   m_ObjectHideFlags: 0
@@ -3870,6 +4431,90 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &1478304804
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Hearts (Instance)
+  m_Shader: {fileID: 4800000, guid: 5fd7b1fde6c9dab4ca2ae8c9f342ca9c, type: 3}
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA PIXELSNAP_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 1
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EnableExternalAlpha: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Saturation: 0.1
+    - _SaturationMixing: 0
+    - _SaturationTarget: 0.1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1519953101
 GameObject:
   m_ObjectHideFlags: 0
@@ -4160,6 +4805,7 @@ MonoBehaviour:
   forwardEventsTo:
   - {fileID: 1630457782}
   - {fileID: 1630457785}
+  - {fileID: 176121588}
   times:
   - 0.8392857
   - 1
@@ -4910,6 +5556,8 @@ GameObject:
   - component: {fileID: 1898681022}
   - component: {fileID: 1898681020}
   - component: {fileID: 1898681021}
+  - component: {fileID: 1898681024}
+  - component: {fileID: 1898681023}
   m_Layer: 0
   m_Name: Land
   m_TagString: Untagged
@@ -4951,7 +5599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab521e7d981499e4fa580201dda8d8cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftTransitionTo: {fileID: 176121586}
+  leftTransitionTo: {fileID: 0}
   leftTransitionToTime: 0.00001
   rightTransitionTo: {fileID: 0}
   rightTransitionToTime: 0.00001
@@ -4968,6 +5616,38 @@ Transform:
   m_Father: {fileID: 1040646235}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1898681023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1898681019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe648c544c9d51648b969dbca18d411b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternativePriority:
+  - {fileID: 176121588}
+  - {fileID: 857710043}
+  player: {fileID: 1222024435}
+--- !u!114 &1898681024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1898681019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardEventsTo: []
+  times:
+  - 0
+  - 0.10714286
+  curve: {fileID: 1898681020}
+  lineColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &1951745393
 Prefab:
   m_ObjectHideFlags: 0
@@ -5059,6 +5739,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1040646235}
+  - {fileID: 1303167006}
   m_Father: {fileID: 1118882028}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
