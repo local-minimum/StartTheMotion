@@ -794,6 +794,7 @@ MonoBehaviour:
   - {x: -1.2185411, y: -2.358211, z: 0}
   - {x: -3.5093741, y: -2.5060396, z: 0}
   - {x: -0.08299065, y: -1.655277, z: 0}
+  attractorsAreOffsets: 0
   anchorLeft: {fileID: 0}
   anchoredTimeLeft: 0
   anchorRight: {fileID: 0}
@@ -852,7 +853,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114181968789509998, guid: 7f82a2cb158e4b14bbf1820cc951fcb8, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 7f82a2cb158e4b14bbf1820cc951fcb8, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &532868883
@@ -1300,6 +1302,7 @@ GameObject:
   - component: {fileID: 940304968}
   - component: {fileID: 940304971}
   - component: {fileID: 940304972}
+  - component: {fileID: 940304974}
   - component: {fileID: 940304970}
   - component: {fileID: 940304973}
   m_Layer: 0
@@ -1322,7 +1325,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e65b4b7e23d45e74095a3c0f4b00dcf7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1341,7 +1344,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 992915403e9399d49b1c96a8787828a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6ec5d0716c7eebd47853baa633620bf6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1410,12 +1413,13 @@ MonoBehaviour:
   - {fileID: 940304968}
   - {fileID: 940304971}
   - {fileID: 940304972}
+  - {fileID: 940304974}
   transitions:
   - m_Source: 
     m_Target: Respawn
     m_Trigger: 
   - m_Source: Respawn
-    m_Target: Idle
+    m_Target: Walk
     m_Trigger: 
   - m_Source: Idle
     m_Target: IdleScratch
@@ -1496,6 +1500,32 @@ MonoBehaviour:
   trigger: Scratch
   probPerSecond: 0.07
   requiredState: Idle
+--- !u!114 &940304974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 940304966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac756f54fab97949b41ac670efa3644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequenceName: Walk
+  mode: 0
+  sequence:
+  - {fileID: 21300000, guid: 79e1d15bb98781341b2a1d947dc24e7c, type: 3}
+  - {fileID: 21300000, guid: 6ec5d0716c7eebd47853baa633620bf6, type: 3}
+  - {fileID: 21300000, guid: bd5f6702f74d34d41a061a5b00fcd11b, type: 3}
+  - {fileID: 21300000, guid: 03a9c6e2cc9423b44866fd5d8577c336, type: 3}
+  - {fileID: 21300000, guid: 7befe32e3d7afec4a952b96ee893edb3, type: 3}
+  - {fileID: 21300000, guid: 9b174fc70eaf7454d9984967ea01f4aa, type: 3}
+  - {fileID: 21300000, guid: 50b6eae11e91c1545b42c4394f66a78a, type: 3}
+  - {fileID: 21300000, guid: f098ae79fc98a5b49947b1072f4f0bb1, type: 3}
+  - {fileID: 21300000, guid: 28d9fa4f661422549b7793381b50855f, type: 3}
+  - {fileID: 21300000, guid: 3606db90a6b8e0544a55b4be076fa651, type: 3}
+  enabledAnimationStep: 01010101010101010101
+  m_fps: 15
 --- !u!1 &1249874376
 GameObject:
   m_ObjectHideFlags: 0
@@ -2175,6 +2205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 1
+  walkDirection: 1
   speed:
     serializedVersion: 2
     m_Curve:
