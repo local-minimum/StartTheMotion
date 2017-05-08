@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterCtrlr : MonoBehaviour {
 
+    [SerializeField]
+    Hearts hearts;
+
     BezierPoint point;
 
     public float speed = 2;
@@ -58,8 +61,18 @@ public class CharacterCtrlr : MonoBehaviour {
         {
             if (interactableDeathLifes.Count > 0)
             {
+
                 DeathLife interactableDeathLife = interactableDeathLifes[interactableDeathLifes.Count - 1];
-                interactableDeathLife.SetAlive(!interactableDeathLife.alive, true);
+                if (interactableDeathLife.alive && hearts.CanTakeLife)
+                {
+                    hearts.TakeLife();
+                    interactableDeathLife.SetAlive(false, true);
+                } else if (!interactableDeathLife.alive && hearts.CanGiveLife)
+                {
+                    hearts.GiveLive();
+                    interactableDeathLife.SetAlive(true, true);
+                }
+                
             }
         }
         /* Temp code for action swapping curves 
