@@ -44,7 +44,7 @@ public class BabyCtrl : MonoBehaviour {
     {
         get
         {
-            return !TheyAllowBounce ? Mathf.Sign(theirStAnim.transform.localScale.x) : -1f;
+            return TheyAllowBounce ? Mathf.Sign(theirStAnim.transform.localScale.x) : -Mathf.Sign(theirStAnim.transform.localScale.x);
         }
     }
 
