@@ -79,6 +79,38 @@ public class StopMotionAnimator : MonoBehaviour {
         }        
     }
 
+    public void ActivateByName(string sequenceName)
+    {
+        StopMotionSequencer next = GetSequenceByName(sequenceName);
+        if (next)
+        {
+            if (active == next)
+            {
+                Debug.LogWarning("Next and current animations are the same '" + next.SequenceName + "'");
+            } else if (active)
+            {
+                active.Stop();
+            }
+            active = next;
+        }
+        else
+        {
+            active = null;
+            Debug.LogWarning("Requested sequence '" + sequenceName + "' but isn't known.");
+        }
+
+    }
+
+    public void StepActive()
+    {
+        active.Step();
+    }
+
+    public void StepToRandomInActive()
+    {
+        active.ShowIndex(Random.Range(0, active.Length));
+    }
+
     public void Trigger(string trigger)
     {
         for (int i = 0, l = transitions.Count; i < l; i++)

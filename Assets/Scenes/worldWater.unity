@@ -261,6 +261,138 @@ MonoBehaviour:
   jumpCurve: {fileID: 1234628734}
   jumpTime: 0.00001
   requireInZone: 1
+--- !u!1 &157762121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 157762124}
+  - component: {fileID: 157762123}
+  - component: {fileID: 157762122}
+  - component: {fileID: 157762125}
+  - component: {fileID: 157762126}
+  m_Layer: 0
+  m_Name: Baby
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &157762122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 157762121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac756f54fab97949b41ac670efa3644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequenceName: Bounce
+  mode: 0
+  sequence:
+  - {fileID: 21300000, guid: c8fb2e7f1b688d84fb5253d9c2163cdf, type: 3}
+  - {fileID: 21300000, guid: 42027ab8fe8bd4242b6449c3e04208da, type: 3}
+  - {fileID: 21300000, guid: cf49fbfd3f3e2134e96dcde8e81db32a, type: 3}
+  - {fileID: 21300000, guid: b02c99d8b4f9e3b4a9b7f57294ee817f, type: 3}
+  - {fileID: 21300000, guid: 8bc446d6284775748b4f1f9d2f6c380e, type: 3}
+  - {fileID: 21300000, guid: 65a6e6c5fbee9964c9965653e247bef9, type: 3}
+  - {fileID: 21300000, guid: 8f80466095ea99c4ebbe55677a34a78c, type: 3}
+  - {fileID: 21300000, guid: 3034458b8637d27439274bed7ee48834, type: 3}
+  - {fileID: 21300000, guid: 5afb31b577dd4c542adc163953b67959, type: 3}
+  - {fileID: 21300000, guid: b52db435b1123b44497ea07bfe9e670e, type: 3}
+  - {fileID: 21300000, guid: 0e0261d6cfb33a148b2cf256d559acaf, type: 3}
+  - {fileID: 21300000, guid: 377fecb4deabf1d4fb3decb853f3e0c2, type: 3}
+  enabledAnimationStep: 010101010101010101010101
+  m_fps: 15
+--- !u!212 &157762123
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 157762121}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -1
+  m_Sprite: {fileID: 21300000, guid: c8fb2e7f1b688d84fb5253d9c2163cdf, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 11.52, y: 10.7}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+--- !u!4 &157762124
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 157762121}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -21.68, y: 1.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1153717798}
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &157762125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 157762121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de41293ab7be5cf4fb2af2596ba7b1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequences:
+  - {fileID: 157762122}
+  - {fileID: 157762122}
+  transitions: []
+--- !u!114 &157762126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 157762121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 009ca4a30d35c184cbdb947bb2706d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdingHand: {fileID: 1952945346}
+  selfRoot: {fileID: 157762124}
+  selfHand: {fileID: 1153717798}
+  snappiness: 30
+  animationProb: 1.4
 --- !u!1 &168055933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,7 +1438,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6b83b9a457f20d3458c30f00644d13e0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e5a503345ff6b341b2c48eb916f9019, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1669,7 +1801,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 720e92f438bb3af46830418de914daf4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c104eefe354cb1046a83b3787368ce5e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1687,7 +1819,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.805094, y: 4.593392, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1952945346}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1710,7 +1843,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6943555d34b6d3c4b8123817ee389933, type: 3}
   - {fileID: 21300000, guid: 80791ad547e0b7840a40af83cac92854, type: 3}
   - {fileID: 21300000, guid: 9bade668be6c01d42a23077969632a0c, type: 3}
-  enabledAnimationStep: 
+  enabledAnimationStep: 0101010101
   m_fps: 15
 --- !u!114 &423001977
 MonoBehaviour:
@@ -1727,7 +1860,7 @@ MonoBehaviour:
   mode: 0
   sequence:
   - {fileID: 21300000, guid: 9e95c77a4a291c6479e6f9d4a4299b07, type: 3}
-  enabledAnimationStep: 
+  enabledAnimationStep: 01
   m_fps: 15
 --- !u!114 &423001978
 MonoBehaviour:
@@ -3330,6 +3463,104 @@ MonoBehaviour:
   jumpCurve: {fileID: 1118882029}
   jumpTime: 0.00001
   requireInZone: 0
+--- !u!1 &1153717797
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1153717798}
+  - component: {fileID: 1153717799}
+  m_Layer: 0
+  m_Name: Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1153717798
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1153717797}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.33, y: 0.9100001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 157762124}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1153717799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1153717797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f92f41acb63d4fe4cabd6b1f72a6dc57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simulationSpace: 0
+  trackingSequences:
+  - {fileID: 157762122}
+  positions:
+  - sequenceImageName: DSC08086
+    sequencerName: Bounce
+    sequencerGameObject: Baby
+    position: {x: 2.2199993, y: 0.86, z: 0}
+  - sequenceImageName: DSC08087
+    sequencerName: Bounce
+    sequencerGameObject: Baby
+    position: {x: 2.2199993, y: 0.86, z: 0}
+  - sequenceImageName: DSC08088
+    sequencerName: Bounce
+    sequencerGameObject: Baby
+    position: {x: 2.2199993, y: 0.86, z: 0}
+  - sequenceImageName: DSC08089
+    sequencerName: Bounce
+    sequencerGameObject: Baby
+    position: {x: 2.1599998, y: 0.46000004, z: 0}
+  - sequenceImageName: DSC08090
+    sequencerName: Bounce
+    sequencerGameObject: Baby
+    position: {x: 2.1599998, y: 0.46000004, z: 0}
+  - sequenceImageName: DSC08091
+    sequencerName: Bounce
+    sequencerGameObject: Baby
+    position: {x: 2.1599998, y: 0.46000004, z: 0}
+  - sequenceImageName: DSC08093
+    sequencerName: Bounce
+    sequencerGameObject: Baby
+    position: {x: 2.1599998, y: 0.46000004, z: 0}
+  - sequenceImageName: DSC08094
+    sequencerName: Bounce
+    sequencerGameObject: Baby
+    position: {x: 2.1000004, y: -0.110000014, z: 0}
+  - sequenceImageName: DSC08095
+    sequencerName: Bounce
+    sequencerGameObject: Baby
+    position: {x: 2.1599998, y: 0.46000004, z: 0}
+  - sequenceImageName: DSC08096
+    sequencerName: Bounce
+    sequencerGameObject: Baby
+    position: {x: 2.1000004, y: 1.1400001, z: 0}
+  - sequenceImageName: DSC08097
+    sequencerName: Bounce
+    sequencerGameObject: Baby
+    position: {x: 2.33, y: 0.9100001, z: 0}
+  - sequenceImageName: DSC08085
+    sequencerName: Bounce
+    sequencerGameObject: Baby
+    position: {x: 2.33, y: 0.9100001, z: 0}
+  currentSequencer: {fileID: 157762122}
+  editingPosition:
+    sequenceImageName: DSC08085
+    sequencerName: Bounce
+    sequencerGameObject: Baby
+    position: {x: 2.33, y: 0.9100001, z: 0}
 --- !u!1 &1234628732
 GameObject:
   m_ObjectHideFlags: 0
@@ -5785,6 +6016,310 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1951745393}
   m_Script: {fileID: 11500000, guid: de41293ab7be5cf4fb2af2596ba7b1c6, type: 3}
+--- !u!1 &1952945345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1952945346}
+  - component: {fileID: 1952945347}
+  m_Layer: 0
+  m_Name: Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1952945346
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1952945345}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.17000008, y: -1.6100001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 423001975}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1952945347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1952945345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f92f41acb63d4fe4cabd6b1f72a6dc57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simulationSpace: 0
+  trackingSequences:
+  - {fileID: 423001973}
+  - {fileID: 423001972}
+  - {fileID: 423001971}
+  - {fileID: 423001970}
+  - {fileID: 423001978}
+  - {fileID: 423001977}
+  - {fileID: 423001976}
+  positions:
+  - sequenceImageName: DSC07995
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 1.7700005, y: -6.16, z: 0}
+  - sequenceImageName: DSC07994
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 1.7700005, y: -5.82, z: 0}
+  - sequenceImageName: DSC07993
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 1.54, y: -5.19, z: 0}
+  - sequenceImageName: DSC07991
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 1.6499996, y: -2.11, z: 0}
+  - sequenceImageName: DSC07990
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 2.6800003, y: -3.25, z: 0}
+  - sequenceImageName: DSC07989
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 2.5699997, y: -2.17, z: 0}
+  - sequenceImageName: DSC07987
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 2.5699997, y: -2.17, z: 0}
+  - sequenceImageName: DSC07986
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 2.63, y: -2, z: 0}
+  - sequenceImageName: DSC07984
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 3.6599998, y: -0.86000013, z: 0}
+  - sequenceImageName: DSC07983
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 3.7200003, y: -0.5700002, z: 0}
+  - sequenceImageName: DSC07982
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 3.8900003, y: -0.9100001, z: 0}
+  - sequenceImageName: DSC07981
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 4.12, y: -0.8499999, z: 0}
+  - sequenceImageName: DSC07978
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 3.83, y: -1.02, z: 0}
+  - sequenceImageName: DSC07977
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 4, y: -0.68000007, z: 0}
+  - sequenceImageName: DSC07976
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 4.1100006, y: -0.9100001, z: 0}
+  - sequenceImageName: DSC07975
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 3.9400005, y: -0.68000007, z: 0}
+  - sequenceImageName: DSC07974
+    sequencerName: Respawn
+    sequencerGameObject: Player
+    position: {x: 3.6499996, y: -0.9100001, z: 0}
+  - sequenceImageName: DSC07950
+    sequencerName: Idle
+    sequencerGameObject: Player
+    position: {x: 2.9099998, y: -1.6500001, z: 0}
+  - sequenceImageName: DSC07951
+    sequencerName: Idle
+    sequencerGameObject: Player
+    position: {x: 2.8500004, y: -1.31, z: 0}
+  - sequenceImageName: DSC07953
+    sequencerName: Idle
+    sequencerGameObject: Player
+    position: {x: 2.33, y: -1.54, z: 0}
+  - sequenceImageName: DSC07952
+    sequencerName: Idle
+    sequencerGameObject: Player
+    position: {x: 2.8400002, y: -1.25, z: 0}
+  - sequenceImageName: DSC07949
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 2.96, y: -1.8800001, z: 0}
+  - sequenceImageName: DSC07950
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 2.8999996, y: -1.6500001, z: 0}
+  - sequenceImageName: DSC07951
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 2.8999996, y: -1.54, z: 0}
+  - sequenceImageName: DSC07952
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 2.7299995, y: -1.25, z: 0}
+  - sequenceImageName: DSC07953
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 2.3900003, y: -1.48, z: 0}
+  - sequenceImageName: DSC07954
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 2.1000004, y: -1.19, z: 0}
+  - sequenceImageName: DSC07955
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 1.5900002, y: -1.7, z: 0}
+  - sequenceImageName: DSC07956
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 1.3000002, y: -2.04, z: 0}
+  - sequenceImageName: DSC07957
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 1.8099995, y: -1.81, z: 0}
+  - sequenceImageName: DSC07958
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 1.9200001, y: -1.81, z: 0}
+  - sequenceImageName: DSC07959
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 1.5799999, y: -1.75, z: 0}
+  - sequenceImageName: DSC07960
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 1.8099995, y: -1.69, z: 0}
+  - sequenceImageName: DSC07961
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 2.1000004, y: -1.5799999, z: 0}
+  - sequenceImageName: DSC07962
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 1.8699999, y: -1.98, z: 0}
+  - sequenceImageName: DSC07963
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 1.4700003, y: -1.98, z: 0}
+  - sequenceImageName: DSC07964
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 1.9799995, y: -1.9200001, z: 0}
+  - sequenceImageName: DSC07965
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 2.0900002, y: -1.46, z: 0}
+  - sequenceImageName: DSC07966
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 2.4300003, y: -1.4000001, z: 0}
+  - sequenceImageName: DSC07967
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 2.3199997, y: -1.4000001, z: 0}
+  - sequenceImageName: DSC07968
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 2.3199997, y: -1.5700002, z: 0}
+  - sequenceImageName: DSC07948
+    sequencerName: IdleScratch
+    sequencerGameObject: Player
+    position: {x: 2.4300003, y: -1.4000001, z: 0}
+  - sequenceImageName: DSC08109
+    sequencerName: Walk
+    sequencerGameObject: Player
+    position: {x: 0.6800003, y: -0.4000001, z: 0}
+  - sequenceImageName: DSC08110
+    sequencerName: Walk
+    sequencerGameObject: Player
+    position: {x: 1.8199997, y: -0.46000004, z: 0}
+  - sequenceImageName: DSC08111
+    sequencerName: Walk
+    sequencerGameObject: Player
+    position: {x: 1.9300003, y: -0.6300001, z: 0}
+  - sequenceImageName: DSC08112
+    sequencerName: Walk
+    sequencerGameObject: Player
+    position: {x: 1.8199997, y: -1.2, z: 0}
+  - sequenceImageName: DSC08113
+    sequencerName: Walk
+    sequencerGameObject: Player
+    position: {x: -0.85999966, y: -2.28, z: 0}
+  - sequenceImageName: DSC08114
+    sequencerName: Walk
+    sequencerGameObject: Player
+    position: {x: -1.6599998, y: -2.51, z: 0}
+  - sequenceImageName: DSC08117
+    sequencerName: Walk
+    sequencerGameObject: Player
+    position: {x: -2.6299992, y: -1.5999999, z: 0}
+  - sequenceImageName: DSC08118
+    sequencerName: Walk
+    sequencerGameObject: Player
+    position: {x: -2.17, y: -1.2, z: 0}
+  - sequenceImageName: DSC08120
+    sequencerName: Walk
+    sequencerGameObject: Player
+    position: {x: -1.4899998, y: -1.3699999, z: 0}
+  - sequenceImageName: DSC08108
+    sequencerName: Walk
+    sequencerGameObject: Player
+    position: {x: -0.35000038, y: -0.79999995, z: 0}
+  - sequenceImageName: DSC08122
+    sequencerName: JumpUp
+    sequencerGameObject: Player
+    position: {x: -1.6599998, y: -0.86000013, z: 0}
+  - sequenceImageName: DSC08124
+    sequencerName: JumpUp
+    sequencerGameObject: Player
+    position: {x: -2.5699997, y: -0.17999983, z: 0}
+  - sequenceImageName: DSC08125
+    sequencerName: JumpUp
+    sequencerGameObject: Player
+    position: {x: -1.6599998, y: -0.86000013, z: 0}
+  - sequenceImageName: DSC08121
+    sequencerName: JumpUp
+    sequencerGameObject: Player
+    position: {x: -0.97999954, y: -0.75, z: 0}
+  - sequenceImageName: DSC08127
+    sequencerName: JumpFly
+    sequencerGameObject: Player
+    position: {x: -2.9699993, y: -2.12, z: 0}
+  - sequenceImageName: DSC08129
+    sequencerName: JumpLand
+    sequencerGameObject: Player
+    position: {x: -0.17000008, y: -1.6100001, z: 0}
+  - sequenceImageName: DSC08130
+    sequencerName: JumpLand
+    sequencerGameObject: Player
+    position: {x: 1.7700005, y: -3.49, z: 0}
+  - sequenceImageName: DSC08131
+    sequencerName: JumpLand
+    sequencerGameObject: Player
+    position: {x: 2.17, y: -2.41, z: 0}
+  - sequenceImageName: DSC08133
+    sequencerName: JumpLand
+    sequencerGameObject: Player
+    position: {x: 0.97000027, y: -1.44, z: 0}
+  - sequenceImageName: DSC08128
+    sequencerName: JumpLand
+    sequencerGameObject: Player
+    position: {x: 2.8000002, y: -2.41, z: 0}
+  currentSequencer: {fileID: 423001976}
+  editingPosition:
+    sequenceImageName: DSC08129
+    sequencerName: JumpLand
+    sequencerGameObject: Player
+    position: {x: -0.17000008, y: -1.6100001, z: 0}
 --- !u!1 &1954811210
 GameObject:
   m_ObjectHideFlags: 0

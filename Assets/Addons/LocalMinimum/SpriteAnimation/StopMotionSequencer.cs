@@ -49,6 +49,14 @@ public class StopMotionSequencer : MonoBehaviour {
         }
     }
 
+    public int Length
+    {
+        get
+        {
+            return sequence.Length;
+        }
+    }
+
     int sequenceDirection = 1;
 
     public bool IsPlaying
@@ -70,6 +78,25 @@ public class StopMotionSequencer : MonoBehaviour {
                 _activeAnimation = null;
             }
         }
+    }
+
+    public void ShowIndex(int index)
+    {
+        if (IsPlaying)
+        {
+            IsPlaying = false;
+        }
+        SetupRenderer();
+        SyncArrayLenghts();
+        SetSequenceDirection();
+        showingIndex = index;
+
+        sRend.sprite = sequence[showingIndex];
+        if (OnSequenceFrame != null)
+        {
+            OnSequenceFrame(this);
+        }
+        Debug.Log(string.Format("{0}, {1}: Stepping to '{2}'", name, sequenceName, ShowingImageName));
     }
 
     public void Step()

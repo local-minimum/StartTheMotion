@@ -68,9 +68,22 @@ public class PositionWithAnimation : MonoBehaviour {
 
     private void OnEnable()
     {
-        if (trackingSequences == null)
+        if (trackingSequences == null || trackingSequences.Length == 0)
         {
-            return;
+            Transform parent = transform.parent;
+            while (parent)
+            {
+                trackingSequences = parent.GetComponents<StopMotionSequencer>();
+                if (trackingSequences != null && trackingSequences.Length > 0)
+                {
+                    break;
+                }
+                parent = parent.parent;
+            }
+            if (parent == null)
+            {
+                return;
+            }
         }
         for (int i=0; i<trackingSequences.Length; i++)
         {
@@ -111,7 +124,7 @@ public class PositionWithAnimation : MonoBehaviour {
                 editingPosition = positions[i].Clone();
                 LoadPosition();
                 insertIndex = i;
-                break;
+                return;
             }
         }
         editingPosition = new PositionInstruction(sequencer, this);
