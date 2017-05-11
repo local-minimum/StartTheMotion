@@ -130,7 +130,7 @@ public class DriveMotion : MonoBehaviour {
     {
         for (int i=0;i<canBeDriven.Length; i++)
         {
-            if (canBeDriven[i] == point.name)
+            if (point.CompareTag(canBeDriven[i]))
             {
                 return true;
             }

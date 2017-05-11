@@ -16,7 +16,7 @@ struct HeartAndMaterial{
     
 }
 
-[ExecuteInEditMode]
+
 public class Hearts : MonoBehaviour {
 
     [SerializeField, Range(0,1)]
