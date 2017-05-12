@@ -149,6 +149,16 @@ public class StopMotionSequencer : MonoBehaviour {
     }
 
     System.Func<bool> callbackOnEndPlayback;
+    public void Resume()
+    {
+        if (callbackOnEndPlayback != null)
+        {
+            Play(false, callbackOnEndPlayback);
+        } else
+        {
+            Play(false);
+        }
+    }
 
     public void Play(bool resetSequence, System.Func<bool> callbackOnEndPlayback)
     {

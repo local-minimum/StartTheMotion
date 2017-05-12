@@ -34,7 +34,7 @@ public class Hearts : MonoBehaviour {
         KillAll();
 
         //TODO: Fix better
-        Debug.Log("Takes life: " + TakeLife());
+        //Debug.Log("Takes life: " + TakeLife());
 	}
 	
     void KillAll()

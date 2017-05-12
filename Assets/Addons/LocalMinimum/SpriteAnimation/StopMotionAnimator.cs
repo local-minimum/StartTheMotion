@@ -60,7 +60,7 @@ public class StopMotionAnimator : MonoBehaviour {
     }
 
     public void Play(StopMotionSequencer next) { 
-        if (next == active || next == null)
+        if (next == active && next.IsPlaying || next == null)
         {
             Debug.LogWarning(next == null ? "Can't play null sequence" : "Next and current animations are the same '" + next.SequenceName + "'");
             return;
@@ -111,6 +111,18 @@ public class StopMotionAnimator : MonoBehaviour {
         active.ShowIndex(Random.Range(0, active.Length));
     }
 
+    public bool HasTrigger(string trigger)
+    {
+        for (int i = 0, l = transitions.Count; i < l; i++)
+        {
+            if (transitions[i].CanTrigger(this, trigger))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void Trigger(string trigger)
     {
         for (int i = 0, l = transitions.Count; i < l; i++)
@@ -130,6 +142,22 @@ public class StopMotionAnimator : MonoBehaviour {
     private void Start()
     {
         StartAnimation();
+    }
+
+    public void Resume()
+    {
+        if (active && !active.IsPlaying)
+        {
+            active.Resume();
+        }
+    }
+
+    public void Stop()
+    {
+        if (active)
+        {
+            active.Stop();
+        }
     }
 
     public void StartAnimation()

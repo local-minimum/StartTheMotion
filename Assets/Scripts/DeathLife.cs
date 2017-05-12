@@ -32,7 +32,21 @@ public class DeathLife : MonoBehaviour {
     {
         for (int i = 0; i < animations.Length; i++)
         {
-            animations[i].Trigger(isAlive ? "Life" : "Death");
+            string state = isAlive ? "Life" : "Death";
+            if (animations[i].HasTrigger(state))
+            {
+                animations[i].Trigger(state);
+            } else
+            {
+                Debug.Log(animations[i] + " has no trigger " + state);
+                if (isAlive)
+                {
+                    animations[i].Resume();
+                } else
+                {
+                    animations[i].Stop();
+                }
+            }
             animations[i].GetComponent<SpriteRenderer>().material.SetFloat("_SaturationMixing", isAlive ? 0 : 0.95f);
         }
         _alive = isAlive;
