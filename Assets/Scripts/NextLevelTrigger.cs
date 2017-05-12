@@ -20,4 +20,6 @@ public class NextLevelTrigger : MonoBehaviour {
     {
         loadZone.ForwardTo(this);
     }
+
+
 }
