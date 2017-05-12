@@ -11,7 +11,7 @@ struct HeartAndMaterial{
     public HeartAndMaterial(StopMotionSequencer sequencer)
     {
         this.sequencer = sequencer;
-        mat = sequencer.GetComponent<SpriteRenderer>().sharedMaterial;
+        mat = sequencer.GetComponent<SpriteRenderer>().material;
     }
     
 }
