@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cloud
   - Rabbit
+  - Fish
   layers:
   - Default
   - TransparentFX
