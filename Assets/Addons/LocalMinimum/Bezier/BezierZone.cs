@@ -62,7 +62,16 @@ public class BezierZone : MonoBehaviour {
         }
     }
 
-    public MonoBehaviour[] forwardEventsTo;
+    [SerializeField]
+    MonoBehaviour[] forwardEventsTo;
+
+    public void ForwardTo(MonoBehaviour me)
+    {
+        MonoBehaviour[] extended = new MonoBehaviour[forwardEventsTo.Length + 1];
+        System.Array.Copy(forwardEventsTo, extended, forwardEventsTo.Length);
+        extended[forwardEventsTo.Length] = me;
+        forwardEventsTo = extended;
+    }
 
     public T GetTarget<T>() where T : MonoBehaviour
     {
