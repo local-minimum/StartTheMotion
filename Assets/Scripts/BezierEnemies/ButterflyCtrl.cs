@@ -7,22 +7,34 @@ public class ButterflyCtrl : MonoBehaviour {
     DeathLife deathLife;
 
     [SerializeField]
-    DriveMotion driver;
+    BezierCurve upCurve;
 
-	void Start () {
+    [SerializeField]
+    BezierCurve downCurve;
+
+    BezierPoint pt;
+
+    bool lifeState;
+
+    void Start () {
         deathLife = GetComponent<DeathLife>();
-        		
-	}
+        lifeState = deathLife.alive;
+        pt = deathLife.GetComponent<BezierPoint>();
+    }
 
     void Update () {
-        if (driver.enabled != deathLife.alive)
+        if (lifeState != deathLife.alive)
         {
-            if (deathLife.alive)
+            lifeState = deathLife.alive;
+
+            if (lifeState)
             {
-                driver.enabled = deathLife.alive;
-                var pt = deathLife.GetComponent<BezierPoint>();
-                pt.Attach(pt.Curve, 0);
+                pt.Attach(upCurve, 1 - pt.CurveTime);
+            } else
+            {
+                pt.Attach(downCurve, 1 - pt.CurveTime);
             }
+            
         }
 	}
 }
