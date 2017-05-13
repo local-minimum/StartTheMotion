@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ThouShallNotPass : MonoBehaviour {
 
     [SerializeField]
     DeathLife guardian;
 
     [SerializeField]
-    bool passAlive;
+    LifeDeathCondition passCondition;
 
-    [SerializeField, Range(0, 1)]
-    float stopPoint;
+    [SerializeField]
+    BezierPoint stopPoint;
+
+    [SerializeField]
+    bool stopPointBelow = true;
 
     [SerializeField]
     BezierZone stopZone;
@@ -23,17 +27,22 @@ public class ThouShallNotPass : MonoBehaviour {
     BezierCurve curve;
 
 	void Update () {
+        bool stopping = !DeathLife.Compatible(passCondition, guardian.alive);
         if (stopZone)
         {
-            if (stopZone.IsInside(player.Curve, player.CurveTime) && guardian.alive != passAlive)
+            if (stopping && stopZone.IsInside(player.Curve, player.CurveTime))
             {
                 player.CurveTime = stopZone.ClosestEdgeTime(player.CurveTime);
             }
-        } else if (guardian.alive != passAlive && player.Curve == curve)
+        } else if (stopping && player.Curve == curve)
         {
-            if (player.CurveTime > stopPoint)
+            float t = player.CurveTime;
+            if (stopPointBelow && t > stopPoint.CurveTime)
             {
-                player.CurveTime = stopPoint;
+                player.CurveTime = stopPoint.CurveTime;
+            } else if (!stopPointBelow && t < stopPoint.CurveTime)
+            {
+                player.CurveTime = stopPoint.CurveTime;
             }
 
         }

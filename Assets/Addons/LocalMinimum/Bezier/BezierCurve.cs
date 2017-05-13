@@ -129,6 +129,7 @@ public class BezierCurve : MonoBehaviour {
             }
         } else
         {
+            Debug.Log(string.Format("{0} -> {1} on {2}", points[index], transform.InverseTransformPoint(globalPoint), this));
             points[index] = transform.InverseTransformPoint(globalPoint);
         }
     }

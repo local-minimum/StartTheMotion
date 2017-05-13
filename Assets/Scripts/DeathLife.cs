@@ -2,10 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum LifeDeathCondition { Any, Life, Death, None };
 
 public delegate void LifeOrDeath(DeathLife dl, bool byPlayer);
 
 public class DeathLife : MonoBehaviour {
+
+    public static bool Compatible(LifeDeathCondition condition, bool alive)
+    {
+        switch (condition)
+        {
+            case LifeDeathCondition.Any:
+                return true;
+            case LifeDeathCondition.None:
+                return false;
+            default:
+                return alive == (condition == LifeDeathCondition.Life);
+        }
+    }
 
     public event LifeOrDeath OnLifeOrDeath;
 

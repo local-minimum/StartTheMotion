@@ -96,7 +96,7 @@ public class StopMotionSequencer : MonoBehaviour {
         {
             OnSequenceFrame(this);
         }
-        Debug.Log(string.Format("{0}, {1}: Stepping to '{2}'", name, sequenceName, ShowingImageName));
+        //Debug.Log(string.Format("{0}, {1}: Stepping to '{2}'", name, sequenceName, ShowingImageName));
     }
 
     public void Step()
