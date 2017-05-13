@@ -18,17 +18,28 @@ public class JumpAlternative : MonoBehaviour
     {
         get
         {
-            Debug.Log(inZone);
             return !requireInZone || inZone;
         }
     }
 
-    bool inZone = false;
-
+    bool inZone
+    {
+        get
+        {
+            if (zone != null && pt != null)
+            {
+                return zone.IsInside(pt.Curve, pt.CurveTime);
+            }
+            return false;
+        }
+    }
+    BezierZone zone;
+    BezierPoint pt;
     public void OnBezierZoneEvent(BezierZoneEvent bEvent)
     {
         //Debug.Log(this + ": zone " + bEvent.zone + " is " + bEvent.type + " point " + bEvent.point.CurveTime);
-        inZone = bEvent.type != BezierZoneEventType.ExitZone;
+        zone = bEvent.zone;
+        pt = bEvent.point;
     }
 
     public void Grab(BezierPoint point)

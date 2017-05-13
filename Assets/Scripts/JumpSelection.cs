@@ -34,6 +34,9 @@ public class JumpSelection : MonoBehaviour {
     {
         if (player.IsInControl && Input.GetButtonDown("Jump") && player.CanJump && InJumpZone(player.GetComponent<BezierPoint>()))
         {
+            Debug.Log(string.Format("Player is on {0}={1} in zone {2} thus can jump", 
+                player.GetComponent<BezierPoint>().Curve, zone.curve, 
+                InJumpZone(player.GetComponent<BezierPoint>())));
             var jump = GetJump();
             if (jump != null)
             {

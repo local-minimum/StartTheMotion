@@ -31,6 +31,7 @@ public class StopMotionSequencer : MonoBehaviour {
     [SerializeField]
     bool[] enabledAnimationStep;
 
+    [SerializeField]
     int showingIndex;
 
     public int ShowingIndex
