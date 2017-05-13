@@ -1274,6 +1274,7 @@ GameObject:
   - component: {fileID: 356118305}
   - component: {fileID: 356118306}
   - component: {fileID: 356118307}
+  - component: {fileID: 356118308}
   m_Layer: 0
   m_Name: FirstWalk-child
   m_TagString: Untagged
@@ -1333,6 +1334,23 @@ MonoBehaviour:
   leftTransitionToTime: 0.99999
   rightTransitionTo: {fileID: 2092872319}
   rightTransitionToTime: 0.00001
+--- !u!114 &356118308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 356118304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardEventsTo: []
+  times:
+  - 0.110119045
+  - 0.3690476
+  curve: {fileID: 356118306}
+  lineColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &373562770
 GameObject:
   m_ObjectHideFlags: 0
@@ -3425,7 +3443,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guardian: {fileID: 922107454}
   passAlive: 0
-  stopPoint: 0.03
+  stopPoint: 0.667
+  stopZone: {fileID: 356118308}
   player: {fileID: 423001965}
   curve: {fileID: 356118306}
 --- !u!61 &922107456
@@ -3467,7 +3486,7 @@ MonoBehaviour:
   deathLife: {fileID: 922107454}
   dropPlayerOnCurves: []
   allowKilling: 1
-  allowLifing: 0
+  allowLifing: 1
   requireCurves: []
 --- !u!1 &1005830858
 GameObject:
@@ -4308,6 +4327,7 @@ MonoBehaviour:
   guardian: {fileID: 1171245373}
   passAlive: 1
   stopPoint: 0.132
+  stopZone: {fileID: 2092872323}
   player: {fileID: 423001965}
   curve: {fileID: 2092872319}
 --- !u!114 &1171245378
@@ -5946,6 +5966,7 @@ MonoBehaviour:
   guardian: {fileID: 1468862414}
   passAlive: 1
   stopPoint: 0.028
+  stopZone: {fileID: 0}
   player: {fileID: 423001965}
   curve: {fileID: 1500452866}
 --- !u!21 &1478304804
@@ -8475,6 +8496,7 @@ GameObject:
   - component: {fileID: 2092872318}
   - component: {fileID: 2092872319}
   - component: {fileID: 2092872320}
+  - component: {fileID: 2092872323}
   - component: {fileID: 2092872322}
   - component: {fileID: 2092872321}
   m_Layer: 0
@@ -8568,6 +8590,23 @@ MonoBehaviour:
   - 1
   curve: {fileID: 2092872319}
   lineColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &2092872323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2092872317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardEventsTo: []
+  times:
+  - 0.17857143
+  - 0.33630952
+  curve: {fileID: 2092872319}
+  lineColor: {r: 0, g: 1, b: 0.13103461, a: 1}
 --- !u!1 &2095173512
 GameObject:
   m_ObjectHideFlags: 0

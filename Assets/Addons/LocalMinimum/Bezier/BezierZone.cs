@@ -179,6 +179,20 @@ public class BezierZone : MonoBehaviour {
         return curve == this.curve && t >= left && t <= right;
     }
 
+    public float ClosestEdgeTime(float t)
+    {
+        float l = left;
+        float r = right;
+        if (Mathf.Abs(l - t) < Mathf.Abs(r - t))
+        {
+            return l;
+        } else
+        {
+            return r;
+        }
+    }
+
+
 #if UNITY_EDITOR
 
     public Color lineColor;

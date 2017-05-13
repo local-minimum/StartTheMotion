@@ -255,7 +255,10 @@ public class StopMotionSequencer : MonoBehaviour {
 
     public void Stop()
     {
-        IsPlaying = false;
+        if (IsPlaying)
+        {
+            IsPlaying = false;
+        }
         //Debug.Log(name + ": Stopped playing " + sequenceName);
     }
 

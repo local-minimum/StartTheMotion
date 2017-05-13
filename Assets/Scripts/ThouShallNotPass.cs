@@ -14,15 +14,28 @@ public class ThouShallNotPass : MonoBehaviour {
     float stopPoint;
 
     [SerializeField]
+    BezierZone stopZone;
+
+    [SerializeField]
     BezierPoint player;
 
     [SerializeField]
     BezierCurve curve;
 
 	void Update () {
-        if (guardian.alive != passAlive && player.Curve == curve && player.CurveTime > stopPoint)
+        if (stopZone)
         {
-            player.CurveTime = stopPoint;
-        }	
-	}
+            if (stopZone.IsInside(player.Curve, player.CurveTime) && guardian.alive != passAlive)
+            {
+                player.CurveTime = stopZone.ClosestEdgeTime(player.CurveTime);
+            }
+        } else if (guardian.alive != passAlive && player.Curve == curve)
+        {
+            if (player.CurveTime > stopPoint)
+            {
+                player.CurveTime = stopPoint;
+            }
+
+        }
+    }
 }

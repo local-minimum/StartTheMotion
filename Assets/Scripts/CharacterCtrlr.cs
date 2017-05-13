@@ -36,7 +36,7 @@ public class CharacterCtrlr : MonoBehaviour {
 
     void Update () {
 
-        if (outroAnim != null)
+        if (outroAnim != null || !canMove)
         {
             return;
         }
@@ -189,13 +189,25 @@ public class CharacterCtrlr : MonoBehaviour {
     [SerializeField]
     bool canDie = true;
 
+    bool canMove = true;
     void Kill()
     {
         if (canDie && SpawnPoint.spawnPoint)
         {            
             Debug.Log(name + ": Respawns at " + SpawnPoint.zoneEvent.zone.curve.name);
             point.Attach(SpawnPoint.zoneEvent.zone.curve, SpawnPoint.zoneEvent.zone.center);
+            canMove = false;
             stAnim.Trigger("Respawn");
+            StartCoroutine(RegainControl());
         }
+    }
+
+    [SerializeField]
+    float respawnTime = 2f;
+
+    IEnumerator<WaitForSeconds> RegainControl()
+    {
+        yield return new WaitForSeconds(respawnTime);
+        canMove = true;
     }
 }
