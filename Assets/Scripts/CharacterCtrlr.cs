@@ -7,6 +7,11 @@ public class CharacterCtrlr : MonoBehaviour {
     [SerializeField]
     Hearts hearts;
 
+    public HelpIconer jumpIcon;
+
+    public HelpIconer lifeIcon;
+    public HelpIconer deathIcon;
+
     BezierPoint point;
 
     public float speed = 2;
@@ -151,6 +156,15 @@ public class CharacterCtrlr : MonoBehaviour {
         if (!interactableDeathLifes.Contains(deathLife))
         {
             interactableDeathLifes.Add(deathLife);
+            if (deathLife.alive)
+            {
+                lifeIcon.Hide();
+                deathIcon.Show();
+            } else
+            {
+                deathIcon.Hide();
+                lifeIcon.Show();
+            }     
         }
     }
 

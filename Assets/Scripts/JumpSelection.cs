@@ -61,5 +61,20 @@ public class JumpSelection : MonoBehaviour {
     public void OnBezierZoneEvent(BezierZoneEvent bEvent)
     {
         zone = bEvent.zone;
+        if (bEvent.type == BezierZoneEventType.EnterZone)
+        {
+            var player = bEvent.point.GetComponent<CharacterCtrlr>();
+            if (player)
+            {
+                player.jumpIcon.Show();
+            }
+        } else if (bEvent.type == BezierZoneEventType.ExitZone)
+        {
+            var player = bEvent.point.GetComponent<CharacterCtrlr>();
+            if (player)
+            {
+                //player.jumpIcon.Hide();
+            }
+        }
     }
 }
