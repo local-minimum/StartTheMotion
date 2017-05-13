@@ -3722,7 +3722,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1005830859}
   - component: {fileID: 1005830860}
-  - component: {fileID: 1005830861}
   - component: {fileID: 1005830863}
   - component: {fileID: 1005830862}
   m_Layer: 0
@@ -3768,20 +3767,6 @@ MonoBehaviour:
   anchorRight: {fileID: 1222146160}
   anchoredTimeRight: 0
   m_cachedLength: 12.912418
---- !u!114 &1005830861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1005830858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcf5d4ab9bfebed48a7f64e85530e80e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpCurve: {fileID: 1005830860}
-  jumpTime: 0.00001
-  requireInZone: 0
 --- !u!114 &1005830862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4397,6 +4382,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpCurve: {fileID: 1118882029}
+  jumpTime: 0.00001
+  requireInZone: 0
+--- !u!1 &1121518269 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1221459061928220, guid: 2a5894b6a921a0e41ac30861bddef143,
+    type: 2}
+  m_PrefabInternal: {fileID: 1499302411}
+--- !u!114 &1121518270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1121518269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf5d4ab9bfebed48a7f64e85530e80e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpCurve: {fileID: 1005830860}
   jumpTime: 0.00001
   requireInZone: 0
 --- !u!1001 &1167632035
@@ -6216,7 +6220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guardian: {fileID: 1468862414}
   passCondition: 3
-  stopPoint: {fileID: 0}
+  stopPoint: {fileID: 1893885418}
   stopPointBelow: 1
   stopZone: {fileID: 0}
   player: {fileID: 423001965}
@@ -6298,7 +6302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sequenceName: Grow
-  mode: 1
+  mode: 2
   sequence:
   - {fileID: 21300000, guid: f522790a97d87e245815bc0fcc19e42d, type: 3}
   - {fileID: 21300000, guid: 82cee3d9c7181054e8829463f0e5d58f, type: 3}
@@ -6573,7 +6577,7 @@ Prefab:
         type: 2}
       propertyPath: alternativePriority.Array.data[0]
       value: 
-      objectReference: {fileID: 1005830861}
+      objectReference: {fileID: 1121518270}
     - target: {fileID: 114497427734936396, guid: 2a5894b6a921a0e41ac30861bddef143,
         type: 2}
       propertyPath: player
@@ -8639,9 +8643,6 @@ MonoBehaviour:
   - m_Source: 
     m_Target: Grow
     m_Trigger: Life
-  - m_Source: Grow
-    m_Target: Sway
-    m_Trigger: 
 --- !u!1001 &1951745393
 Prefab:
   m_ObjectHideFlags: 0

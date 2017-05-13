@@ -34,7 +34,7 @@ public class ThouShallNotPass : MonoBehaviour {
             {
                 player.CurveTime = stopZone.ClosestEdgeTime(player.CurveTime);
             }
-        } else if (stopping && player.Curve == curve)
+        } else if (stopPoint && stopping && player.Curve == curve)
         {
             float t = player.CurveTime;
             if (stopPointBelow && t > stopPoint.CurveTime)
