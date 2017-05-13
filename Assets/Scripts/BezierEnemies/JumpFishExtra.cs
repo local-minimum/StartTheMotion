@@ -68,7 +68,7 @@ public class JumpFishExtra : MonoBehaviour
             fishPoint.Attach(playerKillCurve, fishPoint.CurveTime);
             lifeConsumedByPlayer = false;
             playerKillCurve = null;
-            fish.GetComponent<StopMotionAnimator>().PlayByName("Flapping");
+            fish.GetComponent<StopMotionAnimator>().PlayByName("Flapping", false);
 
         } else 
         {
@@ -94,7 +94,7 @@ public class JumpFishExtra : MonoBehaviour
     {
         if (bEvent.type == BezierZoneEventType.EnterZone && bEvent.zone == flappingZone)
         {
-            fish.GetComponent<StopMotionAnimator>().PlayByName("Flapping");
+            fish.GetComponent<StopMotionAnimator>().PlayByName("Flapping", false);
             return;
         }
 

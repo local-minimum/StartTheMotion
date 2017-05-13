@@ -44,12 +44,12 @@ public class StopMotionAnimator : MonoBehaviour {
         }
     }
 
-    public void PlayByName(string sequenceName)
+    public void PlayByName(string sequenceName, bool resetAnimation)
     {
         StopMotionSequencer next = GetSequenceByName(sequenceName);
         if (next)
         {
-            Play(next);
+            Play(next, resetAnimation);
         }
         else
         {
@@ -59,21 +59,21 @@ public class StopMotionAnimator : MonoBehaviour {
 
     }
 
-    public void Play(StopMotionSequencer next) { 
+    public void Play(StopMotionSequencer next, bool resetAnimation) { 
         if (next == active && next.IsPlaying || next == null)
         {
             Debug.LogWarning(next == null ? "Can't play null sequence" : "Next and current animations are the same '" + next.SequenceName + "'");
             return;
         }
 
-        if (active)
+        if (active && active != next)
         {
             active.Stop();
         }
 
         if (next)
         {
-            next.Play(true, OnAnimationEnd);
+            next.Play(resetAnimation, OnAnimationEnd);
             active = next;
             //Debug.Log(name + ": Changed active sequence to " + active.SequenceName);
         }        
@@ -123,13 +123,13 @@ public class StopMotionAnimator : MonoBehaviour {
         return false;
     }
 
-    public void Trigger(string trigger)
+    public void Trigger(string trigger, bool reset=true)
     {
         for (int i = 0, l = transitions.Count; i < l; i++)
         {
             if (transitions[i].CanTrigger(this, trigger))
             {
-                transitions[i].Execute(this);
+                transitions[i].Execute(this, reset);
                 //Debug.Log(name + " is triggering with " + trigger + " to play " + transitions[i].transitionTarget);
                 return;
             }
@@ -160,13 +160,13 @@ public class StopMotionAnimator : MonoBehaviour {
         }
     }
 
-    public void StartAnimation()
+    public void StartAnimation(bool reset=true)
     {
         for (int i = 0, l = transitions.Count; i < l; i++)
         {
             if (transitions[i].CanExecute(this))
             {
-                transitions[i].Execute(this);
+                transitions[i].Execute(this, reset);
                 Debug.Log(name + ": Start animation " + transitions[i].transitionTarget);
                 return;
             }
@@ -199,7 +199,7 @@ public class StopMotionAnimator : MonoBehaviour {
             if (transitions[i].AutoFires && transitions[i].CanExecute(this))
             {
                 Debug.Log("Transition to " + transitions[i].transitionTarget + " with transition " + i);
-                transitions[i].Execute(this);
+                transitions[i].Execute(this, true);
                 return false;
             } else
             {

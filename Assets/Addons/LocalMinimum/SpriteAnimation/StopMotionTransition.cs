@@ -80,8 +80,8 @@ public class StopMotionTransition
     }
 
 
-    public virtual void Execute(StopMotionAnimator animator)
+    public virtual void Execute(StopMotionAnimator animator, bool resetAnimation)
     {
-        animator.Play(m_targetSequencer);
+        animator.Play(m_targetSequencer, resetAnimation);
     }
 }

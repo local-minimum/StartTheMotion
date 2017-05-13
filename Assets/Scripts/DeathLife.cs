@@ -41,6 +41,8 @@ public class DeathLife : MonoBehaviour {
             return _alive;
         }   
     }
+    [SerializeField]
+    bool resetAnimOnLD = true;
 
     public void SetAlive(bool isAlive, bool isPlayer)
     {
@@ -49,7 +51,7 @@ public class DeathLife : MonoBehaviour {
             string state = isAlive ? "Life" : "Death";
             if (animations[i].HasTrigger(state))
             {
-                animations[i].Trigger(state);
+                animations[i].Trigger(state, resetAnimOnLD);
             } else
             {
                 Debug.Log(animations[i] + " has no trigger " + state);

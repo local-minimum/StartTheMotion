@@ -57,6 +57,7 @@ public class StopMotionSequencer : MonoBehaviour {
         }
     }
 
+    [SerializeField, Range(-1, 1)]
     int sequenceDirection = 1;
 
     public bool IsPlaying
