@@ -7,8 +7,6 @@ public class JumpSelection : MonoBehaviour {
     [SerializeField]
     JumpAlternative[] alternativePriority;
 
-    bool inZone;
-
     [SerializeField]
     CharacterCtrlr player;
 
@@ -34,7 +32,7 @@ public class JumpSelection : MonoBehaviour {
 
     void Update()
     {
-        if (inZone && player.IsInControl && Input.GetButtonDown("Jump") && player.CanJump)
+        if (player.IsInControl && Input.GetButtonDown("Jump") && player.CanJump && InJumpZone(player.GetComponent<BezierPoint>()))
         {
             var jump = GetJump();
             if (jump != null)
@@ -45,9 +43,20 @@ public class JumpSelection : MonoBehaviour {
         } 
     }
 
+    public bool InJumpZone(BezierPoint pt)
+    {
+        if (zone)
+        {
+            return zone.IsInside(pt.Curve, pt.CurveTime);
+        }
+
+        return false;
+    }
+
+    BezierZone zone;
 
     public void OnBezierZoneEvent(BezierZoneEvent bEvent)
     {
-        inZone = bEvent.type != BezierZoneEventType.ExitZone;
+        zone = bEvent.zone;
     }
 }

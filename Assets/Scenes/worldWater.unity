@@ -4402,7 +4402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpCurve: {fileID: 1005830860}
   jumpTime: 0.00001
-  requireInZone: 0
+  requireInZone: 1
 --- !u!1001 &1167632035
 Prefab:
   m_ObjectHideFlags: 0
@@ -6531,6 +6531,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 200269718}
     m_Modifications:
+    - target: {fileID: 114309879018199714, guid: 2a5894b6a921a0e41ac30861bddef143,
+        type: 2}
+      propertyPath: forwardEventsTo.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4959322761538952, guid: 2a5894b6a921a0e41ac30861bddef143, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6623,6 +6628,11 @@ Prefab:
       propertyPath: anchoredTimeLeft
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114309879018199714, guid: 2a5894b6a921a0e41ac30861bddef143,
+        type: 2}
+      propertyPath: forwardEventsTo.Array.data[1]
+      value: 
+      objectReference: {fileID: 1121518270}
     m_RemovedComponents:
     - {fileID: 114358465355751878, guid: 2a5894b6a921a0e41ac30861bddef143, type: 2}
     - {fileID: 114855624802072140, guid: 2a5894b6a921a0e41ac30861bddef143, type: 2}
