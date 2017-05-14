@@ -88,7 +88,8 @@ public class CharacterCtrlr : MonoBehaviour {
                     hearts.GiveLive();
                     interactableDeathLife.SetAlive(true, true);
                 }
-                
+                deathIcon.Hide();
+                lifeIcon.Hide();
             }
         }
 	}

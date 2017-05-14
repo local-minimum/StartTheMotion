@@ -40,6 +40,10 @@ public class TurtleController : MonoBehaviour {
                     tddl.allowKilling = true;
                     transform.localRotation = Quaternion.identity;
                 }
+                if (!prancer.enabled)
+                {
+                    prancer.enabled = true;
+                }
             }
             else
             {

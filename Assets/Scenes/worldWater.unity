@@ -5693,7 +5693,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardEventsTo: []
+  forwardEventsTo:
+  - {fileID: 1630457782}
   times:
   - 0.33035713
   - 1
@@ -7682,8 +7683,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1630457784}
-  - component: {fileID: 1630457783}
   - component: {fileID: 1630457782}
+  - component: {fileID: 1630457783}
   - component: {fileID: 1630457785}
   m_Layer: 0
   m_Name: LandJumpThing
@@ -8913,13 +8914,13 @@ MonoBehaviour:
   - {x: 31.583656, y: -5.3142385, z: 0}
   - {x: 38.18665, y: 1.7622666, z: 0}
   - {x: 39.50388, y: 1.1899042, z: 0}
-  - {x: 41.396942, y: 0.49586725, z: 0}
+  - {x: 41.00232, y: 0.59452343, z: 0}
   attractorsAreOffsets: 0
   anchorLeft: {fileID: 168055934}
   anchoredTimeLeft: 1
   anchorRight: {fileID: 0}
   anchoredTimeRight: 0
-  m_cachedLength: 5.3449206
+  m_cachedLength: 4.740712
 --- !u!4 &1896612620
 Transform:
   m_ObjectHideFlags: 0
