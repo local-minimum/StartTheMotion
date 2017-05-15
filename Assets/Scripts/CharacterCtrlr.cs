@@ -20,8 +20,10 @@ public class CharacterCtrlr : MonoBehaviour {
 
     private void Start()
     {
-        stAnim = GetComponent<StopMotionAnimator>();
-        
+        if (stAnim == null)
+        {
+            stAnim = GetComponent<StopMotionAnimator>();
+        }
         originalScale = transform.localScale;
         point = GetComponent<BezierPoint>();
     }
@@ -204,7 +206,34 @@ public class CharacterCtrlr : MonoBehaviour {
 
     public bool canDie = true;
 
-    public bool canMove = true;
+    [SerializeField]
+    bool _canMove = false;
+    
+    public bool canMove
+    {
+        get
+        {
+            return _canMove;
+        }
+
+        set
+        {
+            _canMove = value;
+            if (stAnim == null)
+            {
+                stAnim = GetComponent<StopMotionAnimator>();
+            }
+            if (value)
+            {
+                GetComponent<ProbabilityAnimTrigger>().enabled = true;
+                stAnim.Resume();
+            } else
+            {
+                GetComponent<ProbabilityAnimTrigger>().enabled = false;
+                stAnim.Stop();
+            }
+        }
+    }
 
     void Kill()
     {

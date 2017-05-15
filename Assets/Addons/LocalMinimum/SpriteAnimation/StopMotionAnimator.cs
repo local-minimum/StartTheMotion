@@ -44,6 +44,14 @@ public class StopMotionAnimator : MonoBehaviour {
         }
     }
 
+    public bool IsPlaying
+    {
+        get
+        {
+            return active != null && active.IsPlaying;
+        }
+    }
+
     public void PlayByName(string sequenceName, bool resetAnimation)
     {
         StopMotionSequencer next = GetSequenceByName(sequenceName);

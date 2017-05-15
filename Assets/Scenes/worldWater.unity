@@ -227,7 +227,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: cea8a52b095352540a4b7620930e28c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -266,7 +266,7 @@ MonoBehaviour:
   sequencer: {fileID: 43561445}
   moveIndices: 00000000
   moveLengths:
-  - 5
+  - 4.75
   direction: 1
 --- !u!114 &43561449
 MonoBehaviour:
@@ -4740,13 +4740,13 @@ MonoBehaviour:
   - {x: 13.215088, y: -12.4379635, z: 0}
   - {x: 14.215088, y: -10.9379635, z: 0}
   - {x: 14.602585, y: -12.714184, z: 0}
-  - {x: 16.67395, y: -11.41321, z: 0}
+  - {x: 18.236374, y: -11.18174, z: 0}
   attractorsAreOffsets: 0
   anchorLeft: {fileID: 670409881}
   anchoredTimeLeft: 1
   anchorRight: {fileID: 0}
   anchoredTimeRight: 0
-  m_cachedLength: 3.8311744
+  m_cachedLength: 5.377908
 --- !u!114 &1051323474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4776,7 +4776,7 @@ MonoBehaviour:
   forwardEventsTo:
   - {fileID: 43561447}
   times:
-  - 0.55654764
+  - 0.88392854
   - 1
   curve: {fileID: 1051323473}
   lineColor: {r: 1, g: 0, b: 0, a: 1}
@@ -5415,7 +5415,7 @@ Prefab:
         type: 2}
       propertyPath: startCurve
       value: 
-      objectReference: {fileID: 1438274286}
+      objectReference: {fileID: 994206255}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f208f74f9b1b9c4095d27056d02d4a3, type: 2}
   m_IsPrefabParent: 0

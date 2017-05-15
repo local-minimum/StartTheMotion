@@ -24,7 +24,7 @@ public class ProbabilityAnimTrigger : MonoBehaviour {
     {
         if (Random.value < probPerSecond * Time.deltaTime)
         {
-            if (string.IsNullOrEmpty(requiredState) || smAnim.ActiveName == requiredState)
+            if (smAnim.IsPlaying && string.IsNullOrEmpty(requiredState) || smAnim.ActiveName == requiredState)
             {
                 smAnim.Trigger(trigger);
             }        

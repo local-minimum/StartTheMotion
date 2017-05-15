@@ -31,13 +31,19 @@ public class MoveOnFrame : MonoBehaviour {
 
     private void Sequencer_OnSequenceFrame(StopMotionSequencer sequencer)
     {
+        float epsilon = 0.01f;
+
         int sIdx = sequencer.ShowingIndex;
         for (int i=0; i<moveIndices.Length; i++)
         {
             if (sIdx == moveIndices[i])
             {
                 float move = moveLengths[i];
-                pt.Move(move * direction);
+                float diff = pt.Move(move * direction);
+                if (diff > epsilon)
+                {
+                    pt.Move(diff * direction);
+                }
                 return;
             }
         }

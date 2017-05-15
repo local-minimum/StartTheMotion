@@ -317,11 +317,12 @@ public class BezierCurve : MonoBehaviour {
     private const float tStartStep = 0.01f;
     private const float lengthAcceptance = 0.001f;
 
-    public float GetTimeAfter(float startTime, float distance, out bool hitEnd)
+    public float GetTimeAfter(float startTime, float distance, out float moveDist)
     {
+        moveDist = 0;
+
         if (distance == 0)
         {
-            hitEnd = false;
             return startTime;
         }
 
@@ -332,7 +333,7 @@ public class BezierCurve : MonoBehaviour {
         float tCur = startTime;
         float direction = distance > 0 ? 1f : -1f;
         distance = Mathf.Abs(distance);
-        float l = 0;
+
         float maxLSq = Mathf.Pow(Vector3.Distance(GetGlobalPoint(0), GetGlobalPoint(1)) * maxLengthStep, 2);
         while (true)
         {
@@ -348,13 +349,13 @@ public class BezierCurve : MonoBehaviour {
                 else
                 {
                     float deltaL = Vector3.Distance(prev, cur);
-                    if (l + deltaL > distance + lengthAcceptance && tCur != 0 && tCur != 1)
+                    if (moveDist + deltaL > distance + lengthAcceptance && tCur != 0 && tCur != 1)
                     {
                         tCur = Mathf.Lerp(tPrev, tCur, 0.5f);
                     }
                     else
                     {
-                        l += deltaL;
+                        moveDist += deltaL;
                         break;
                     }
                 }
@@ -362,15 +363,14 @@ public class BezierCurve : MonoBehaviour {
                 iterations++;
                 if (iterations > 1000)
                 {
-                    throw new System.ArgumentException(string.Format("Too many iterations finding {0}, now at {1} with l {2}", distance, tCur, l));
+                    throw new System.ArgumentException(string.Format("Too many iterations finding {0}, now at {1} with l {2}", distance, tCur, moveDist));
                 }
             } while (true);
 
             prev = cur;
             tPrev = tCur;
-            if (l > distance - lengthAcceptance || tCur == 0 || tCur == 1)
+            if (moveDist > distance - lengthAcceptance || tCur == 0 || tCur == 1)
             {
-                hitEnd = tCur == 0 || tCur == 1;
                 break;
             }
 

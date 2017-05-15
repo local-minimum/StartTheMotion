@@ -60,13 +60,14 @@ public class BezierPoint : MonoBehaviour {
         CurveTime = time;
     }
 
-    public void Move(float distance)
+    public float Move(float distance)
     {
-        bool hitEnd;
+        float movedDist = 0;
         if (curve)
         {
-            CurveTime = curve.GetTimeAfter(curveTime, distance, out hitEnd);
+            CurveTime = curve.GetTimeAfter(curveTime, distance, out movedDist);
         }
+        return Mathf.Abs(distance) - movedDist;
     }
 
     [HideInInspector]
