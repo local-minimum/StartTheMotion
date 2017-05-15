@@ -10,17 +10,51 @@ public class LarvaCtrl : MonoBehaviour {
     [SerializeField]
     CameraAttractor camAttractor;
 
+    [SerializeField]
+    StopMotionSequencer invadSeq;
+
+    [SerializeField]
+    int invadedIndex = 22;
+
     BezierPoint pt;
 
+    StopMotionAnimator smAnim;
+
 	void Start () {
+        smAnim = GetComponent<StopMotionAnimator>();
         pt = GetComponent<BezierPoint>();
         camAttractor.isTracked = transform;
         charCtrl.canMove = false;
-        pt.Attach(pt.Curve, pt.CurveTime);		
+        pt.Attach(pt.Curve, pt.CurveTime);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    private void OnEnable()
+    {
+        invadSeq.OnSequenceFrame += InvadSeq_OnSequenceFrame;
+    }
+
+    private void OnDisable()
+    {
+        invadSeq.OnSequenceFrame -= InvadSeq_OnSequenceFrame;
+    }
+
+    private void InvadSeq_OnSequenceFrame(StopMotionSequencer sequencer)
+    {
+        if (sequencer.ShowingIndex == invadedIndex)
+        {
+            smAnim.Stop();
+            charCtrl.canMove = true;
+            camAttractor.isTracked = charCtrl.transform;
+            Destroy(gameObject);
+        }
+    }
+
+    public void OnBezierZoneEvent(BezierZoneEvent bEvent)
+    {
+        if (bEvent.point == pt && bEvent.type == BezierZoneEventType.EnterZone)
+        {
+            smAnim.Trigger("Invade");
+        }
+    }
+
 }

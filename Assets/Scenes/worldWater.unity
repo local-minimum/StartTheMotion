@@ -116,13 +116,16 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 43561443}
+  - component: {fileID: 43561447}
   - component: {fileID: 43561446}
   - component: {fileID: 43561445}
+  - component: {fileID: 43561449}
   - component: {fileID: 43561444}
-  - component: {fileID: 43561447}
+  - component: {fileID: 43561448}
+  - component: {fileID: 43561450}
   m_Layer: 0
   m_Name: Larva
-  m_TagString: Larva
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac756f54fab97949b41ac670efa3644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sequenceName: 
+  sequenceName: Walk
   mode: 0
   sequence:
   - {fileID: 21300000, guid: cea8a52b095352540a4b7620930e28c9, type: 3}
@@ -190,7 +193,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 51d2a046eee779c40a13adf00d3b692d, type: 3}
   - {fileID: 21300000, guid: 77d56da4adc8b0143949f1b17fa65020, type: 3}
   enabledAnimationStep: 01010101010101010101010101010101010101
-  showingIndex: 3
+  showingIndex: 0
   sequenceDirection: 1
   m_fps: 15
 --- !u!212 &43561446
@@ -225,7 +228,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8c543b9986d72474295c03fd4ede0016, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cea8a52b095352540a4b7620930e28c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -246,6 +249,86 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charCtrl: {fileID: 423001966}
   camAttractor: {fileID: 646345948}
+  invadSeq: {fileID: 43561449}
+  invadedIndex: 21
+--- !u!114 &43561448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43561442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75fc6cdb88b39dc41b7ac426dcb49f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pt: {fileID: 43561444}
+  sequencer: {fileID: 43561445}
+  moveIndices: 00000000
+  moveLengths:
+  - 5
+  direction: 1
+--- !u!114 &43561449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43561442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac756f54fab97949b41ac670efa3644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequenceName: Invade
+  mode: 0
+  sequence:
+  - {fileID: 21300000, guid: d40db8a64371b5f4395f52dcb6170715, type: 3}
+  - {fileID: 21300000, guid: 802662a8153eb964c85520636b140406, type: 3}
+  - {fileID: 21300000, guid: b84f8648fc49fc4428beb5f578c3d12a, type: 3}
+  - {fileID: 21300000, guid: 250f74cced6979c45ad3a8e0318709d3, type: 3}
+  - {fileID: 21300000, guid: 8a80163deb7b3fa41b903cad1b9f6c87, type: 3}
+  - {fileID: 21300000, guid: b794daa1f5d4ee544ac89bb2ac62e7d0, type: 3}
+  - {fileID: 21300000, guid: 592428f9870529a4ba5852cb28cc5d1d, type: 3}
+  - {fileID: 21300000, guid: 733742e7d5dcd054faf7f14f9fcfad91, type: 3}
+  - {fileID: 21300000, guid: 20288bab1093cb049936d94cb271789d, type: 3}
+  - {fileID: 21300000, guid: 5879874703aba40429ba1530b88932c5, type: 3}
+  - {fileID: 21300000, guid: 5b2bea44a4b364a49aa8d1e43c16ab8e, type: 3}
+  - {fileID: 21300000, guid: 545a21d4d1c3cd84f912452450302ba1, type: 3}
+  - {fileID: 21300000, guid: 2ebd988e2267860449c05400345fac0b, type: 3}
+  - {fileID: 21300000, guid: 8204581354de36540abff511ca21b217, type: 3}
+  - {fileID: 21300000, guid: 452bfa0c2f37924459168d9a234f5a37, type: 3}
+  - {fileID: 21300000, guid: dd22ad45bb5f08e459e4425d190113a5, type: 3}
+  - {fileID: 21300000, guid: c48adf8d5c8c6564282990b90cef19ca, type: 3}
+  - {fileID: 21300000, guid: e318dee18b68db84e924dcaf89fee08e, type: 3}
+  - {fileID: 21300000, guid: cb883e19831213641954d9208f23e310, type: 3}
+  - {fileID: 21300000, guid: efeb7175ce8888f4aa06c7db32f27434, type: 3}
+  - {fileID: 21300000, guid: cbfd7fbaad3f08d46a07032de24e0db6, type: 3}
+  - {fileID: 0}
+  enabledAnimationStep: 
+  showingIndex: 0
+  sequenceDirection: 1
+  m_fps: 15
+--- !u!114 &43561450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43561442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de41293ab7be5cf4fb2af2596ba7b1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequences:
+  - {fileID: 43561445}
+  - {fileID: 43561449}
+  transitions:
+  - m_Source: 
+    m_Target: Walk
+    m_Trigger: 
+  - m_Source: Walk
+    m_Target: Invade
+    m_Trigger: Invade
 --- !u!1 &147396585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,7 +1562,6 @@ GameObject:
   m_Component:
   - component: {fileID: 311244535}
   - component: {fileID: 311244536}
-  - component: {fileID: 311244538}
   - component: {fileID: 311244537}
   m_Layer: 0
   m_Name: LarvaPath
@@ -1540,50 +1622,6 @@ MonoBehaviour:
   leftTransitionToTime: 0.99999
   rightTransitionTo: {fileID: 670409881}
   rightTransitionToTime: 0.00001
---- !u!114 &311244538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 311244534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa468bf6ec8d56f4ebf8b2b7a35cebd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canBeDriven:
-  - Larva
-  driveForZoneOnly: 0
-  speedByPostion:
-    active: 1
-    velocity:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 5
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 5
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 0
-    duration: 0
-  speedByDuration:
-    active: 0
-    velocity:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    duration: 0
 --- !u!114 &342957023 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114438967592918750, guid: 64f550f2f668a674aa77aa2cdc0dac28,
@@ -2857,7 +2895,6 @@ GameObject:
   m_Component:
   - component: {fileID: 670409880}
   - component: {fileID: 670409881}
-  - component: {fileID: 670409883}
   - component: {fileID: 670409882}
   m_Layer: 0
   m_Name: LarvaPath-child
@@ -2918,50 +2955,6 @@ MonoBehaviour:
   leftTransitionToTime: 0.99999
   rightTransitionTo: {fileID: 1051323473}
   rightTransitionToTime: 0.00001
---- !u!114 &670409883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 670409879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa468bf6ec8d56f4ebf8b2b7a35cebd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canBeDriven:
-  - Larva
-  driveForZoneOnly: 0
-  speedByPostion:
-    active: 1
-    velocity:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 5
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 5
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 0
-    duration: 0
-  speedByDuration:
-    active: 0
-    velocity:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    duration: 0
 --- !u!1001 &685046862
 Prefab:
   m_ObjectHideFlags: 0
@@ -4415,6 +4408,72 @@ Transform:
   m_PrefabParentObject: {fileID: 4279759458724690, guid: d4ea9ff2c3ccf63438fba2c048434765,
     type: 2}
   m_PrefabInternal: {fileID: 747791552}
+--- !u!1 &994206252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 994206253}
+  - component: {fileID: 994206255}
+  - component: {fileID: 994206254}
+  m_Layer: 0
+  m_Name: CameraPath-child-child-child-child
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &994206253
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 994206252}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1438274287}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &994206254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 994206252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d38458edf7d37ee4d9eed667e85ab72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neighbours:
+  - {fileID: 1438274286}
+--- !u!114 &994206255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 994206252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40553b30afbf3d64cb5125c783593f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bezierType: 1
+  points:
+  - {x: -223.29065, y: -1.7317033, z: 0}
+  - {x: -254.78264, y: -3.3559308, z: 0}
+  - {x: -270.82034, y: 23.636658, z: 0}
+  - {x: -287.94086, y: 26.178068, z: 0}
+  attractorsAreOffsets: 0
+  anchorLeft: {fileID: 1438274286}
+  anchoredTimeLeft: 1
+  anchorRight: {fileID: 0}
+  anchoredTimeRight: 0
+  m_cachedLength: 71.825134
 --- !u!1 &1005830858
 GameObject:
   m_ObjectHideFlags: 0
@@ -4643,8 +4702,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1051323472}
   - component: {fileID: 1051323473}
-  - component: {fileID: 1051323475}
   - component: {fileID: 1051323474}
+  - component: {fileID: 1051323475}
   m_Layer: 0
   m_Name: LarvaPath-child-child
   m_TagString: Untagged
@@ -4680,14 +4739,14 @@ MonoBehaviour:
   points:
   - {x: 13.215088, y: -12.4379635, z: 0}
   - {x: 14.215088, y: -10.9379635, z: 0}
-  - {x: 16.942139, y: -12.989424, z: 0}
-  - {x: 19.839218, y: -11.963694, z: 0}
+  - {x: 14.602585, y: -12.714184, z: 0}
+  - {x: 16.67395, y: -11.41321, z: 0}
   attractorsAreOffsets: 0
   anchorLeft: {fileID: 670409881}
   anchoredTimeLeft: 1
   anchorRight: {fileID: 0}
   anchoredTimeRight: 0
-  m_cachedLength: 6.872295
+  m_cachedLength: 3.8311744
 --- !u!114 &1051323474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4711,42 +4770,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1051323471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa468bf6ec8d56f4ebf8b2b7a35cebd4, type: 3}
+  m_Script: {fileID: 11500000, guid: f273af5ba92d4a64e9e94d051c88579e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBeDriven:
-  - Larva
-  driveForZoneOnly: 0
-  speedByPostion:
-    active: 1
-    velocity:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 5
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 5
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 0
-    duration: 0
-  speedByDuration:
-    active: 0
-    velocity:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    duration: 0
+  forwardEventsTo:
+  - {fileID: 43561447}
+  times:
+  - 0.55654764
+  - 1
+  curve: {fileID: 1051323473}
+  lineColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!21 &1067725446
 Material:
   serializedVersion: 6
@@ -7085,7 +7118,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 994206253}
   m_Father: {fileID: 624148114}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7102,6 +7136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   neighbours:
   - {fileID: 624148112}
+  - {fileID: 994206255}
 --- !u!1 &1468862413
 GameObject:
   m_ObjectHideFlags: 0
