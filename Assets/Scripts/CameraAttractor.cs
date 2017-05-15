@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraAttractor : MonoBehaviour {
-
-    [SerializeField]
-    Transform isTracked;
+    
+    public Transform isTracked;
 
    
     [SerializeField]

@@ -201,10 +201,11 @@ public class CharacterCtrlr : MonoBehaviour {
         Kill();
     }
 
-    [SerializeField]
-    bool canDie = true;
 
-    bool canMove = true;
+    public bool canDie = true;
+
+    public bool canMove = true;
+
     void Kill()
     {
         if (canDie && SpawnPoint.spawnPoint)

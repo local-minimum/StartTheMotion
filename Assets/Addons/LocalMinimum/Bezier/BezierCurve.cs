@@ -230,15 +230,40 @@ public class BezierCurve : MonoBehaviour {
 
     public void SetDefaultShape()
     {
-        Vector3 left = anchorLeft == null ? Vector3.zero : transform.InverseTransformPoint(AnchorPointLeft);
-        Vector3 right = anchorRight == null ? left + Vector3.right : transform.InverseTransformPoint(AnchorPointRight);
+        Vector3 left;
+        Vector3 right;
+        float defaultLength = 2f;
+        float defaultHeight = 1.5f;
+
+        if (anchorLeft)
+        {
+            left = AnchorPointLeft;
+            if (anchorRight)
+            {
+                right = transform.InverseTransformPoint(AnchorPointRight);
+            } else
+            {
+                 right = left + Vector3.right * defaultLength;
+            }
+        }
+        else if (anchorRight)
+        {
+            right = AnchorPointRight;
+            left = right + Vector3.right * defaultLength;            
+        }
+        else
+        {
+            left = Vector3.zero;
+            right = left + Vector3.right * defaultLength;
+        }
+
         Vector3 midPoint = Vector3.Lerp(left, right, 0.5f);
 
         points = new Vector3[4]
         {
             left,
-            midPoint + Vector3.up,
-            midPoint + Vector3.down,
+            midPoint + Vector3.up * defaultHeight,
+            midPoint + Vector3.down * defaultHeight,
             right
         };
     }
@@ -259,6 +284,7 @@ public class BezierCurve : MonoBehaviour {
         to.points = new Vector3[4];
         Vector3 toAnchor = to.AnchorPointLeft;
         Vector3 fromAnchor = from.GetGlobalPoint(0);
+
         for (int i = 0; i < from.points.Length; i++)
         {
             to.points[i] = to.transform.InverseTransformVector( 
