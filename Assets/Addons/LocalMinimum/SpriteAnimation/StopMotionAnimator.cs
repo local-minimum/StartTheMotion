@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AnimEventType {StartPlaying, StopPlaying, NewFrame};
+public delegate void StopMotionAnimationEvent(StopMotionSequencer seq, AnimEventType eventType);
+
 public class StopMotionAnimator : MonoBehaviour {
+
+    public event StopMotionAnimationEvent OnAnimationEvent;
 
     [SerializeField]
     StopMotionSequencer[] sequences;
@@ -18,6 +23,29 @@ public class StopMotionAnimator : MonoBehaviour {
     private void Reset()
     {
         sequences = GetComponents<StopMotionSequencer>();
+    }
+
+    private void OnEnable()
+    {
+        for (int i=0; i<sequences.Length; i++)
+        {
+            sequences[i].OnSequenceFrame += StopMotionAnimator_OnSequenceFrame;
+        }
+    }
+
+    private void OnDisable()
+    {
+        for (int i = 0; i < sequences.Length; i++)
+        {
+            sequences[i].OnSequenceFrame -= StopMotionAnimator_OnSequenceFrame;
+        }
+    }
+
+    private void StopMotionAnimator_OnSequenceFrame(StopMotionSequencer sequencer)
+    {
+        if (OnAnimationEvent !=null) {
+            OnAnimationEvent(sequencer, AnimEventType.NewFrame);
+        }
     }
 
     StopMotionSequencer active;
@@ -77,12 +105,20 @@ public class StopMotionAnimator : MonoBehaviour {
         if (active && active != next)
         {
             active.Stop();
+            if (OnAnimationEvent != null)
+            {
+                OnAnimationEvent(active, AnimEventType.StopPlaying);
+            }
         }
 
         if (next)
         {
             next.Play(resetAnimation, OnAnimationEnd);
             active = next;
+            if (OnAnimationEvent != null)
+            {
+                OnAnimationEvent(active, AnimEventType.StartPlaying);
+            }
             //Debug.Log(name + ": Changed active sequence to " + active.SequenceName);
         }        
     }
@@ -98,6 +134,10 @@ public class StopMotionAnimator : MonoBehaviour {
             } else if (active)
             {
                 active.Stop();
+                if (OnAnimationEvent != null)
+                {
+                    OnAnimationEvent(active, AnimEventType.StopPlaying);
+                }
             }
             active = next;
         }
@@ -111,7 +151,7 @@ public class StopMotionAnimator : MonoBehaviour {
 
     public void StepActive()
     {
-        active.Step();
+        active.Step();        
     }
 
     public void StepToRandomInActive()
