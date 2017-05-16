@@ -82,6 +82,12 @@ public class StopMotionSequencer : MonoBehaviour {
         }
     }
 
+    public void FastForward(int delta)
+    {
+        showingIndex += delta * sequenceDirection;
+
+    }
+
     public void ShowIndex(int index)
     {
         if (IsPlaying)
@@ -322,12 +328,12 @@ public class StopMotionSequencer : MonoBehaviour {
             {
                 if (mode == SequenceMode.PingPong)
                 {
-                    showingIndex = 1;
+                    showingIndex = -showingIndex;
                     sequenceDirection = 1;
                 }
                 else
                 {
-                    showingIndex = sequence.Length - 1;
+                    showingIndex = sequence.Length + showingIndex;
                     if (callbackOnEndPlayback != null)
                     {
                         if (!callbackOnEndPlayback())
@@ -340,7 +346,8 @@ public class StopMotionSequencer : MonoBehaviour {
             {
                 if (mode == SequenceMode.PingPong)
                 {
-                    showingIndex = sequence.Length - 2;
+                    // TODO: This is not correct
+                    showingIndex = sequence.Length - (sequence.Length - showingIndex);
                     sequenceDirection = -1;
                 } else
                 {
