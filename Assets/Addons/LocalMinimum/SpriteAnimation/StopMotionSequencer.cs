@@ -321,6 +321,9 @@ public class StopMotionSequencer : MonoBehaviour {
             return true;
         }
 
+        int tries = 0;
+        int max_tries = 10;
+
         do
         {
             showingIndex+=sequenceDirection;
@@ -346,12 +349,11 @@ public class StopMotionSequencer : MonoBehaviour {
             {
                 if (mode == SequenceMode.PingPong)
                 {
-                    // TODO: This is not correct
-                    showingIndex = sequence.Length - (sequence.Length - showingIndex);
+                    showingIndex = sequence.Length - (sequence.Length - showingIndex - 2);
                     sequenceDirection = -1;
                 } else
                 {
-                    showingIndex = 0;
+                    showingIndex = showingIndex - sequence.Length;
                     if (callbackOnEndPlayback != null)
                     {
                         if (!callbackOnEndPlayback())
@@ -362,7 +364,9 @@ public class StopMotionSequencer : MonoBehaviour {
                 }
             }
 
-            if (showingIndex == start)
+            tries++;
+
+            if (tries > max_tries)
             {
                 IsPlaying = false;
                 throw new System.ArgumentException("No frames enabled on " + name);

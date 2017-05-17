@@ -208,7 +208,9 @@ public class CharacterCtrlr : MonoBehaviour {
 
     [SerializeField]
     bool _canMove = false;
-    
+
+    Stutter stutter;
+
     public bool canMove
     {
         get
@@ -225,6 +227,11 @@ public class CharacterCtrlr : MonoBehaviour {
             }
             if (value)
             {
+                if (stutter == null)
+                {
+                    stutter = GetComponent<Stutter>();
+                }
+                stutter.AddStutter(new List<string>() {"Walk", "Idle", "IdleScratch"}, 50);
                 GetComponent<ProbabilityAnimTrigger>().enabled = true;
                 stAnim.Resume();
             } else

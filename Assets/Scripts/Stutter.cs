@@ -10,16 +10,34 @@ public class Stutter : MonoBehaviour {
     [SerializeField]
     int stutterLengthMax = 7;
 
+    [SerializeField, Range(0, 1)]
+    float baseStutterProb = 1;
+
     StopMotionAnimator stAnim;
    
     List<List<string>> stutterGroup = new List<List<string>>();
 
     List<int> stutters = new List<int>();
 
+    List<float> stutterProbabilities = new List<float>();
+
     public void AddStutter(List<string> sequencerNames, int nStutters)
     {
         stutterGroup.Add(sequencerNames);
         stutters.Add(nStutters);
+        stutterProbabilities.Add(baseStutterProb);
+    }
+
+    public void AddStutter(List<string> sequencerNames, int nStutters, float stutterProbability)
+    {
+        stutterGroup.Add(sequencerNames);
+        stutters.Add(nStutters);
+        stutterProbabilities.Add(stutterProbability);
+    }
+
+    private void Awake()
+    {
+        stAnim = GetComponent<StopMotionAnimator>();
     }
 
     private void OnEnable()
@@ -41,7 +59,7 @@ public class Stutter : MonoBehaviour {
 
         for (int i=0, l=stutterGroup.Count; i<l; i++)
         {
-            if (stutterGroup[i].Contains(seq.SequenceName))
+            if (stutterGroup[i].Contains(seq.SequenceName) && Random.value <= stutterProbabilities[i])
             {
                 seq.FastForward(Random.Range(stutterLengthMin, stutterLengthMax));
                 stutters[i]--;
@@ -49,6 +67,7 @@ public class Stutter : MonoBehaviour {
                 {
                     stutters.RemoveAt(i);
                     stutterGroup.RemoveAt(i);
+                    stutterProbabilities.RemoveAt(i);
                 }
                 break;
             }
